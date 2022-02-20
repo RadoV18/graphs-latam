@@ -10,6 +10,9 @@ function App() {
 
     const [addNode, setAddNode] = useState(false);
     const [addEdge, setAddEdge] = useState(false);
+    
+    const [selectedNode, setSelectedNode] = useState("");
+    const [nodeCollection, setNodeCollection] = useState(cy.collection());
 
     useLayoutEffect(() => {
         console.log("new cy");
@@ -64,6 +67,8 @@ function App() {
 
     useEffect(() => {
         if (addNode) {
+            cy.removeListener("tap");
+            console.log("add node");
             setAllFalse();
             setAddNode(true);
             cy.on("tap", (e) => {
@@ -75,26 +80,52 @@ function App() {
                     });
                 }
             });
-        } else {
-            cy.removeListener("tap");
         }
     }, [addNode]);
 
     useEffect(() => {
+        if(selectedNode !== "") {
+            const node = cy.nodes("#" + selectedNode);
+            console.log("Node", node);
+            setNodeCollection(nodeCollection.union(node));
+            setSelectedNode("");
+        }
+    }, [selectedNode]);
+
+    useEffect(() => {
+        if(nodeCollection.length === 2) {
+            const source = nodeCollection[0]._private.data.id
+            const target = nodeCollection[1]._private.data.id
+            const id = source + "-" + target; 
+            cy.add({
+                data: {
+                    id,
+                    source,
+                    target
+                }
+            });
+            setNodeCollection(cy.collection());
+        }
+    }, [nodeCollection]);
+
+    useEffect(() => {
         if(addEdge) {
+            cy.removeListener("tap");
+            console.log("add edge");
             setAllFalse();
             setAddEdge(true);
+            cy.nodes().on("tap", (e) => {
+                console.log("tap");
+                setSelectedNode(e.target._private.data.id);
+            });
         }
     }, [addEdge]);
-
-    
 
     const onMouseMove = (event) => {
         setMousePosition({
             x: event.screenX,
             y: event.screenY,
         });
-        // console.log(event.screenX, event.screenY);
     };
 
     // TODO: aqui le meten la matriz de adyacencia
