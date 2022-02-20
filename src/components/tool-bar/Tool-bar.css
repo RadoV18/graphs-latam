@@ -1,0 +1,15 @@
+.tool-bar{
+    position: absolute;
+    background-color: #EC1550;
+    bottom: 7rem;
+    left: 0;
+    left: 35%;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 20% 20% 0% 0;
+
+}
+.tool-bar button{
+    background-color: #EC1550;  
+}
