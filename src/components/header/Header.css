@@ -1,0 +1,15 @@
+
+.container{
+    display: flex;
+    background-color: #1B0188;
+
+}
+.title{
+    margin-left: 13%;
+
+}
+h2{
+    font-family: 'Trebuchet MS';
+    font-size: 3rem;
+    color: #FFFFFF;
+}
