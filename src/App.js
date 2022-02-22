@@ -1,8 +1,10 @@
 import "./style.css";
 import React, { useEffect, useLayoutEffect, useState } from "react";
+import Graph from "./components/Graph/Graph";
+import Header from "./components/Header/Header";
 import cytoscape from "cytoscape";
-import edgehandles from "cytoscape-edgehandles";
-cytoscape.use(edgehandles);
+import Toolbar from "./components/Toolbar/Toolbar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
     const [cy, setCy] = useState(cytoscape());
@@ -13,52 +15,6 @@ function App() {
     
     const [selectedNode, setSelectedNode] = useState("");
     const [nodeCollection, setNodeCollection] = useState(cy.collection());
-
-    useLayoutEffect(() => {
-        console.log("new cy");
-        const newCy = cytoscape({
-            container: document.getElementById("cy"),
-            elements: [
-                // list of graph elements to start with
-                {
-                    // node a
-                    data: { id: "a" },
-                },
-                {
-                    // node b
-                    data: { id: "b" },
-                },
-                {
-                    // edge ab
-                    data: { id: "ab", source: "a", target: "b", weight: "10" },
-                },
-            ],
-            style: [
-                {
-                    selector: "node",
-                    style: {
-                        label: "data(id)",
-                        "text-valign": "center",
-                        "text-halign": "center",
-                    },
-                },
-                {
-                    selector: "edge",
-                    style: {
-                        label: "data(weight)",
-                        "target-arrow-shape": "triangle",
-                        "target-arrow-color": "black",
-                        "source-arrow-color": "black",
-                        "line-color": "#333",
-                        width: 1.5,
-                        "curve-style": "bezier",
-                    },
-                }
-            ],
-        });
-        newCy.edgehandles();
-        setCy(newCy);
-    }, []);
 
     const setAllFalse = () => {
         setAddNode(false);
@@ -144,14 +100,10 @@ function App() {
 
     return (
         <div className="App">
-            <button onClick={() => setAddNode(true)}>
-                {addNode ? "add node enabled" : "add node disabled"}
-            </button>
-            <button onClick={() => setAddEdge(true)}>
-                {addEdge ? "add edge enabled" : "add edge disabled"}
-            </button>
-            <button onClick={adjacencyMatrix}>data</button>
-            <div id="cy" onMouseMove={onMouseMove}></div>
+            <Header />
+            <Graph />
+            <Toolbar />
+            <Footer />
         </div>
     );
 }
