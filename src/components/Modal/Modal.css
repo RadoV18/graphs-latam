@@ -1,0 +1,68 @@
+.modal {
+    align-items: center;
+    position: fixed;
+    overflow: auto;
+    z-index: 99999;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1b0188;
+    color: white;
+    width: 15%;
+    height: 10%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-content form {
+    flex-grow: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-content span {
+    margin: 0 auto;
+    flex-grow: 2;
+}
+
+.modal-content input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-footer button {
+    background-color: #EC1750; 
+    color: white;
+    font-family: "Trebuchet MS";
+    border: 1px solid transparent;
+    padding: 5px;
+    width: 40%;
+    border-radius: 5px;
+}
+
+.modal-footer button:hover {
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.modal-footer .btn-cancel:hover {
+    background-color: #b10933;
+}

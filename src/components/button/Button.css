@@ -1,6 +1,10 @@
-.footer button{
-    background-color: #EC1550;
-    font-family: 'Trebuchet MS';
-    color: #FFFFFF;
+.footer button {
+    background-color: #ec1550;
+    font-family: "Trebuchet MS";
+    color: #ffffff;
     border: solid #000000;
+}
+
+.footer button:hover {
+    cursor: pointer;
 }

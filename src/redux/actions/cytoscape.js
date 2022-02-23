@@ -1,7 +1,9 @@
-export const setCytoscape = (data) => {
+export const addState = (obj, index) => {
     return {
-        type: "SET_CYTOSCAPE",
-        data,
-    };
-};
-
+        type: "ADD_STATE",
+        data: {
+            obj,
+            index
+        }
+    }
+}

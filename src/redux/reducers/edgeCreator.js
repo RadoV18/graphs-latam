@@ -1,5 +1,6 @@
 const initialState = {
-    source: ""
+    source: "",
+    target: ""
 };
 
 const edgeCreatorReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const edgeCreatorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 source: action.data
+            }
+        case "SET_TARGET_NODE":
+            return {
+                ...state,
+                target: action.data
             }
         default:
             return state;
