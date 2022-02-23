@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCytoscape } from "../../redux/actions/cytoscape";
+import { addState } from "../../redux/actions/cytoscape";
 import { setSourceNode, setTargetNode } from "../../redux/actions/edgeCreator";
 import { setDisplay } from "../../redux/actions/modalStyle";
 import { setNewNodePosition } from "../../redux/actions/nodeCreator";
+import { nextIndex } from "../../redux/actions/currentIndex";
 import cytoscape from "cytoscape";
 
 const Graph = () => {
     const dispatch = useDispatch();
     const toolbar = useSelector((state) => state.toolbar);
-    const cytoscapeData = useSelector((state) => state.cytoscapeData);
+    const currentIndex = useSelector((state) => state.currentIndex);
+    const cytoscapeData = useSelector((state) => state.cytoscapeData[currentIndex]);
     const sourceNode = useSelector((state) => state.edgeCreator.source);
 
     const [cy, setCy] = useState(cytoscape());
@@ -63,7 +65,8 @@ const Graph = () => {
         cy.on("tap", (e) => {
             const toDelete = cy.$(`#${e.target._private.data.id}`);
             cy.remove(toDelete);
-            dispatch(setCytoscape(cy.json()));
+            dispatch(addState(cy.json(), currentIndex));
+            dispatch(nextIndex());
         });
     }
     return <div id="cy"></div>;

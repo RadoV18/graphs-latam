@@ -7,6 +7,7 @@ import edgeIdsReducer from "./reducers/edgeIds";
 import textInputReducer from "./reducers/textInput";
 import modalStyleReducer from "./reducers/modalStyle";
 import nodeCreatorReducer from "./reducers/nodeCreator";
+import currentIndexReducer from "./reducers/currentIndexReducer";
 
 const reducer = combineReducers({
     cytoscapeData: cytoscapeReducer,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
     edgeIds: edgeIdsReducer,
     textInput: textInputReducer,
     modalStyle: modalStyleReducer,
-    nodeCreator: nodeCreatorReducer
+    nodeCreator: nodeCreatorReducer,
+    currentIndex: currentIndexReducer
 });
 
 const store = createStore(reducer, composeWithDevTools());

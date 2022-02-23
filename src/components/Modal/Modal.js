@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../TextInput/TextInput";
 import { setText } from "../../redux/actions/textInput";
 import { setDisplay } from "../../redux/actions/modalStyle";
-import { setCytoscape } from "../../redux/actions/cytoscape";
+import { addState } from "../../redux/actions/cytoscape";
+import { nextIndex } from "../../redux/actions/currentIndex";
 import { addEdgeId } from "../../redux/actions/edgeIds";
 import { setSourceNode, setTargetNode } from "../../redux/actions/edgeCreator";
 
@@ -15,7 +16,10 @@ const Modal = () => {
     const textInput = useSelector((state) => state.textInput);
     const toolbar = useSelector((state) => state.toolbar);
     const modalStyle = useSelector((state) => state.modalStyle);
-    const cytoscapeData = useSelector((state) => state.cytoscapeData);
+    const currentIndex = useSelector((state) => state.currentIndex);
+    const cytoscapeData = useSelector(
+        (state) => state.cytoscapeData[currentIndex]
+    );
     const newNode = useSelector((state) => state.nodeCreator);
 
     const newEdge = useSelector((state) => state.edgeCreator);
@@ -27,10 +31,10 @@ const Modal = () => {
     const [cy, setCy] = useState(cytoscape());
 
     useEffect(() => {
-        if(newNode.position) {
+        if (newNode.position) {
             setContentStyle({
                 marginLeft: newNode.position.x - 100,
-                marginTop: newNode.position.y + 115
+                marginTop: newNode.position.y + 115,
             });
         }
     }, [newNode]);
@@ -80,7 +84,8 @@ const Modal = () => {
                 scratch: { label: textInput },
                 position: newNode.position,
             });
-            dispatch(setCytoscape(cy.json()));
+            dispatch(addState(cy.json(), currentIndex));
+            dispatch(nextIndex());
             dispatch(setDisplay("none"));
             dispatch(setText(""));
         } catch (error) {
@@ -126,7 +131,8 @@ const Modal = () => {
                 },
             });
             dispatch(addEdgeId(id));
-            dispatch(setCytoscape(cy.json()));
+            dispatch(addState(cy.json(), currentIndex));
+            dispatch(nextIndex());
             dispatch(setSourceNode(""));
             dispatch(setTargetNode(""));
             dispatch(setDisplay("none"));
@@ -154,6 +160,8 @@ const Modal = () => {
 
     const cancel = (e) => {
         dispatch(setDisplay("none"));
+        dispatch(setSourceNode(""));
+        dispatch(setTargetNode(""));
         dispatch(setText(""));
     };
 

@@ -1,4 +1,4 @@
-const initialState = {
+const initialState = [{
     container: document.getElementById("cy"),
     style: [
         {
@@ -22,17 +22,12 @@ const initialState = {
             },
         },
     ],
-};
+}];
 
 const cytoscapeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SET_CYTOSCAPE":
-            return action.data;
-        case "SET_LAST_NODE_POSITION":
-            return {
-                ...state,
-                elements: state.elements.map
-            }
+        case "ADD_STATE":
+            return [...state.slice(0, action.data.index + 1), action.data.obj];
         default:
             return state;
     }
