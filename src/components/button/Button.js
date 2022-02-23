@@ -1,10 +1,10 @@
 import React from 'react';
-import './Button.css'
+import './Button.css';
 
 
-const Button = (props) => {
+const Button = ({ text, onClick }) => {
     return(
-        <button>{props.text}</button>
+        <button onClick={onClick}>{text}</button>
     )
 }
 export default Button;
