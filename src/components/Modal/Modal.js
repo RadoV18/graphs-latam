@@ -8,6 +8,8 @@ import { setCytoscape } from "../../redux/actions/cytoscape";
 import { addEdgeId } from "../../redux/actions/edgeIds";
 import { setSourceNode, setTargetNode } from "../../redux/actions/edgeCreator";
 
+import "./Modal.css";
+
 const Modal = () => {
     const dispatch = useDispatch();
     const textInput = useSelector((state) => state.textInput);
@@ -20,8 +22,18 @@ const Modal = () => {
     const edgeIds = useSelector((state) => state.edgeIds);
 
     const [errorMessage, setErrorMessage] = useState(null);
+    const [contentStyle, setContentStyle] = useState({});
 
     const [cy, setCy] = useState(cytoscape());
+
+    useEffect(() => {
+        if(newNode.position) {
+            setContentStyle({
+                marginLeft: newNode.position.x - 100,
+                marginTop: newNode.position.y + 115
+            });
+        }
+    }, [newNode]);
 
     useEffect(() => {
         console.log(cytoscapeData);
@@ -146,25 +158,27 @@ const Modal = () => {
     };
 
     return (
-        <div style={modalStyle}>
-            <span>{message}</span>
-            <form onSubmit={submit}>
-                <TextInput
-                    value={textInput}
-                    changeHandler={change}
-                    name="textInput"
-                    id="textInput"
-                />
-                {errorMessage ? (
-                    <span className="modal-error">{errorMessage}</span>
-                ) : null}
-                <div className="modal-footer">
-                    <button>Aceptar</button>
-                    <button type="button" onClick={cancel}>
-                        Cancelar
-                    </button>
-                </div>
-            </form>
+        <div style={modalStyle} className="modal">
+            <div style={contentStyle} className="modal-content">
+                <span>{message}</span>
+                <form onSubmit={submit}>
+                    <TextInput
+                        value={textInput}
+                        changeHandler={change}
+                        name="textInput"
+                        id="textInput"
+                    />
+                    {errorMessage ? (
+                        <span className="modal-error">{errorMessage}</span>
+                    ) : null}
+                    <div className="modal-footer">
+                        <button>Aceptar</button>
+                        <button type="button" onClick={cancel}>
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
