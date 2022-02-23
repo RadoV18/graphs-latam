@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCytoscape } from "../../redux/actions/cytoscape";
 import { setSourceNode, setTargetNode } from "../../redux/actions/edgeCreator";
-import { addEdgeId } from "../../redux/actions/edgeIds";
+import { setDisplay } from "../../redux/actions/modalStyle";
+import { setNewNodePosition } from "../../redux/actions/nodeCreator";
 import cytoscape from "cytoscape";
 
 const Graph = () => {
@@ -10,7 +11,6 @@ const Graph = () => {
     const toolbar = useSelector((state) => state.toolbar);
     const cytoscapeData = useSelector((state) => state.cytoscapeData);
     const sourceNode = useSelector((state) => state.edgeCreator.source);
-    const edgeIds = useSelector((state) => state.edgeIds);
 
     const [cy, setCy] = useState(cytoscape());
 
@@ -41,12 +41,8 @@ const Graph = () => {
         cy.removeListener("tap");
         cy.on("tap", (e) => {
             if (e.target === cy) {
-                // text input
-                cy.add({
-                    data: { id: e.timeStamp },
-                    position: e.position,
-                });
-                dispatch(setCytoscape(cy.json()));
+                dispatch(setDisplay("block"));
+                dispatch(setNewNodePosition(e.position));
             }
         });
     } else if (toolbar.edge) {
@@ -56,30 +52,8 @@ const Graph = () => {
                 if (sourceNode === "") {
                     dispatch(setSourceNode(e.target._private.data.id));
                 } else {
-                    const initialId = sourceNode + "-" + e.target._private.data.id;
-
-                    const validatedId = edgeIds.filter((edge) =>
-                        edge.startsWith(initialId)
-                    );
-
-                    let num = 0;
-                    if(validatedId.length > 0) {
-                        const separated = validatedId[validatedId.length - 1].split('-');
-                        num = Number(separated[separated.length - 1]) + 1;
-                    }
-
-                    const id = sourceNode + "-" + e.target._private.data.id + "-" + num;
-
-                    cy.add({
-                        data: {
-                            id,
-                            source: sourceNode,
-                            target: e.target._private.data.id,
-                        },
-                    });
-                    dispatch(addEdgeId(id));
-                    dispatch(setCytoscape(cy.json()));
-                    dispatch(setSourceNode(""));
+                    dispatch(setTargetNode(e.target._private.data.id));
+                    dispatch(setDisplay("block"));
                 }
             }
         });
@@ -89,6 +63,7 @@ const Graph = () => {
         cy.on("tap", (e) => {
             const toDelete = cy.$(`#${e.target._private.data.id}`);
             cy.remove(toDelete);
+            dispatch(setCytoscape(cy.json()));
         });
     }
     return <div id="cy"></div>;

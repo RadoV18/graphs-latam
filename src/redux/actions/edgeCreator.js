@@ -4,3 +4,10 @@ export const setSourceNode = (data) => {
         data
     }
 }
+
+export const setTargetNode = (data) => {
+    return {
+        type: "SET_TARGET_NODE",
+        data
+    }
+}

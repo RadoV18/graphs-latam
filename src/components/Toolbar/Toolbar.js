@@ -32,11 +32,11 @@ const Toolbar = () => {
 
     return (
             <div className="tool-bar">
-                <button onClick={setNode}><img src={node} alt="logo-node"/></button>
-                <button onClick={setEdge}><img src={arista} alt="aris"/></button>
-                <button onClick={setEraser}><img src={eraser} alt="logo-eraser"/></button> 
-                <button><img src={back} alt="logo-back"/></button> 
-                <button><img src={redo} alt="logo-redo"/></button>
+                <button title="Agregar vértice" onClick={setNode}><img src={node} alt="logo-node"/></button>
+                <button title="Agregar arista" onClick={setEdge}><img src={arista} alt="aris"/></button>
+                <button title="Borrar elemento" onClick={setEraser}><img src={eraser} alt="logo-eraser"/></button> 
+                <button title="Deshacer"><img src={back} alt="logo-back"/></button> 
+                <button title="Rehacer"><img src={redo} alt="logo-redo"/></button>
             </div>
         );
 };
