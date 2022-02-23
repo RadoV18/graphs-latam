@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { setAdjacencyMatrix, setMatrixLabels } from "../../redux/actions/adjacencyMatrix"; 
+import { setAdjacencyMatrix, setMatrixLabels, setMatrixDisplay } from "../../redux/actions/adjacencyMatrix"; 
 import { useHistory } from "react-router-dom";
+import { setDisplay } from '../../redux/actions/modalStyle';
 import Button from '../Button/Button';
 import './Footer.css';
 
@@ -42,6 +43,8 @@ const Footer = () => {
 
         dispatch(setAdjacencyMatrix(adjacencyMatrix));
         dispatch(setMatrixLabels(Array.from(indexes)));
+        dispatch(setMatrixDisplay(true));
+        dispatch(setDisplay("block"));
     };
 
     const redirectToContactUs = () => {

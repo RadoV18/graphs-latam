@@ -1,6 +1,7 @@
 const initialState = {
     matrix: [],
-    labels: []
+    labels: [],
+    display: false
 };
 
 const adjacencyMatrixReducer = (state = initialState, action) => {
@@ -15,6 +16,11 @@ const adjacencyMatrixReducer = (state = initialState, action) => {
                 ...state,
                 labels: action.data
             };
+        case "SET_MATRIX_DISPLAY":
+            return {
+                ...state,
+                display: action.data
+            }
         default:
             return state;
     }

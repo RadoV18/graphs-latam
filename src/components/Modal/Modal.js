@@ -8,7 +8,8 @@ import { addState } from "../../redux/actions/cytoscape";
 import { nextIndex } from "../../redux/actions/currentIndex";
 import { addEdgeId } from "../../redux/actions/edgeIds";
 import { setSourceNode, setTargetNode } from "../../redux/actions/edgeCreator";
-
+import { setMatrixDisplay } from "../../redux/actions/adjacencyMatrix";
+import AdjacencyMatrix from "../AdjacencyMatrix/AdjacencyMatrix";
 import "./Modal.css";
 
 const Modal = () => {
@@ -21,9 +22,9 @@ const Modal = () => {
         (state) => state.cytoscapeData[currentIndex]
     );
     const newNode = useSelector((state) => state.nodeCreator);
-
     const newEdge = useSelector((state) => state.edgeCreator);
     const edgeIds = useSelector((state) => state.edgeIds);
+    const adjacencyMatrix = useSelector((state) => state.adjacencyMatrix);
 
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -154,7 +155,22 @@ const Modal = () => {
         dispatch(setSourceNode(""));
         dispatch(setTargetNode(""));
         dispatch(setText(""));
+        dispatch(setMatrixDisplay(false));
     };
+    if (adjacencyMatrix.display === true) {
+        return (
+            <div style={modalStyle} className="modal">
+                <div className="modal-content">
+                    <AdjacencyMatrix />
+                    <div className="modal-footer">
+                        <button type="button" onClick={cancel}>
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div style={modalStyle} className="modal">

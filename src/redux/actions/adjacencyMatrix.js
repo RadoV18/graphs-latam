@@ -11,3 +11,10 @@ export const setMatrixLabels = (data) => {
         data
     }
 };
+
+export const setMatrixDisplay = (data) => {
+    return {
+        type: "SET_MATRIX_DISPLAY",
+        data
+    }
+}
