@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { setAdjacencyMatrix, setMatrixLabels } from "../../redux/actions/adjacencyMatrix"; 
+import { useHistory } from "react-router-dom";
 import Button from '../Button/Button';
 import './Footer.css';
 
@@ -8,6 +9,7 @@ const Footer = () => {
     const dispatch = useDispatch();
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
+    const history = useHistory();
 
     const generateMatrix = () => {
         console.log("Generate adjacency matrix...");
@@ -42,15 +44,25 @@ const Footer = () => {
         dispatch(setMatrixLabels(Array.from(indexes)));
     };
 
+    const redirectToContactUs = () => {
+        history.push("/contacto");
+    }
+
+    const openManual = () => {
+        const newWindow = window.open(`http://localhost:3001/doc.pdf`, "_blank", "noopener,noreferrer");
+        if(newWindow) {
+            newWindow.opener = null;
+        }
+    }
+
     return (
         <div>
             <div className="footer">
                 <div className="button-container">
-                    <Button text="Salir de la aplicación"/>
+                    <Button text="Salir de la aplicación" onClick={openManual}/>
                     <Button text="Generar Matriz de Adyacencia" onClick={generateMatrix}/>
-                    <Button text="Contáctanos"/>
+                    <Button text="Contáctanos" onClick={redirectToContactUs}/>
                 </div>
-
             </div>
         </div>
         );

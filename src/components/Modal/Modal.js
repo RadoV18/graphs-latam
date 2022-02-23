@@ -34,7 +34,7 @@ const Modal = () => {
         if (newNode.position) {
             setContentStyle({
                 marginLeft: newNode.position.x - 100,
-                marginTop: newNode.position.y + 115,
+                marginTop: newNode.position.y + 20 ,
             });
         }
     }, [newNode]);
