@@ -21,8 +21,10 @@ const Graph = () => {
         const newCy = cytoscape({
             container: document.getElementById("cy"),
             style: cytoscapeData.style,
-            zoom: cytoscapeData.zoom,
-            pan: cytoscapeData.pan,
+            zoomingEnabled: false,
+            userZoomingEnabled: false,
+            panningEnabled: false,
+            userPanningEnabled: false,
         });
         if (cytoscapeData.elements) {
             if (cytoscapeData.elements.nodes) {
@@ -55,6 +57,7 @@ const Graph = () => {
                     dispatch(setSourceNode(e.target._private.data.id));
                 } else {
                     dispatch(setTargetNode(e.target._private.data.id));
+                    dispatch(setNewNodePosition(e.position));
                     dispatch(setDisplay("block"));
                 }
             }

@@ -1,5 +1,4 @@
 import React from "react";
-// TODO: useSelector to toggle button
 import { useDispatch, useSelector } from "react-redux";
 
 // action creators
@@ -10,6 +9,7 @@ import {
     disableAll,
 } from "../../redux/actions/toolbar";
 import { nextIndex, previousIndex } from "../../redux/actions/currentIndex";
+import { setTargetNode, setSourceNode } from "../../redux/actions/edgeCreator";
 
 import node from "../../img/node.png";
 import back from "../../img/backw.png";
@@ -30,24 +30,34 @@ const Toolbar = () => {
 
     const setNode = () => {
         dispatch(disableAll());
+        dispatch(setTargetNode(""));
+        dispatch(setSourceNode(""));
         dispatch(setNodeActive());
     };
 
     const setEdge = () => {
         dispatch(disableAll());
+        dispatch(setTargetNode(""));
+        dispatch(setSourceNode(""));
         dispatch(setEdgeActive());
     };
 
     const setEraser = () => {
         dispatch(disableAll());
+        dispatch(setTargetNode(""));
+        dispatch(setSourceNode(""));
         dispatch(setEraserActive());
     };
 
     const undoAction = () => {
         dispatch(previousIndex());
+        dispatch(setTargetNode(""));
+        dispatch(setSourceNode(""));
     };
 
     const redoAction = () => {
+        dispatch(setTargetNode(""));
+        dispatch(setSourceNode(""));
         if (currentIndex + 1 < cytoscapeArray.length) {
             dispatch(nextIndex());
         }

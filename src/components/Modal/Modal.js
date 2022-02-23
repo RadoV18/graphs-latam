@@ -26,26 +26,18 @@ const Modal = () => {
     const edgeIds = useSelector((state) => state.edgeIds);
 
     const [errorMessage, setErrorMessage] = useState(null);
-    const [contentStyle, setContentStyle] = useState({});
 
     const [cy, setCy] = useState(cytoscape());
-
-    useEffect(() => {
-        if (newNode.position) {
-            setContentStyle({
-                marginLeft: newNode.position.x - 100,
-                marginTop: newNode.position.y + 20 ,
-            });
-        }
-    }, [newNode]);
 
     useEffect(() => {
         console.log(cytoscapeData);
         const newCy = cytoscape({
             container: document.getElementById("cy"),
             style: cytoscapeData.style,
-            zoom: cytoscapeData.zoom,
-            pan: cytoscapeData.pan,
+            zoomingEnabled: false,
+            userZoomingEnabled: false,
+            panningEnabled: false,
+            userPanningEnabled: false,
         });
         if (cytoscapeData.elements) {
             if (cytoscapeData.elements.nodes) {
@@ -121,7 +113,6 @@ const Modal = () => {
                 const toRemove = cy.$(`#${id}`);
                 cy.remove(toRemove);
             }
-
             cy.add({
                 data: {
                     id,
@@ -167,7 +158,7 @@ const Modal = () => {
 
     return (
         <div style={modalStyle} className="modal">
-            <div style={contentStyle} className="modal-content">
+            <div className="modal-content">
                 <span>{message}</span>
                 <form onSubmit={submit}>
                     <TextInput
@@ -181,7 +172,11 @@ const Modal = () => {
                     ) : null}
                     <div className="modal-footer">
                         <button>Aceptar</button>
-                        <button type="button" onClick={cancel}>
+                        <button
+                            type="button"
+                            onClick={cancel}
+                            className="btn-cancel"
+                        >
                             Cancelar
                         </button>
                     </div>
