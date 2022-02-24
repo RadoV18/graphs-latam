@@ -72,4 +72,19 @@
     height: 50%;
 }
 
+@media (max-width: 768px){
+    .modal-content{
+        width: 45%;
+        height: 15%;
+    }
+    .modal-adjacencymatrix{
+        
+        width: 80%;
+        height: 40%;
+    }
+
+    .adjacency-matrix h2{
+        padding-bottom: 1rem;
+    }
+}
 

@@ -23,3 +23,11 @@ html, body {
     flex-direction: column;
     justify-content: flex-start;
 }
+
+@media (max-width: 767px) {
+    html{
+        margin: 0;
+
+    }
+    
+}

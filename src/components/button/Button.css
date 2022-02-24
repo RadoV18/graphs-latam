@@ -8,3 +8,9 @@
 .footer button:hover {
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .footer button {
+       width: 30%;
+    }
+}

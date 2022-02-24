@@ -20,3 +20,14 @@ article {
     display: flex;
     flex-direction: column;
 }
+
+@media (max-width: 768px) {
+    .box{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .image img {
+        width: 100px;
+        height: 100px;
+    }
+    
+}
