@@ -1,16 +1,22 @@
-.box{
+.container-contacts {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.box {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 3rem;
     row-gap: 3rem;
-    margin-bottom: 2rem;
-
+    margin: 2rem 0;
 }
-.image img{
+
+.image img {
     width: 150px;
     height: 150px;
 }
-article{
+
+article {
     display: flex;
     flex-direction: column;
 }

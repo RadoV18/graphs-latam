@@ -1,5 +1,5 @@
-import React from 'react';
-import './FooterContact.css';
+import React from "react";
+import "./FooterContact.css";
 import { useHistory } from "react-router-dom";
 import Button from "../Button/Button";
 
@@ -8,16 +8,13 @@ const FooterContact = () => {
 
     const onClick = () => {
         history.push("/");
-    }
+    };
 
-    return(
-        <div className="container">
-            <div className="footer">
-                <Button onClick={onClick} text={"Volver a inicio"} />
-            </div>
+    return (
+        <div className="footer">
+            <Button onClick={onClick} text={"Volver a inicio"} />
         </div>
     );
-
 };
 
 export default FooterContact;

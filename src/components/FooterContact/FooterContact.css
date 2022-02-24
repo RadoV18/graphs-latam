@@ -1,18 +1,13 @@
-.container{
+/* .container {
     display: fixed;
     bottom: 0;
     left: 0;
     text-align: center;
-    
-}
+} */
+
 .footer {
     max-width: 100vw;
     text-align: center;
     background-color: #1b0188;
     padding: 1rem;
-
-}
-h2{
-    width: 100%;
-    flex-grow: 2;
 }

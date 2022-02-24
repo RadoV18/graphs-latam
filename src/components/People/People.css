@@ -1,0 +1,22 @@
+.person {
+    margin: 0 auto;
+}
+
+.image {
+    display: flex;
+    justify-content: space-around;
+}
+
+.image img {
+    object-fit: contain;
+}
+
+.description h3 {
+    margin-top: 0.25rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.description span {
+    text-align: center;
+}
