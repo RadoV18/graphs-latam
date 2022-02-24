@@ -1,0 +1,24 @@
+.adjacency-matrix .cell-value{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.adjacency-matrix{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cell-node{
+    background-color: #ec1550;
+}
+
+.cell-addition{
+    background-color: #7e499b;
+}
+
+tbody td{
+    align-self: center;
+    
+}

@@ -66,3 +66,10 @@
 .modal-footer .btn-cancel:hover {
     background-color: #b10933;
 }
+
+.modal-adjacencymatrix{
+    width: 50%;
+    height: 50%;
+}
+
+

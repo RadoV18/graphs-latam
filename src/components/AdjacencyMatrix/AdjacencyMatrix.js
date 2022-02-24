@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import './AdjacencyMatrix.css';
 
 const AdjacencyMatrix = () => {
     const adjacencyMatrix = useSelector((state) => state.adjacencyMatrix);
@@ -24,6 +25,7 @@ const AdjacencyMatrix = () => {
 
     return (
         <div className="adjacency-matrix">
+            <h2>Matriz de Adyacencia</h2>
             <table>
                 <tbody>
                     <tr>
@@ -41,7 +43,7 @@ const AdjacencyMatrix = () => {
                             {row.map((element) =>
                                 <td className="cell-value">{element}</td>
                             )}
-                            <td>{rowsSum[index]}</td>
+                            <td className="cell-addition">{rowsSum[index]}</td>
                         </tr>    
                     )}
                     <tr>
@@ -49,7 +51,7 @@ const AdjacencyMatrix = () => {
                             <span>Suma</span>
                         </td>
                         {columnsSum.map((sum) => 
-                            <td>{sum}</td>    
+                            <td className="cell-addition">{sum}</td>    
                         )}
                         <td></td>
                     </tr>

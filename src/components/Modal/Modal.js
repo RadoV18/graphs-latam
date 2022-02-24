@@ -160,7 +160,7 @@ const Modal = () => {
     if (adjacencyMatrix.display === true) {
         return (
             <div style={modalStyle} className="modal">
-                <div className="modal-content">
+                <div className="modal-content modal-adjacencymatrix">
                     <AdjacencyMatrix />
                     <div className="modal-footer">
                         <button type="button" onClick={cancel}>
