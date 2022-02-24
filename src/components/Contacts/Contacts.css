@@ -1,0 +1,16 @@
+.box{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 3rem;
+    row-gap: 3rem;
+    margin-bottom: 2rem;
+
+}
+.image img{
+    width: 150px;
+    height: 150px;
+}
+article{
+    display: flex;
+    flex-direction: column;
+}
