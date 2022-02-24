@@ -17,7 +17,6 @@ const Graph = () => {
     const [cy, setCy] = useState(cytoscape());
 
     useEffect(() => {
-        console.log(cytoscapeData);
         const newCy = cytoscape({
             container: document.getElementById("cy"),
             style: cytoscapeData.style,
@@ -63,7 +62,6 @@ const Graph = () => {
             }
         });
     } else if (toolbar.eraser) {
-        console.log("eraser is active");
         cy.removeListener("tap");
         cy.on("tap", (e) => {
             const toDelete = cy.$(`#${e.target._private.data.id}`);

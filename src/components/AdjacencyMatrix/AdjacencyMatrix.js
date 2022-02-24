@@ -29,31 +29,31 @@ const AdjacencyMatrix = () => {
             <table>
                 <tbody>
                     <tr>
-                        <td className="cell-node"></td>
-                        {adjacencyMatrix.labels.map((label) => 
-                            <td className="cell-node">{label[0]}</td>    
+                        <td key="empty" className="cell-node"></td>
+                        {adjacencyMatrix.labels.map((label, index) => 
+                            <td key={`cn-${index}`} className="cell-node">{label[0]}</td>    
                         )}
-                        <td className="cell-node">
+                        <td key="sum-0" className="cell-node">
                             <span>Suma</span>
                         </td>
                     </tr>
                     {adjacencyMatrix.matrix.map((row, index) => 
-                        <tr>
-                            <td className="cell-node">{adjacencyMatrix.labels[index][0]}</td>
-                            {row.map((element) =>
-                                <td className="cell-value">{element}</td>
+                        <tr key={`nrow-${index}`}>
+                            <td key={`srow-${index}`} className="cell-node">{adjacencyMatrix.labels[index][0]}</td>
+                            {row.map((element, index) =>
+                                <td key={`row-${index}`} className="cell-value">{element}</td>
                             )}
-                            <td className="cell-addition">{rowsSum[index]}</td>
+                            <td key={`sum-r-${index}`} className="cell-addition">{rowsSum[index]}</td>
                         </tr>    
                     )}
                     <tr>
-                        <td className="cell-node">
+                        <td key="sum-1" className="cell-node">
                             <span>Suma</span>
                         </td>
-                        {columnsSum.map((sum) => 
-                            <td className="cell-addition">{sum}</td>    
+                        {columnsSum.map((sum, index) => 
+                            <td key={`colsum-${index}`} className="cell-addition">{sum}</td>    
                         )}
-                        <td></td>
+                        <td key="empty-1"></td>
                     </tr>
                 </tbody>
             </table>

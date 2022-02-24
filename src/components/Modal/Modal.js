@@ -31,7 +31,6 @@ const Modal = () => {
     const [cy, setCy] = useState(cytoscape());
 
     useEffect(() => {
-        console.log(cytoscapeData);
         const newCy = cytoscape({
             container: document.getElementById("cy"),
             style: cytoscapeData.style,
@@ -157,6 +156,7 @@ const Modal = () => {
         dispatch(setText(""));
         dispatch(setMatrixDisplay(false));
     };
+    
     if (adjacencyMatrix.display === true) {
         return (
             <div style={modalStyle} className="modal">
@@ -170,7 +170,7 @@ const Modal = () => {
                 </div>
             </div>
         );
-    }
+    }    
 
     return (
         <div style={modalStyle} className="modal">

@@ -13,8 +13,6 @@ const Footer = () => {
     const history = useHistory();
 
     const generateMatrix = () => {
-        console.log("Generate adjacency matrix...");
-        console.log(data);
         if(!data.elements) {
             return;
         }
@@ -52,7 +50,7 @@ const Footer = () => {
     }
 
     const openManual = () => {
-        const newWindow = window.open(`http://localhost:3001/doc.pdf`, "_blank", "noopener,noreferrer");
+        const newWindow = window.open(`/doc.pdf`, "_blank", "noopener,noreferrer");
         if(newWindow) {
             newWindow.opener = null;
         }
@@ -62,7 +60,7 @@ const Footer = () => {
         <div>
             <div className="footer">
                 <div className="button-container">
-                    <Button text="Salir de la aplicación" onClick={openManual}/>
+                    <Button text="Manual de Usuario" onClick={openManual}/>
                     <Button text="Generar Matriz de Adyacencia" onClick={generateMatrix}/>
                     <Button text="Contáctanos" onClick={redirectToContactUs}/>
                 </div>

@@ -4,6 +4,7 @@ const TextInput = ({ value, changeHandler, name, id}) => {
     return (
         <div>
             <input
+                autoFocus
                 value={value}
                 onChange={changeHandler}
                 type="text"

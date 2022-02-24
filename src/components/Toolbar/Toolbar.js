@@ -11,11 +11,6 @@ import {
 import { nextIndex, previousIndex } from "../../redux/actions/currentIndex";
 import { setTargetNode, setSourceNode } from "../../redux/actions/edgeCreator";
 
-import node from "../../img/node.png";
-import back from "../../img/backw.png";
-import eraser from "../../img/erase.png";
-import redo from "../../img/redo.png";
-import arista from "../../img/arista.png";
 import "./Tool-bar.css";
 
 const Toolbar = () => {
@@ -70,27 +65,27 @@ const Toolbar = () => {
                 onClick={setNode}
                 className={nodeSelected ? "selected" : ""}
             >
-                <img src={node} alt="logo-node" />
+                <img src="/img/node.png" alt="logo-node" />
             </button>
             <button
                 title="Agregar arista"
                 onClick={setEdge}
                 className={edgeSelected ? "selected" : ""}
             >
-                <img src={arista} alt="aris" />
+                <img src="/img/arista.png" alt="aris" />
             </button>
             <button
                 title="Borrar elemento"
                 onClick={setEraser}
                 className={eraserSelected ? "selected" : ""}
             >
-                <img src={eraser} alt="logo-eraser" />
+                <img src="/img/erase.png" alt="logo-eraser" />
             </button>
             <button title="Deshacer" onClick={undoAction}>
-                <img src={back} alt="logo-back" />
+                <img src="/img/backw.png" alt="logo-back" />
             </button>
             <button title="Rehacer" onClick={redoAction}>
-                <img src={redo} alt="logo-redo" />
+                <img src="/img/redo.png" alt="logo-redo" />
             </button>
         </div>
     );
