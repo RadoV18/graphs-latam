@@ -1,18 +1,32 @@
 import React from "react";
 import "./Header.css";
-import logo from "../../img/latam_logo.png";
 
-const Header = () => {
-    return (
-        <div className="container-header">
-            <div className="header-logo">
-                <img src={logo} alt="logo" />
+const Header = ({title, logo}) => {
+    if(logo === ""){
+        return (
+            <div className="container-header">
+                <div className="header-logo">
+                </div>
+                <div className="title">
+                    <h2>{title}</h2>
+                </div>
             </div>
-            <div className="title">
-                <h2>Diseño de Grafos LATAM Airlines</h2>
+        );
+    }
+    else{
+        return (
+            <div className="container-header">
+                <div className="header-logo">
+                    <img src={logo} alt="logo" />
+                </div>
+                <div className="title">
+                    <h2>{title}</h2>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+    
+
 };
 
 export default Header;

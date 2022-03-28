@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 const ContactUs = () => {
     return (
         <div className="container">
-            <Header />
+            <Header title="Diseño de Grafos LATAM Airlines" logo="/img/latam_logo.png"/>
             <Contacts />
             <FooterContact />
         </div>
