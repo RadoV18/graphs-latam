@@ -1,0 +1,21 @@
+.card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1D008F;  
+    border: 1px solid #ec1550;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+button{
+    margin-top: 3%;
+}
+
+.card-content:hover{
+    background-color: #EFEBFF;
+    border: 1px solid #000;
+    color: #000;
+}
+
+
