@@ -30,7 +30,7 @@ const Main = () => {
     return (
         <div className="container">
             <Modal />
-            <Header title="Diseño de Grafos LATAM Airlines" logo="../img/latam_logo.png"/>
+            <Header title="Diseño de Grafos LATAM Airlines" logo="/img/latam_logo.png"/>
             <Graph />
             <Toolbar />
             <Footer btnText="Generar matriz de adyacencia" onClick={onClick} />
