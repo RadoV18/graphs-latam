@@ -1,82 +1,85 @@
-import React from 'react';
+import React, { useState } from "react";
 import Graph from "../components/Graph/Graph";
 import Header from "../components/Header/Header";
 import Toolbar from "../components/Toolbar/Toolbar";
 import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
-import popper from 'cytoscape-popper';
+import popper from "cytoscape-popper";
 import cytoscape from "cytoscape";
+import { generateMatrix } from "../utils/adjacencyMatrix";
 
 const Johnson = () => {
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
-    const cy = useState(cytoscape());
+    const [cy, setCy] = useState(cytoscape());
 
     const onClick = () => {
         // ejecutar algoritmo
-
+        const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
 
         // generar poppers
-        var makePooperNode = function (node,text1, text2){
-          var popper = node.popper({
-            content: () => {
-              var div = document.createElement('div');
-              div.classList.add('popper-div');
-              div.innerHTML = "<table>"+
-                                "<tr>"+
-                                  "<td>"+text1+"</td>"+
-                                  "<td>"+text2+"</td>"+
-                                "</tr>"+
-                              "</table>";
-              document.body.appendChild( div );
-              return div;
-            },
-            popper: {
-              placement: 'bottom'
-            }
-          });
-          return popper;
+        const makePopperNode = (node, earlyStart, latestFinish) => {
+            const popper = node.popper({
+                content: () => {
+                    const div = document.createElement("div");
+                    div.classList.add("popper-div");
+                    div.innerHTML = `<table>
+                                    <tr>
+                                        <td>${earlyStart}</td>
+                                        <td>${latestFinish}</td>
+                                    </tr>
+                               </table>`;
+                    document.body.appendChild(div);
+                    return div;
+                },
+                popper: {
+                    placement: "bottom",
+                },
+            });
+            return popper;
         };
 
-        var makePopperEdge = function (edge,text1){
-          var popper = edge.popper({
-            content: () => {
-              var div = document.createElement('div');
-              div.classList.add('popper-div');
-              div.innerHTML = "h = "+ text1;
-              document.body.appendChild( div );
-              return div;
-            },
-            popper: {
-              placement: 'bottom'
-            }
-          });
-          return popper;
-        }
-        
-        const JohnsonData = [] // arreglo obtenido al ejecutar el algoritmo
+        const makePopperEdge = (edge, value) => {
+            const popper = edge.popper({
+                content: () => {
+                    const div = document.createElement("div");
+                    div.classList.add("popper-div");
+                    div.innerHTML = "h = " + value;
+                    document.body.appendChild(div);
+                    return div;
+                },
+                popper: {
+                    placement: "bottom",
+                },
+            });
+            return popper;
+        };
 
         //Agregando los popper a cada nodo
-        JohnsonData.nodes.forEach((e) =>{
-          var node = cy.getElementById(e.id);
-          var popperNode = makePooperNode(node, e.earlyStart, e.latestFinish);
-          let updateNode = () => {
-            popperNode.update();
-          };
-          node.on('position', updateNode);
-          cy.on('drag', updateNode);
-        });  
-        
+        johnsonData.nodes.forEach((e) => {
+            const node = cy.$(`#${e.id}`);
+            const popperNode = makePopperNode(
+                node,
+                e.earlyStart,
+                e.latestFinish
+            );
+            let updateNode = () => {
+                popperNode.update();
+            };
+            node.on("position", updateNode);
+            cy.on("drag", updateNode);
+        });
+
         //Agregando los poppers a cada edge
-        Johnson.edges.forEach((e) => {
-          var edge = cy.getElementById(e.id);
-          var popperEdge = makePopperEdge(edge, e.slag);
-          let updateEdge = () => {
-            popperEdge.update();
-          }
-          edge.connectedNodes().on('position', updateEdge);
-          cy.on('drag', updateEdge)
+        johnsonData.edges.forEach((e) => {
+            const edge = cy.$(`#${e.id}`);
+            const popperEdge = makePopperEdge(edge, e.slag);
+            let updateEdge = () => {
+                popperEdge.update();
+            };
+            edge.connectedNodes().on("position", updateEdge);
+            cy.on("drag", updateEdge);
         });
     };
 
@@ -89,6 +92,6 @@ const Johnson = () => {
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
         </div>
     );
-}
+};
 
-export default Johnson
+export default Johnson;
