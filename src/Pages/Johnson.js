@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Graph from "../components/Graph/Graph";
 import Header from "../components/Header/Header";
 import Toolbar from "../components/Toolbar/Toolbar";
 import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
+import { johnsonsAlgorithm } from "../utils/algorithms/johnsons";
 import popper from "cytoscape-popper";
 import cytoscape from "cytoscape";
 import { generateMatrix } from "../utils/adjacencyMatrix";
 
+cytoscape.use(popper);
+
 const Johnson = () => {
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
-    const [cy, setCy] = useState(cytoscape());
+    const cy = useRef(cytoscape());
+    console.log(cy.current);
 
     const onClick = () => {
         // ejecutar algoritmo
-        // const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
-        const johnsonData = {};
+        // console.log();
+        const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
 
         // generar poppers
         const makePopperNode = (node) => {
@@ -59,7 +63,9 @@ const Johnson = () => {
 
         //Agregando los popper a cada nodo
         johnsonData.nodes.forEach((e) => {
-            const node = cy.$(`#${e.id}`);
+            const node = cy.current.$id(`${e.label}`);
+            console.log(e.label);
+            console.log(cy.current);
             const popperNode = makePopperNode(
                 node,
                 e.earlyStart,
@@ -69,12 +75,12 @@ const Johnson = () => {
                 popperNode.update();
             };
             node.on("position", updateNode);
-            cy.on("drag", updateNode);
+            cy.current.on("drag", updateNode);
         });
 
         //Agregando los poppers a cada edge
         johnsonData.edges.forEach((e) => {
-            const edge = cy.$(`#${e.id}`);
+            const edge = cy.current.$id(`${e.id}`);
             const popperEdge = makePopperEdge(edge, e.slag);
             let updateEdge = () => {
                 popperEdge.update();
@@ -88,7 +94,7 @@ const Johnson = () => {
         <div className="container">
             <Modal />
             <Header />
-            <Graph />
+            <Graph ref={cy}/>
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
         </div>
