@@ -52,7 +52,7 @@ const Johnson = () => {
                 content: () => {
                     const div = document.createElement("div");
                     div.classList.add("popper-div");
-                    div.innerHTML = `<table class=${isCritical ? "node--critical" : "node--standard"}>
+                    div.innerHTML = `<table class="${isCritical ? "node node--critical" : "node"}">
                                     <tr>
                                         <td>${earlyStart}</td>
                                         <td>${latestFinish}</td>
