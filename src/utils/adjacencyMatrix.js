@@ -12,7 +12,7 @@ export const generateMatrix = (elements) => {
         indexes.set(node.data.id, index);
         adjacencyMatrix.push([]);
         for(let i = 0; i < nodes.length; i++) {
-            adjacencyMatrix[index].push(0);
+            adjacencyMatrix[index].push(-1);
         }
     });
 

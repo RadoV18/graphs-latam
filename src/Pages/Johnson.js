@@ -16,18 +16,19 @@ const Johnson = () => {
 
     const onClick = () => {
         // ejecutar algoritmo
-        const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
+        // const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
+        const johnsonData = {};
 
         // generar poppers
-        const makePopperNode = (node, earlyStart, latestFinish) => {
+        const makePopperNode = (node) => {
             const popper = node.popper({
                 content: () => {
                     const div = document.createElement("div");
                     div.classList.add("popper-div");
-                    div.innerHTML = `<table>
+                    div.innerHTML = `<table class=${node.isCritical ? "node--critical" : ""}>
                                     <tr>
-                                        <td>${earlyStart}</td>
-                                        <td>${latestFinish}</td>
+                                        <td>${node.earlyStart}</td>
+                                        <td>${node.latestFinish}</td>
                                     </tr>
                                </table>`;
                     document.body.appendChild(div);

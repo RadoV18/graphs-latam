@@ -13,36 +13,21 @@
 // const result = {
 //     nodes: [
 //         {
+//             label, 
 //             earlyStart, // izquierdo
 //             latestFinish, // derecho
+//             isCritical (boolean)
 //         }
 //     ],
 //     edges: [
 //         {
+//             source, (label del nodo)
+//             destination, (label del nodo)
 //             weight, // peso
 //             slag // (holgura)
 //         }
 //     ]
 // }
-
-
-// TODO: recibirlos Parametros desde DISPATCH
-
-labels = [['0', 0], ['1', 1], ['2', 2], ['3', 3], ['4', 4],['5', 5],['6', 6]];
-//matrix = [ [0,6,3,2,0,0,0],[0,0,0,0,4,0,0], [0,0,0,0,6,5,3], [0,0,0,0,0,8,0], [0,0,0,0,0,0,12],[0,0,0,0,0,0,9],[0,0,0,0,0,0,0] ];
-matrix = [ [0,3,0,0,0,0,0],[0,0,6,0,0,0,0], [0,0,0,0,0,0,0], [5,4,5,0,0,0,0], [0,0,0,2,0,0,0],[0,0,0,0,5,0,8],[0,0,0,3,0,0,0] ];
-
-console.log( labels);
-console.log(matrix);
-
-// variable para almacenar la posicion del nodo inicial
-const nodeBegin = [];
-
-// variable para almacenar la posicion del nodo final
-const nodeEnd = [];
-
-
-
 /*
 se calcula la suma por fila y por columna 
 de esa manera se identifica los nodos iniciales y finales 
@@ -52,21 +37,84 @@ si la suma por fila = 0 ; se considera que para esa posicion de la fila el nodo 
 
 TODO: no se distingue si existe uno mas nodos iniciales o finales
 */
-for(let i=0 ; i< matrix.length ;i++){
-    let columnSum = 0;
-    let rowSum =0;
-    
-    for(let j=0 ; j< matrix.length; j++ ){
-        rowSum += matrix[i][j];
-        columnSum += matrix[j][i]; 
+const validate = (matrix) => {
+    let firstNode = -1;
+    let lastNode = -1;
+
+    for(let i=0 ; i< matrix.length ;i++){
+        let columnSum = 0;
+        let rowSum = 0;
+        
+        for(let j=0 ; j< matrix.length; j++ ){
+            const rowWeight = matrix[i][j];
+            const columnWeight = matrix[j][i];
+            rowSum += (rowWeight <= 0 ? rowWeight + 1 : rowWeight);
+            columnSum += (columnWeight <= 0 ? columnWeight + 1 : columnWeight);; 
+        }
+        if(columnSum === 0){
+            if(firstNode === -1) {
+                firstNode = columnSum;
+            } else {
+                throw new Error("Grafo inválido");
+            }
+        }
+        if(rowSum === 0){
+            if(lastNode === -1) {
+                lastNode = columnSum;
+            } else {
+                throw new Error("Grafo inválido");
+            }
+        }
     }
-    if(columnSum == 0){
-        nodeBegin.push(i);
+
+    return { firstNode, lastNode };
+}
+
+const johnsonsAlgorithm = ({ labels, matrix }) => {
+    const { firstNode, lastNode } = validate(matrix);
+    if(firstNode === -1 || lastNode === -1) {
+        throw new Error("Grafo inválido");
     }
-    if(rowSum ==0){
-        nodeEnd.push(i);
+
+
+
+    return {
+        //nodes,
+        //edges
     }
 }
+
+
+// TODO: recibirlos Parametros desde DISPATCH
+
+const labels = [
+    ["A", 0],
+    ["B", 1],
+    ["C", 2],
+    ["D", 3],
+    ["E", 4],
+    ["F", 5],
+    ["G", 6],
+];
+//matrix = [ [0,6,3,2,0,0,0],[0,0,0,0,4,0,0], [0,0,0,0,6,5,3], [0,0,0,0,0,8,0], [0,0,0,0,0,0,12],[0,0,0,0,0,0,9],[0,0,0,0,0,0,0] ];
+const matrix = [
+    [-1,  1, -1, -1, -1, -1, -1],
+    [-1, -1,  2, -1, -1, -1, -1],
+    [-1, -1, -1,  3,  4, -1, -1],
+    [-1, -1, -1, -1,  0,  0, -1],
+    [-1, -1, -1, -1, -1,  2, -1],
+    [-1, -1, -1, -1, -1, -1,  3],
+    [-1, -1, -1, -1, -1, -1, -1],
+];
+
+console.log( labels);
+console.log(matrix);
+
+// variable para almacenar la posicion del nodo inicial
+const nodeBegin = [];
+
+// variable para almacenar la posicion del nodo final
+const nodeEnd = [];
 
  
 
@@ -172,9 +220,9 @@ for(let i=0; i < matrix.length ; i++){
     matrixSlag.push([]);
     for(let j=0 ; j < matrix.length ; j++){
         let aux = -1;
-        if(matrix[i][j] != 0){
+        if(matrix[i][j] !== 0){
             aux = arrayTardeValues[j]-arrayProntoValues[i]-matrix[i][j];
-            if(aux == 0){
+            if(aux === 0){
                 arrayOfCriticalPath.push([i, j]);
             }
         }

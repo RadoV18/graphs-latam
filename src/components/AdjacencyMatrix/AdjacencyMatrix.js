@@ -9,7 +9,7 @@ const AdjacencyMatrix = () => {
     adjacencyMatrix.matrix.forEach((row) => {
         let rowSum = 0;
         row.forEach((weight) => {
-            rowSum += weight;
+            rowSum += (weight === -1 ? 0 : weight);
         });
         rowsSum.push(rowSum);
     });
@@ -18,7 +18,8 @@ const AdjacencyMatrix = () => {
     for(let i = 0; i < adjacencyMatrix.matrix.length; i++) {
         let columnSum = 0;
         for(let j = 0; j < adjacencyMatrix.matrix.length; j++) {
-            columnSum += adjacencyMatrix.matrix[j][i];
+            const weight = adjacencyMatrix.matrix[j][i];
+            columnSum += (weight === -1 ? 0 : weight);
         }
         columnsSum.push(columnSum);
     }
@@ -41,7 +42,7 @@ const AdjacencyMatrix = () => {
                         <tr key={`nrow-${index}`}>
                             <td key={`srow-${index}`} className="cell-node">{adjacencyMatrix.labels[index][0]}</td>
                             {row.map((element, index) =>
-                                <td key={`row-${index}`} className="cell-value">{element}</td>
+                                <td key={`row-${index}`} className="cell-value">{element === -1 ? 0 : element}</td>
                             )}
                             <td key={`sum-r-${index}`} className="cell-addition">{rowsSum[index]}</td>
                         </tr>    
