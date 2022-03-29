@@ -1,0 +1,23 @@
+.node--critical {
+    margin: 5px;
+    border: 1px solid green;
+    background-color: green;
+}
+
+.node--critical td {
+    border: 1px solid white;
+    width: 1rem;
+    text-align: center;
+    color: white
+}
+
+.node--standard {
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.node--standard td {
+    border: 1px solid black;
+    width: 1rem;
+    text-align: center;
+}

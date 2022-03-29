@@ -1,13 +1,15 @@
 import Graph from "../components/Graph/Graph";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import Toolbar from "../components/Toolbar/Toolbar";
-import Footer from "../components/footer/Footer";
+import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { johnsonsAlgorithm } from "../utils/algorithms/johnsons";
 import popper from "cytoscape-popper";
 import cytoscape from "cytoscape";
 import { generateMatrix } from "../utils/adjacencyMatrix";
+
+import "../Styles/johnson.css";
 
 cytoscape.use(popper);
 
@@ -50,7 +52,7 @@ const Johnson = () => {
                 content: () => {
                     const div = document.createElement("div");
                     div.classList.add("popper-div");
-                    div.innerHTML = `<table class=${isCritical ? "node--critical" : ""}>
+                    div.innerHTML = `<table class=${isCritical ? "node--critical" : "node--standard"}>
                                     <tr>
                                         <td>${earlyStart}</td>
                                         <td>${latestFinish}</td>
@@ -97,7 +99,7 @@ const Johnson = () => {
                 popperNode.update();
             };
             node.on("position", updateNode);
-            cy.on("drag", updateNode);
+            cy.on("pan zoom resize", updateNode);
         });
 
         //Agregando los poppers a cada edge
@@ -110,7 +112,7 @@ const Johnson = () => {
                 popperEdge.update();
             };
             edge.connectedNodes().on("position", updateEdge);
-            cy.on("drag", updateEdge);
+            cy.on("pan zoom resize", updateEdge);
         });
     };
 
