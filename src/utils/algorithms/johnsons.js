@@ -53,14 +53,14 @@ const validate = (matrix) => {
         }
         if(columnSum === 0){
             if(firstNode === -1) {
-                firstNode = columnSum;
+                firstNode = i;
             } else {
                 throw new Error("Grafo inválido");
             }
         }
         if(rowSum === 0){
             if(lastNode === -1) {
-                lastNode = columnSum;
+                lastNode = i;
             } else {
                 throw new Error("Grafo inválido");
             }
@@ -76,14 +76,198 @@ const johnsonsAlgorithm = ({ labels, matrix }) => {
         throw new Error("Grafo inválido");
     }
 
+    const {matrixIdaEarly, arrayLeftEarly} = getMatrixLeftEarly(matrix, firstNode);
+    const {matrixVueltaLate, arrayRightLate} = getMatrixRightLate(matrix,  arrayLeftEarly, lastNode);
+    const {matrixSlag, arrayOfCriticalPath, arraySlagByEdge } = getSlagAndCritical(arrayLeftEarly, arrayRightLate, matrix);
 
+    // aqui se devuelve;
+    const Nodes = [];
+    const edges = [];
+
+    for(let i=0; i < arrayLeftEarly.length ; i++){
+        
+        Nodes.push({label: labels[i][0]  , 
+                    earlyStart: arrayLeftEarly[i] ,
+                    latestFinish: arrayRightLate[i] ,
+                    isCritical: giveMeifexitsInCriticalPath(i, arrayOfCriticalPath)});
+
+
+    }
+    for(let j =0; j < arraySlagByEdge.length ; j++){
+        edges.push( {
+            source: labels[arraySlagByEdge[j][0]] ,
+            destination: labels[arraySlagByEdge[j][1]],
+            weight: matrix[arraySlagByEdge[j][0]][arraySlagByEdge[j][1]],
+            slag: arraySlagByEdge[j][2]
+        });
+    }
+ 
 
     return {
-        //nodes,
-        //edges
+        Nodes, edges
+    };
+}
+function giveMeifexitsInCriticalPath(a, arrayOfCriticalPath){
+    const arrayAuxiliar = [];
+    for(let i=0; i < arrayOfCriticalPath.length ; i++){
+        for(let j=0 ; j < arrayOfCriticalPath[i].length ; j++){
+            arrayAuxiliar.push(arrayOfCriticalPath[i][j]);
+        }
+    }
+    if(arrayAuxiliar.includes(a)){
+        return true;
+    }else{
+        return false;
     }
 }
+const getSlagAndCritical = (arrayProntoValues, arrayTardeValues, matrix) => {
+    const matrixSlag = [];
+    const arrayOfCriticalPath = [];
+    for(let i=0; i < matrix.length ; i++){
+        matrixSlag.push([]);
+        for(let j=0 ; j < matrix.length ; j++){
+            let aux = -1;
+            if(matrix[i][j] != -1){
+                aux = arrayTardeValues[j]-arrayProntoValues[i]-matrix[i][j];
+                if(aux == 0){
+                    arrayOfCriticalPath.push([i, j]);
+                }
+            }
+            matrixSlag[i].push(aux);
+        }
+    }
 
+
+    const slagsByArista = [];
+    for(let i=0; i < matrix.length ; i++){
+        for(let j=0 ; j < matrix.length ; j++){
+            if(matrixSlag[i][j] != -1){
+                slagsByArista.push([i,j,matrixSlag[i][j]]);
+            }
+        }
+    }
+
+    
+    
+
+    return {matrixSlag, arrayOfCriticalPath, slagsByArista};
+
+}
+
+const getMatrixRightLate = (matrix,   arrayProntoValues, lastNode) => {
+    const matrixVuelta = [];
+
+    for(let i=0 ; i < matrix.length ; i++){
+    
+        matrixVuelta.push([]);
+      
+        for(let j=0 ; j< matrix.length ; j++){
+            matrixVuelta[i].push(arrayProntoValues[lastNode]);
+             
+        }
+    }
+
+    insertIntoMatrixVuelta(arrayProntoValues[lastNode], lastNode, matrixVuelta);
+     
+
+    function insertIntoMatrixVuelta(dism, col, matrixAuxx){
+        for(let i=0 ; i < matrixAuxx.length ; i++ ){
+            let aux = arrayProntoValues[lastNode];
+            if(matrix[i][col] != -1){
+                
+                aux = dism - matrix[i][col] ;
+                if(matrixAuxx[col][i] < aux){
+                    aux = matrixAuxx[col][i];
+                }
+                insertIntoMatrixVuelta(aux , i, matrixAuxx);
+            }
+            matrixAuxx[col][i]= aux;
+
+        }
+    }
+
+    const arrayTardeValues = [];
+    for(let i=0 ; i< matrix.length ;i++){ 
+        arrayTardeValues.push(giveLowestOfColumn(i, matrixVuelta));
+    }
+
+    return {matrixVuelta, arrayTardeValues};
+
+}
+
+const getMatrixLeftEarly = ( matrix, firstNode) =>{
+    const matrixIda = [];
+    // TODO: Se podria evitar cerear toda la matriz pero lo dejo asi nomas XD
+    for(let i=0 ; i < matrix.length ; i++){
+    
+        matrixIda.push([]);
+      
+        for(let j=0 ; j< matrix.length ; j++){
+            matrixIda[i].push(0);
+             
+        }
+    }
+
+        /*
+    COmienza el verdadero algoritmo para identificar las sumas de IDA
+    teniendo en cuenta que:
+    posicion de fila = nodo inicial
+    posicion de columna = nodo final
+    */
+    insertIntoMatrixPronto(0,firstNode, matrixIda);
+
+    function insertIntoMatrixPronto(add, row, matrixAux){
+        for(let i=0 ; i < matrixAux.length ; i++ ){
+            let aux = 0;
+            if(matrix[row][i] != -1){
+                
+                aux = matrix[row][i]+add;
+                if(matrixAux[row][i] > aux){
+                    aux =matrixAux[row][i] ;
+                }
+                insertIntoMatrixPronto(aux, i, matrixAux);
+            }
+            matrixAux[row][i]= aux;
+
+        }
+    }
+
+    const arrayProntoValues = [];
+    for(let i=0 ; i< matrix.length ;i++){ 
+        arrayProntoValues.push(giveMeHighestOfColum(i, matrixIda));
+    }
+
+
+    return {matrixIda, arrayProntoValues};
+
+ 
+}
+
+
+function giveMeHighestOfColum(col, properMatrix){
+    let n = 0;
+    for(let i=0 ; i< properMatrix.length ;i++){
+         if(properMatrix[i][col] > n){
+             n = properMatrix[i][col];
+             
+         }
+         
+    }
+    return n;
+}
+function giveLowestOfColumn(col, properMatrix){
+    let n = giveMeHighestOfColum(col, properMatrix);
+    for(let i=0 ; i< properMatrix.length ;i++){
+         if(properMatrix[i][col] < n){
+             n = properMatrix[i][col];
+             
+         }
+         
+    }
+    return n;
+}
+
+/*** 
 
 // TODO: recibirlos Parametros desde DISPATCH
 
@@ -135,12 +319,12 @@ for(let i=0 ; i < matrix.length ; i++){
     }
 }
 
-/*
+ 
 COmienza el verdadero algoritmo para identificar las sumas de IDA
 teniendo en cuenta que:
 posicion de fila = nodo inicial
 posicion de columna = nodo final
-*/
+ 
 insertIntoMatrixPronto(0,nodeBegin[0], matrixIda);
 
 function insertIntoMatrixPronto(add, row, matrixAux){
@@ -273,7 +457,7 @@ function giveLowestOfColumn(col, properMatrix){
     return n;
 }
 
-/*
+ 
   variables donde se encuentran los datos:
 
   arrayProntoValues   // se encuentra los valores de lado pronto de todos los nodos, los nodos en base a su posicion del array 'Labels'  
@@ -282,4 +466,5 @@ function giveLowestOfColumn(col, properMatrix){
   arrayOfCriticalPath   // se encuentra las posiciones de los nodos que son la ruta critica =>  [posicionNodoInicial, posicionNodoFinal]  
                         // TODO: aqui se encuentra en desorden pero creo que este array puede servir para pintar la arista entre [posicionNodoInicial, posicionNodoFinal]
 
+ 
 */
