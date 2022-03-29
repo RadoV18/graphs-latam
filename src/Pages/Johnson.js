@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
 import Graph from "../components/Graph/Graph";
-import Header from "../components/Header/Header";
+import Header from "../components/header/Header";
 import Toolbar from "../components/Toolbar/Toolbar";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { johnsonsAlgorithm } from "../utils/algorithms/johnsons";
@@ -15,24 +14,46 @@ cytoscape.use(popper);
 const Johnson = () => {
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
-    const cy = useRef(cytoscape());
-    console.log(cy.current);
+    
 
     const onClick = () => {
         // ejecutar algoritmo
         // console.log();
         const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
+        
+        //No se si es valido pero funca
+        //generamos un cy con los valores obtenidos del estado
+        const cy = cytoscape({
+            container: document.getElementById("cy"),
+            style: data.style,
+            zoomingEnabled: true,
+            userZoomingEnabled: true,
+            panningEnabled: true,
+            userPanningEnabled: true,
+        });
+        if (data.elements) {
+            if (data.elements.nodes) {
+                data.elements.nodes.forEach((element) => {
+                    cy.add(element);
+                });
+            }
+            if (data.elements.edges) {
+                data.elements.edges.forEach((element) => {
+                    cy.add(element);
+                });
+            }
+        };
 
         // generar poppers
-        const makePopperNode = (node) => {
+        const makePopperNode = (node, earlyStart, latestFinish , isCritical) => {
             const popper = node.popper({
                 content: () => {
                     const div = document.createElement("div");
                     div.classList.add("popper-div");
-                    div.innerHTML = `<table class=${node.isCritical ? "node--critical" : ""}>
+                    div.innerHTML = `<table class=${isCritical ? "node--critical" : ""}>
                                     <tr>
-                                        <td>${node.earlyStart}</td>
-                                        <td>${node.latestFinish}</td>
+                                        <td>${earlyStart}</td>
+                                        <td>${latestFinish}</td>
                                     </tr>
                                </table>`;
                     document.body.appendChild(div);
@@ -63,24 +84,27 @@ const Johnson = () => {
 
         //Agregando los popper a cada nodo
         johnsonData.nodes.forEach((e) => {
-            const node = cy.current.$id(`${e.label}`);
-            console.log(e.label);
-            console.log(cy.current);
+            //Obtenemos la referencia del nodo del cy declarado
+            const node = cy.getElementById(e.label);
+            //Se envia la referencia del nodo y los valores de los poppers
             const popperNode = makePopperNode(
                 node,
                 e.earlyStart,
-                e.latestFinish
+                e.latestFinish,
+                e.isCritical
             );
             let updateNode = () => {
                 popperNode.update();
             };
             node.on("position", updateNode);
-            cy.current.on("drag", updateNode);
+            cy.on("drag", updateNode);
         });
 
         //Agregando los poppers a cada edge
         johnsonData.edges.forEach((e) => {
-            const edge = cy.current.$id(`${e.id}`);
+            //Concatenamos el valor del source y target para obtener el id
+            const edge = cy.getElementById(e.source[0]+"-"+e.destination[0]);
+            //Aca igual se envia la referencia del edge y el valor de la holgura
             const popperEdge = makePopperEdge(edge, e.slag);
             let updateEdge = () => {
                 popperEdge.update();
@@ -94,7 +118,7 @@ const Johnson = () => {
         <div className="container">
             <Modal />
             <Header />
-            <Graph ref={cy}/>
+            <Graph />
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
         </div>

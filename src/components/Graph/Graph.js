@@ -7,7 +7,7 @@ import { setNewNodePosition } from "../../redux/actions/nodeCreator";
 import { nextIndex } from "../../redux/actions/currentIndex";
 import cytoscape from "cytoscape";
 
-const Graph = ({ ref }) => {
+const Graph = () => {
     const dispatch = useDispatch();
     const toolbar = useSelector((state) => state.toolbar);
     const currentIndex = useSelector((state) => state.currentIndex);
@@ -38,11 +38,8 @@ const Graph = ({ ref }) => {
             }
         }
         setCy(newCy);
-        if(ref) {
-            ref.current = newCy;
-            console.log(ref.current);
-        }
-    }, [cytoscapeData, ref]);
+        
+    }, [cytoscapeData]);
 
     if (toolbar.node) {
         cy.removeListener("tap");
