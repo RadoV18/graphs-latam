@@ -1,0 +1,25 @@
+.node {
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.node td {
+    border: 1px solid black;
+    width: 1rem;
+    text-align: center;
+}
+
+.node--critical {
+    border: 1px solid green;
+    background-color: green;
+}
+
+.node--critical td {
+    border: 1px solid white;
+    color: white
+}
+
+.popper-div {
+    overflow: hidden;
+    z-index: -9999;
+}

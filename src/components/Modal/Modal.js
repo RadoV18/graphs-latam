@@ -96,7 +96,7 @@ const Modal = () => {
         try {
             const weight = Number(textInput);
 
-            if (Number.isNaN(weight) || weight <= 0) {
+            if (Number.isNaN(weight) || weight < 0) {
                 throw new TypeError();
             }
 

@@ -20,10 +20,10 @@ const Graph = () => {
         const newCy = cytoscape({
             container: document.getElementById("cy"),
             style: cytoscapeData.style,
-            zoomingEnabled: false,
-            userZoomingEnabled: false,
-            panningEnabled: false,
-            userPanningEnabled: false,
+            zoomingEnabled: true,
+            userZoomingEnabled: true,
+            panningEnabled: true,
+            userPanningEnabled: true,
         });
         if (cytoscapeData.elements) {
             if (cytoscapeData.elements.nodes) {
@@ -38,6 +38,7 @@ const Graph = () => {
             }
         }
         setCy(newCy);
+        
     }, [cytoscapeData]);
 
     if (toolbar.node) {
