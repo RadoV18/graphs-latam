@@ -6,6 +6,7 @@ import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
 import popper from 'cytoscape-popper';
+import { useState }  from 'react';
 import cytoscape from "cytoscape";
 
 const Johnson = () => {
@@ -83,7 +84,7 @@ const Johnson = () => {
     return (
         <div className="container">
             <Modal />
-            <Header />
+            <Header title="Diseño de Grafos LATAM Airlines" logo="/img/latam_logo.png"/>
             <Graph />
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
