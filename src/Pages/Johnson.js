@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
 import popper from 'cytoscape-popper';
-import { useState }  from 'react';
+import { useState }  from 'react';o
 import cytoscape from "cytoscape";
 
 const Johnson = () => {
