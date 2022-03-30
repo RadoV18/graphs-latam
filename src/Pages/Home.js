@@ -19,6 +19,11 @@ const Home = () => {
         history.push("/grafos/johnson");
     }
 
+    const openAsignacion = () => {
+        history.push("/grafos/asignacion");
+
+    }
+
     return <div>
         <Header title={'Implementación  de  Algoritmos'} logo={''}/>
         <Title text={'Generación de Grafos'} />
@@ -27,6 +32,8 @@ const Home = () => {
             buttonText="Grafos" onClick={openGraphs}/>
             <Card subtitle="Johnson" img="/img/Card/johnson.png" text="Algoritmo de Johnson" 
             buttonText="Johnson" onClick={openJohnson}/>
+            <Card subtitle="Asignación" img="/img/Card/asignacion.png" text="Algoritmo de Johnson" 
+            buttonText="Asignación" onClick={openAsignacion}/>
             
         </div>
     </div>
