@@ -24,6 +24,7 @@ function App() {
                     <Asignacion />
                 </Route>
                 <Route path="/grafos/Transporte">
+                    
                     <Transporte />
                 </Route>
                 <Route path="/">
