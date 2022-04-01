@@ -119,7 +119,7 @@ const Johnson = () => {
     return (
         <div className="container">
             <Modal />
-            <Header title="Diseño de Grafos LATAM Airlines" logo="/img/latam_logo.png"/>
+            <Header logo="/img/latam_logo.png"/>
             <Graph />
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />

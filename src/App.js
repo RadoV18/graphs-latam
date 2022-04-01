@@ -4,6 +4,8 @@ import Home from "./Pages/Home";
 import ContactUs from "./Pages/ContactUs";
 import Main from "./Pages/Main";
 import Johnson from "./Pages/Johnson";
+import Asignacion from "./Pages/Asignacion";
+import Transporte from "./Pages/Transporte";
 
 function App() {
     return (
@@ -17,6 +19,12 @@ function App() {
                 </Route>
                 <Route path="/grafos/johnson">
                     <Johnson />
+                </Route>
+                <Route path="/grafos/asignacion">
+                    <Asignacion />
+                </Route>
+                <Route path="/grafos/transporte">
+                    <Transporte />
                 </Route>
                 <Route path="/">
                     <Home />
