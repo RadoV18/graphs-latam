@@ -1,5 +1,9 @@
 .table__container--transporte {
     display: flex;
+    width: 90%;
+    margin: 0 auto;
+    flex-grow: 20;
+    overflow: auto;
 }
 
 .available__container {

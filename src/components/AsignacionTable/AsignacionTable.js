@@ -51,8 +51,10 @@ const AsignacionTable = ({ matrix, setMatrix }) => {
                     </tbody>
                 </table>
             </div>
-            <Counter variable={rows} setVariable={setRows} text="Filas" />
-            <Counter variable={columns} setVariable={setColumns} text="Columnas" />
+            <div className="counter__container">
+                <Counter variable={rows} setVariable={setRows} text="Filas" />
+                <Counter variable={columns} setVariable={setColumns} text="Columnas" />
+            </div>
         </>
     );
 };

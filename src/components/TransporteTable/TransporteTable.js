@@ -57,39 +57,42 @@ const TransporteTable = ({ matrix, setMatrix, available, setAvailable, demand, s
     }, [columns]);
 
     return (
-        <div className="table__container">
-            <div className="table__container--transporte">
-                <table className="table">
-                    <tbody className="table__body">
-                        {matrix.map((row, indexI) => (
-                            <tr className="table__row" key={"row" + indexI}>
-                                {row.map((value, indexJ) => {
-                                    return <td className="table__col" key={"col" + indexJ}>
-                                        <input className="table__input" type="text" onChange={(e) => handleChange(e, indexI, indexJ)} value={value} disabled={indexI === 0 && indexJ === 0 ? true : false} />
-                                    </td>;
+        <>
+            <div className="table__container">
+                <div className="table__container--transporte">
+                    <table className="table">
+                        <tbody className="table__body">
+                            {matrix.map((row, indexI) => (
+                                <tr className="table__row" key={"row" + indexI}>
+                                    {row.map((value, indexJ) => {
+                                        return <td className="table__col" key={"col" + indexJ}>
+                                            <input className="table__input" type="text" onChange={(e) => handleChange(e, indexI, indexJ)} value={value} disabled={indexI === 0 && indexJ === 0 ? true : false} />
+                                        </td>;
+                                    })}
+                                </tr>
+                            ))}
+                            <tr className="table__demand">
+                                {demand.map((value, index) => {
+                                    return <td className="table__col" key={"demand" + index} >
+                                        <input className="table__input" type="text" value={value} onChange={(e) => demandChange(e, index)} />
+                                    </td>
                                 })}
                             </tr>
-                        ))}
-                        <tr className="table__demand">
-                            {demand.map((value, index) => {
-                                return <td className="table__col" key={"demand" + index} >
-                                    <input className="table__input" type="text" value={value} onChange={(e) => demandChange(e, index)} />
-                                </td>
-                            })}
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="available__container" style={{marginLeft: "2rem"}}>
-                    {available.map((value, index) => 
-                        <input className="table__input" type="text" value={value} onChange={(e => availableChange(e, index))} />
-                    )}
-                    <input className="table__input" type="text" disabled />
+                        </tbody>
+                    </table>
+                    <div className="available__container" style={{marginLeft: "2rem"}}>
+                        {available.map((value, index) =>
+                            <input className="table__input" type="text" value={value} onChange={(e => availableChange(e, index))} />
+                        )}
+                        <input className="table__input" type="text" disabled />
+                    </div>
                 </div>
             </div>
-            
-            <Counter variable={rows} setVariable={setRows} text="Filas" />
-            <Counter variable={columns} setVariable={setColumns} text="Columnas"/>
-        </div>
+            <div className="counter__container">
+                <Counter variable={rows} setVariable={setRows} text="Filas" />
+                <Counter variable={columns} setVariable={setColumns} text="Columnas"/>
+            </div>
+        </>
     );
 };
 
