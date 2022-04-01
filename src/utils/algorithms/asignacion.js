@@ -33,6 +33,7 @@ function maximizarFunction(
     trueSoutions,
     matrixSolutions
 ) {
+    
     let numAuxiliar = 0;
     while (numAuxiliar != copyMatrix[0].length) {
         operateByColumns(copyMatrix, maximaze);
@@ -77,36 +78,40 @@ function minimizarFunction(
     trueSoutions,
     matrixSolutions
 ) {
-    operateByColumns(copyMatrix, maximaze);
+    
+    let numAuxiliar = 0;
+    while(numAuxiliar != copyMatrix[0].length){ 
+        operateByColumns(copyMatrix, maximaze);
 
-    operateByRows(copyMatrix, maximaze);
+        operateByRows(copyMatrix, maximaze);
 
-    var zerosArray = giveMeZerosArray(copyMatrix);
+        var zerosArray = giveMeZerosArray(copyMatrix);
 
-    var pathsFounded = givePathFounded(zerosArray);
+        var pathsFounded = givePathFounded(zerosArray);
 
-    var pathInArray = getPathInArrayPosition(pathsFounded, copyMatrix);
+        var pathInArray = getPathInArrayPosition(pathsFounded, copyMatrix);
 
-    for (let i = 0; i < pathInArray.length; i++) {
-        if (pathInArray[i].length === copyMatrix[0].length) {
-            matrixSolutions.push(copyMatrix);
-            trueSoutions.push(pathInArray);
-        } else {
-            var copy2matrix = copyMatrix.map(function (arr) {
-                return arr.slice();
-            });
-            var copyArray = pathInArray[i].map(function (arr) {
-                return arr.slice();
-            });
+        for (let i = 0; i < pathInArray.length; i++) {
+            if (pathInArray[i].length === copyMatrix[0].length) {
+                matrixSolutions.push(copyMatrix);
+                trueSoutions.push(pathInArray);
+            } else {
+                var copy2matrix = copyMatrix.map(function (arr) {
+                    return arr.slice();
+                });
+                var copyArray = pathInArray[i].map(function (arr) {
+                    return arr.slice();
+                });
 
-            usarPivote(copy2matrix, copyArray, maximaze);
+                usarPivote(copy2matrix, copyArray, maximaze);
 
-            operateInMatrix(
-                copy2matrix,
-                maximaze,
-                trueSoutions,
-                matrixSolutions
-            );
+                operateInMatrix(
+                    copy2matrix,
+                    maximaze,
+                    trueSoutions,
+                    matrixSolutions
+                );
+            }
         }
     }
 }
