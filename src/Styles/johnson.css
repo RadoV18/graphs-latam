@@ -23,3 +23,14 @@
     overflow: hidden;
     z-index: -9999;
 }
+
+.square{
+    margin: 2% 2% 2% 2%;
+    width: 30px;
+    height: 30px;
+    background-color: green;
+}
+
+.square-container{
+    display: none;
+}
