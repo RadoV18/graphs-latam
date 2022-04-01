@@ -34,7 +34,6 @@ const Home = () => {
             buttonText="Johnson" onClick={openJohnson}/>
             <Card subtitle="Asignación" img="/img/Card/asignacion.png" text="Algoritmo de Johnson" 
             buttonText="Asignación" onClick={openAsignacion}/>
-            
         </div>
     </div>
 };

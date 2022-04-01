@@ -17,7 +17,17 @@ const Asignacion = () => {
 
     const onClick = (e) => {
         e.preventDefault();
-        asignacionAlgorithm(matrix, true);
+        let matrixAsignacion = matrix.slice(1);
+        matrixAsignacion = matrixAsignacion.map((elem) => {
+            return elem.slice(1);
+        })
+        
+        const result = asignacionAlgorithm(matrixAsignacion, true);
+    }
+
+    const radioButtonChange = (e) => {
+        e.preventDefault();
+        console.log(e.target);
     }
 
     return (
@@ -25,10 +35,10 @@ const Asignacion = () => {
             <Header title="Algoritmo de Asignación" logo="" />
 
             <div className="radio-wrapper">
-              <input type="radio" id="max" name="radio" />
+              <input onChange={radioButtonChange} type="radio" id="max" name="radio" />
               <label htmlFor="max">Maximizar</label>
 
-              <input type="radio" id="min" name="radio" />
+              <input onChange={radioButtonChange} type="radio" id="min" name="radio" />
               <label htmlFor="min">Minimizar</label>
             </div>
 
