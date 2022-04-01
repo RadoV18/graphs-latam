@@ -10,7 +10,7 @@ const Card = ({subtitle, img, text, buttonText, onClick}) => {
         <div className="card-text">
           {text}
         </div>
-        <Button text={buttonText} onClick={onClick} />
+        <div class="card__button"><Button text={buttonText} onClick={onClick} /></div>
     </div>
   )
 }

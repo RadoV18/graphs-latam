@@ -59,7 +59,7 @@ const Transporte = () => {
 
     return (
         <div className="container">
-            <Header title="Algoritmo de Transporte" logo="" />
+            <Header title="Algoritmo de Transporte" logo="/img/latam_logo.png" />
 
             <div className="radio-wrapper">
                 <input onChange={radioButtonChange} type="radio" id="max" name="radio" />

@@ -31,13 +31,13 @@ const Home = () => {
 
     return <div>
         <Header title={'Implementación  de  Algoritmos'} logo={''}/>
-        <Title text={'Generación de Grafos'} />
-        <div className="card-wrapper">
-            <Card subtitle="Grafos" img="/img/Card/grafos.png" text="Representación de los grafos aplicados a la empresa LATAM" 
+        <Title text={'Grafos'} />
+        <div className="card-wrapper" style={{paddingBottom: '5rem'}}>
+            <Card subtitle="Generación de Grafos" img="/img/Card/grafos.png" text="Representación de los grafos aplicados a la empresa LATAM" 
             buttonText="Grafos" onClick={openGraphs}/>
             <Card subtitle="Johnson" img="/img/Card/johnson.png" text="Algoritmo de Johnson" 
             buttonText="Johnson" onClick={openJohnson}/>
-            <Card subtitle="Asignación" img="/img/Card/asignacion.png" text="Algoritmo de Johnson" 
+            <Card subtitle="Asignación" img="/img/Card/asignacion.png" text="Algoritmo de Asignación" 
             buttonText="Asignación" onClick={openAsignacion}/>
             <Card subtitle="Transporte" img="/img/Card/transporte.png" text="Algoritmo de Transporte" 
             buttonText="Transporte" onClick={openTransporte}/>

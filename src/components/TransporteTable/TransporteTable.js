@@ -74,7 +74,7 @@ const TransporteTable = ({ matrix, setMatrix, available, setAvailable, demand, s
                             <tr className="table__demand">
                                 {demand.map((value, index) => {
                                     return <td className="table__col" key={"demand" + index} >
-                                        <input className="table__input" type="text" value={value} onChange={(e) => demandChange(e, index)} />
+                                        <input className={index === 0 ? "table__input available__input" : "table__input" } type="text" value={index === 0 ? "Demanda" : value} onChange={(e) => demandChange(e, index)} disabled={index === 0 ? true : false} />
                                     </td>
                                 })}
                             </tr>
@@ -82,7 +82,7 @@ const TransporteTable = ({ matrix, setMatrix, available, setAvailable, demand, s
                     </table>
                     <div className="available__container" style={{marginLeft: "2rem"}}>
                         {available.map((value, index) =>
-                            <input className="table__input" type="text" value={value} onChange={(e => availableChange(e, index))} />
+                            <input className="table__input available__input" type="text" value={index === 0 ? "Disponibilidad" : value} onChange={(e => availableChange(e, index))} disabled={index === 0 ? true : false } />
                         )}
                         <input className="table__input" type="text" disabled />
                     </div>

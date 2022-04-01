@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = ({title, logo}) => {
@@ -17,7 +18,7 @@ const Header = ({title, logo}) => {
         return (
             <div className="container-header">
                 <div className="header-logo">
-                    <img src={logo} alt="logo" />
+                    <Link to="/" ><img src={logo} alt="logo" /></Link>
                 </div>
                 <div className="title">
                     <h2>{title}</h2>

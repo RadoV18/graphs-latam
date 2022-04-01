@@ -11,3 +11,9 @@
     flex-direction: column;
     justify-content: space-around;
 }
+
+.available__input:nth-child(1) {
+    border: solid #ec1550;
+    background-color: #ec1550;
+    color: white;
+}

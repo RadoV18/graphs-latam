@@ -15,8 +15,9 @@
 .table__input {
     margin: 0;
     padding: 0;
-    width: 3rem;
+    width: 6rem;
     height: 2rem;
+    text-align: center;
 }
 
 .table__col:nth-child(1){
@@ -34,6 +35,7 @@
     border: solid #ec1550;
     background-color: #ec1550;
 }
+
 
 .radio-wrapper {
     display: flex;

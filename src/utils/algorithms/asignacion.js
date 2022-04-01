@@ -2,8 +2,6 @@ export const asignacionAlgorithm = (matrix, maximaze) => {
     // si el objetivo es maximizar: maximaze = true;
     // por el contrario si es minimizar: maximaze = false;
 
-    // TODO: verficar que la matrix sea cuadrada
-
     var copyMatrix = matrix.map(function (arr) {
         return arr.slice();
     });
