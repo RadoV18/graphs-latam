@@ -20,12 +20,22 @@
 }
 
 .table__col:nth-child(1){
-    border: solid black;
-    background-color: #7e499b;
+    border: solid #ec1550;
+    background-color: #ec1550;
 }
 
 .counter__container {
     display: flex;
     justify-content: space-around;
     margin-bottom: 2rem;
+}
+
+.table__row:nth-child(1){
+    border: solid #ec1550;
+    background-color: #ec1550;
+}
+
+.radio-wrapper {
+    display: flex;
+    margin: 0 auto;
 }
