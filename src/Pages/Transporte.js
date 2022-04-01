@@ -3,7 +3,7 @@ import { useState } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import "../Styles/asignacion.css";
-import TransporteTable from "../components/AsignacionTable/AsignacionTable";
+import TransporteTable from "../components/TransporteTable/TransporteTable";
 import { northWestAlgorithm } from "../utils/algorithms/northWestAlgorithm";
 
 const Transporte = () => {

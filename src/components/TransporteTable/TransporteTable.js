@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import Counter from "../Counter/Counter";
 
+import "./TransporteTable.css";
+
 const TransporteTable = ({ matrix, setMatrix, available, setAvailable, demand, setDemand }) => {
     const [rows, setRows] = useState(3);
     const [columns, setColumns] = useState(3);
@@ -70,17 +72,18 @@ const TransporteTable = ({ matrix, setMatrix, available, setAvailable, demand, s
                         ))}
                         <tr className="table__demand">
                             {demand.map((value, index) => {
-                                return <td className="table__col" key={"demand" + index}>
+                                return <td className="table__col" key={"demand" + index} >
                                     <input className="table__input" type="text" value={value} onChange={(e) => demandChange(e, index)} />
                                 </td>
                             })}
                         </tr>
                     </tbody>
                 </table>
-                <div className="available__container">
+                <div className="available__container" style={{marginLeft: "2rem"}}>
                     {available.map((value, index) => 
                         <input className="table__input" type="text" value={value} onChange={(e => availableChange(e, index))} />
                     )}
+                    <input className="table__input" type="text" disabled />
                 </div>
             </div>
             

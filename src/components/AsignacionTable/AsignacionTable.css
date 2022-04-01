@@ -6,9 +6,13 @@
 .table__col {
     width: 3rem;
     height: 2rem;
+    padding: 0;
+    margin: 0;
 }
 
 .table__input {
+    margin: 0;
+    padding: 0;
     width: 3rem;
     height: 2rem;
 }

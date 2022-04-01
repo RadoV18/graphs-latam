@@ -1,0 +1,9 @@
+.table__container--transporte {
+    display: flex;
+}
+
+.available__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
