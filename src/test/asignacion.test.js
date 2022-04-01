@@ -16,15 +16,30 @@ const maxMatrix = [
 
 describe("algoritmo de asignacion", () => {
     test("minimizar matriz", () => {
-        expect(asignacionAlgorithm(matrix, false)).toBe(
-            [[0, 0], [1, 1], [2, 2], [3, 3]]
-        )
+        expect(asignacionAlgorithm(matrix, false)).toEqual([
+            [
+                [0, 0],
+                [2, 2],
+                [3, 3],
+                [1, 1],
+            ],
+            [
+                [3, 3],
+                [0, 2],
+                [1, 1],
+                [2, 0],
+            ],
+        ]);
     });
-    // [[0, 2], [1, 1], [2, 0], [3, 3]],
 
     test("maximizar matriz", () => {
-        expect(asignacionAlgorithm(maxMatrix, true)).toBe(
-            [[0, 0], [1, 3], [2, 1], [3, 2]],
-        );
+        expect(asignacionAlgorithm(maxMatrix, true)).toEqual([
+            [
+                [0, 0],
+                [3, 2],
+                [1, 3],
+                [2, 1],
+            ],
+        ]);
     });
 });

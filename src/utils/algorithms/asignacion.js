@@ -64,7 +64,7 @@ function maximizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
                         return arr.slice();
                     });
                     
-                    usePivote(copy2matrix, copyArray, maximaze);
+                    usarPivote(copy2matrix, copyArray, maximaze);
                     
                     operateInMatrix(copy2matrix, maximaze, trueSoutions, matrixSolutions);
                  
@@ -93,7 +93,6 @@ function minimizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
        
         for(let i= 0 ; i < pathInArray.length ; i++){
             if(pathInArray[i].length === copyMatrix[0].length){ 
-                numAuxiliar = pathInArray[i].length ;
                 matrixSolutions.push(copyMatrix);
                 trueSoutions.push(pathInArray);
     
@@ -105,14 +104,14 @@ function minimizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
                         return arr.slice();
                     });
                     
-                    usePivote(copy2matrix, copyArray, maximaze);
+                    usarPivote(copy2matrix, copyArray, maximaze);
                
                     operateInMatrix(copy2matrix, maximaze, trueSoutions, matrixSolutions);
                  
             }
         }
 }
-function usePivote(matrixSelected, pathSelected, maximaze){
+function usarPivote(matrixSelected, pathSelected, maximaze){
      
     let elementsInRow  = giveSeparateElements(pathSelected, true);
     let elementsInColumn = giveSeparateElements(pathSelected, false);
