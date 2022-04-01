@@ -12,3 +12,8 @@
     width: 3rem;
     height: 2rem;
 }
+
+.table__col:nth-child(1){
+    border: solid black;
+    background-color: #7e499b;
+}
