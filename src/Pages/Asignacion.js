@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 import "../Styles/asignacion.css";
 import Button from "../components/Button/Button";
 import AsignacionTable from "../components/AsignacionTable/AsignacionTable";
-import asignacionAlgorithm from "../utils/algorithms/asignacion";
+import { asignacionAlgorithm } from "../utils/algorithms/asignacion";
 
 const Asignacion = () => {
     const [matrix, setMatrix] = useState([
