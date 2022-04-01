@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Graph from "../components/Graph/Graph";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -9,6 +9,7 @@ import AsignacionTable from "../components/AsignacionTable/AsignacionTable";
 import { asignacionAlgorithm } from "../utils/algorithms/asignacion";
 
 const Asignacion = () => {
+    const [selected, setSelected] = useState("");
     const [matrix, setMatrix] = useState([
         ["", "", ""],
         ["", "", ""],
@@ -22,12 +23,13 @@ const Asignacion = () => {
             return elem.slice(1);
         })
         
-        const result = asignacionAlgorithm(matrixAsignacion, true);
+        const result = asignacionAlgorithm(matrixAsignacion, selected === "min" ? false : true);
+        console.log(result);
     }
 
     const radioButtonChange = (e) => {
         e.preventDefault();
-        console.log(e.target);
+        setSelected(e.target.id);
     }
 
     return (
