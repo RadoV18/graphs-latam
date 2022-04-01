@@ -23,8 +23,7 @@ function App() {
                 <Route path="/grafos/asignacion">
                     <Asignacion />
                 </Route>
-                <Route path="/grafos/Transporte">
-                    
+                <Route path="/grafos/transporte">
                     <Transporte />
                 </Route>
                 <Route path="/">
