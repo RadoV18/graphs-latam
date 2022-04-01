@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Counter.css";
+
 const Counter = ({ variable, setVariable, text }) => {
     const increase = () => {
         setVariable(variable => variable + 1);
@@ -12,9 +14,9 @@ const Counter = ({ variable, setVariable, text }) => {
     return (
         <div className="counter">
             <span>{text}</span>
-            <button onClick={decrease}>-</button>
+            <button className="counter__button" onClick={decrease}>-</button>
             <span>{Number(variable) - 1}</span>
-            <button onClick={increase}>+</button>
+            <button className="counter__button" onClick={increase}>+</button>
         </div>
     );
 };

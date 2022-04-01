@@ -7,18 +7,24 @@ import TransporteTable from "../components/TransporteTable/TransporteTable";
 import { northWestAlgorithm } from "../utils/algorithms/northWestAlgorithm";
 
 const Transporte = () => {
+    const [selected, setSelected] = useState("");
     const [matrix, setMatrix] = useState([
         ["", "", ""],
         ["", "", ""],
         ["", "", ""],
     ]);
 
+    const radioButtonChange = (e) => {
+        e.preventDefault();
+        setSelected(e.target.id);
+    }
+
     const [demand, setDemand] = useState(["", "", ""]);
     const [available, setAvailable] = useState(["", "", ""]);
 
     const onClick = (e) => {
         e.preventDefault();
-        northWestAlgorithm(matrix, true);
+        northWestAlgorithm(matrix, selected === "min" ? false : true);
     };
 
     return (
@@ -26,10 +32,10 @@ const Transporte = () => {
             <Header title="Algoritmo de Asignación" logo="" />
 
             <div className="radio-wrapper">
-                <input type="radio" id="max" name="radio" />
+                <input onChange={radioButtonChange} type="radio" id="max" name="radio" />
                 <label htmlFor="max">Maximizar</label>
 
-                <input type="radio" id="min" name="radio" />
+                <input onChange={radioButtonChange} type="radio" id="min" name="radio" />
                 <label htmlFor="min">Minimizar</label>
             </div>
 
