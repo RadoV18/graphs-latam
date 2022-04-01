@@ -1,10 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import Graph from "../components/Graph/Graph";
+import { useState } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import "../Styles/asignacion.css";
-import Button from "../components/Button/Button";
 import AsignacionTable from "../components/AsignacionTable/AsignacionTable";
 import { asignacionAlgorithm } from "../utils/algorithms/asignacion";
 
