@@ -23,6 +23,16 @@ const Asignacion = () => {
     return (
         <div className="container">
             <Header title="Algoritmo de Asignación" logo="" />
+
+            <div className="radio-wrapper">
+              <input type="radio" id="max" name="radio" />
+              <label htmlFor="max">Maximizar</label>
+
+              <input type="radio" id="min" name="radio" />
+              <label htmlFor="min">Minimizar</label>
+            </div>
+
+
             <AsignacionTable matrix={matrix} setMatrix={setMatrix} />
             <Footer btnText="Ejecutar Asignacion"  onClick={onClick}/>
         </div>

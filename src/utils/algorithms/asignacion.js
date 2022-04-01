@@ -1,15 +1,13 @@
-// export const asignacionAlgorithm = (input) => {
-//     const matrix = input.adjacencyMatrix;
-//     const labels = input.indexes;
-//     // si el objetivo es maximizar: maximaze = true;
-//     // por el contrario si es minimizar: maximaze = false;
-//     const maximaze = input.maximaze;
+export const asignacionAlgorithm = (matrix, maximaze) => {
+     
+    // si el objetivo es maximizar: maximaze = true;
+    // por el contrario si es minimizar: maximaze = false;
+    
+    // TODO: verficar que la matrix sea cuadrada
 
-//     // TODO: verficar que la matrix sea cuadrada
-
-//     var copyMatrix = matrix.map(function(arr) {
-//         return arr.slice();
-//     });
+    var copyMatrix = matrix.map(function(arr) {
+        return arr.slice();
+    });
     
     
 //     let verdaderasSoluciones = [];
@@ -29,9 +27,9 @@
      
 // }
 
-// function maximizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
-//     let numAuxiliar = 0;
-//     while(numAuxiliar != matrix[0].length){ 
+function maximizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
+    let numAuxiliar = 0;
+    while(numAuxiliar != copyMatrix[0].length){ 
       
 //         operateByColumns(copyMatrix, maximaze);
     
@@ -48,15 +46,15 @@
        
        
     
-//         var pathInArray  = getPathInArrayPosition(pathsFounded);
+        var pathInArray  = getPathInArrayPosition(pathsFounded, copyMatrix);
 
         
     
-//         for(let i= 0 ; i < pathInArray.length ; i++){
-//             if(pathInArray[i].length === matrix[0].length){ 
-//                 numAuxiliar = pathInArray[i].length ;
-//                 matrixSolutions.push(copyMatrix);
-//                 trueSoutions.push(pathInArray);
+        for(let i= 0 ; i < pathInArray.length ; i++){
+            if(pathInArray[i].length === copyMatrix[0].length){ 
+                numAuxiliar = pathInArray[i].length ;
+                matrixSolutions.push(copyMatrix);
+                trueSoutions.push(pathInArray);
     
 //             }else{ 
 //                     var copy2matrix = copyMatrix.map(function(arr) {
@@ -66,7 +64,7 @@
 //                         return arr.slice();
 //                     });
                     
-//                     usePivote(copy2matrix, copyArray, maximaze);
+                    usarPivote(copy2matrix, copyArray, maximaze);
                     
 //                     operateInMatrix(copy2matrix, maximaze, trueSoutions, matrixSolutions);
                  
@@ -90,14 +88,13 @@
        
        
     
-//         var pathInArray  = getPathInArrayPosition(pathsFounded);
+        var pathInArray  = getPathInArrayPosition(pathsFounded, copyMatrix);
 
        
-//         for(let i= 0 ; i < pathInArray.length ; i++){
-//             if(pathInArray[i].length === matrix[0].length){ 
-//                 numAuxiliar = pathInArray[i].length ;
-//                 matrixSolutions.push(copyMatrix);
-//                 trueSoutions.push(pathInArray);
+        for(let i= 0 ; i < pathInArray.length ; i++){
+            if(pathInArray[i].length === copyMatrix[0].length){ 
+                matrixSolutions.push(copyMatrix);
+                trueSoutions.push(pathInArray);
     
 //             }else{ 
 //                     var copy2matrix = copyMatrix.map(function(arr) {
@@ -107,14 +104,14 @@
 //                         return arr.slice();
 //                     });
                     
-//                     usePivote(copy2matrix, copyArray, maximaze);
+                    usarPivote(copy2matrix, copyArray, maximaze);
                
 //                     operateInMatrix(copy2matrix, maximaze, trueSoutions, matrixSolutions);
                  
-//             }
-//         }
-// }
-// function usePivote(matrixSelected, pathSelected, maximaze){
+            }
+        }
+}
+function usarPivote(matrixSelected, pathSelected, maximaze){
      
 //     let elementsInRow  = giveSeparateElements(pathSelected, true);
 //     let elementsInColumn = giveSeparateElements(pathSelected, false);
@@ -259,16 +256,16 @@
 
 
 
-// function getPathInArrayPosition(pathsFounded){
-//     const pathInArrayByPosition = [];
-//     for(let i=0; i < pathsFounded.length ; i++){
-//         var current = pathsFounded[i];
-//         var aux2 = [];
-//         for(let b =0 ; b<current.length ; b++){
-//             aux2.push(current[b][0]*matrix.length + current[b][1]);
-//         }
-//         pathInArrayByPosition.push(aux2);
-//     }
+function getPathInArrayPosition(pathsFounded, copyMatrix){
+    const pathInArrayByPosition = [];
+    for(let i=0; i < pathsFounded.length ; i++){
+        var current = pathsFounded[i];
+        var aux2 = [];
+        for(let b =0 ; b<current.length ; b++){
+            aux2.push(current[b][0]*copyMatrix.length + current[b][1]);
+        }
+        pathInArrayByPosition.push(aux2);
+    }
 
 //     for(let i = 0; i<pathInArrayByPosition.length ; i++){
 //         pathInArrayByPosition[i].sort();
@@ -278,14 +275,14 @@
 
 //     const posibleSolutions = [];
     
-//     for(let i = 0; i<deletedRepeated.length ; i++){
-//         var posible = [];
-//         var currentPos = deletedRepeated[i];
-//         for(let a = 0 ; a < currentPos.length ; a++){
-//             posible.push([  parseInt(currentPos[a]/matrix.length )  , currentPos[a]%matrix[0].length  ])
-//         }
-//         posibleSolutions.push(posible);
-//     }
+    for(let i = 0; i<deletedRepeated.length ; i++){
+        var posible = [];
+        var currentPos = deletedRepeated[i];
+        for(let a = 0 ; a < currentPos.length ; a++){
+            posible.push([  parseInt(currentPos[a]/copyMatrix.length )  , currentPos[a]%copyMatrix[0].length  ])
+        }
+        posibleSolutions.push(posible);
+    }
 
 //     const highEst = takeTheHightPosible(posibleSolutions);
 
@@ -365,6 +362,3 @@
 //         }
     
 //     return res;
-// }
-
- 
