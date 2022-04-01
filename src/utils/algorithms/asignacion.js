@@ -1,10 +1,8 @@
-export const asignacionAlgorithm = (input) => {
-    const matrix = input.adjacencyMatrix;
-    const labels = input.indexes;
+export const asignacionAlgorithm = (matrix, maximaze) => {
+     
     // si el objetivo es maximizar: maximaze = true;
     // por el contrario si es minimizar: maximaze = false;
-    const maximaze = input.maximaze;
-
+    
     // TODO: verficar que la matrix sea cuadrada
 
     var copyMatrix = matrix.map(function(arr) {
@@ -31,7 +29,7 @@ function operateInMatrix(copyMatrix, maximaze, trueSoutions, matrixSolutions){
 
 function maximizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
     let numAuxiliar = 0;
-    while(numAuxiliar != matrix[0].length){ 
+    while(numAuxiliar != copyMatrix[0].length){ 
       
         operateByColumns(copyMatrix, maximaze);
     
@@ -48,12 +46,12 @@ function maximizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
        
        
     
-        var pathInArray  = getPathInArrayPosition(pathsFounded);
+        var pathInArray  = getPathInArrayPosition(pathsFounded, copyMatrix);
 
         
     
         for(let i= 0 ; i < pathInArray.length ; i++){
-            if(pathInArray[i].length === matrix[0].length){ 
+            if(pathInArray[i].length === copyMatrix[0].length){ 
                 numAuxiliar = pathInArray[i].length ;
                 matrixSolutions.push(copyMatrix);
                 trueSoutions.push(pathInArray);
@@ -90,11 +88,11 @@ function minimizarFunction(copyMatrix, maximaze, trueSoutions, matrixSolutions){
        
        
     
-        var pathInArray  = getPathInArrayPosition(pathsFounded);
+        var pathInArray  = getPathInArrayPosition(pathsFounded, copyMatrix);
 
        
         for(let i= 0 ; i < pathInArray.length ; i++){
-            if(pathInArray[i].length === matrix[0].length){ 
+            if(pathInArray[i].length === copyMatrix[0].length){ 
                 numAuxiliar = pathInArray[i].length ;
                 matrixSolutions.push(copyMatrix);
                 trueSoutions.push(pathInArray);
@@ -259,13 +257,13 @@ function givePathFounded(zerosArray){
 
 
 
-function getPathInArrayPosition(pathsFounded){
+function getPathInArrayPosition(pathsFounded, copyMatrix){
     const pathInArrayByPosition = [];
     for(let i=0; i < pathsFounded.length ; i++){
         var current = pathsFounded[i];
         var aux2 = [];
         for(let b =0 ; b<current.length ; b++){
-            aux2.push(current[b][0]*matrix.length + current[b][1]);
+            aux2.push(current[b][0]*copyMatrix.length + current[b][1]);
         }
         pathInArrayByPosition.push(aux2);
     }
@@ -282,7 +280,7 @@ function getPathInArrayPosition(pathsFounded){
         var posible = [];
         var currentPos = deletedRepeated[i];
         for(let a = 0 ; a < currentPos.length ; a++){
-            posible.push([  parseInt(currentPos[a]/matrix.length )  , currentPos[a]%matrix[0].length  ])
+            posible.push([  parseInt(currentPos[a]/copyMatrix.length )  , currentPos[a]%copyMatrix[0].length  ])
         }
         posibleSolutions.push(posible);
     }
