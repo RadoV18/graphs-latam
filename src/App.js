@@ -1,3 +1,4 @@
+import React from "react";
 import "./style.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
@@ -8,6 +9,14 @@ import Asignacion from "./Pages/Asignacion";
 import Transporte from "./Pages/Transporte";
 
 function App() {
+    const deletePoppers = () => {
+        const className = "popper-div";
+        const poppers = document.getElementsByClassName(className);
+        while (poppers.length > 0) {
+            poppers[0].parentNode.removeChild(poppers[0]);
+        }
+    };
+
     return (
         <Router>
             <Switch>
@@ -18,7 +27,7 @@ function App() {
                     <Main />
                 </Route>
                 <Route path="/grafos/johnson">
-                    <Johnson />
+                    <Johnson deletePoppers={deletePoppers} />
                 </Route>
                 <Route path="/grafos/asignacion">
                     <Asignacion />
@@ -27,7 +36,7 @@ function App() {
                     <Transporte />
                 </Route>
                 <Route path="/">
-                    <Home />
+                    <Home deletePoppers={deletePoppers} />
                 </Route>
             </Switch>
         </Router>

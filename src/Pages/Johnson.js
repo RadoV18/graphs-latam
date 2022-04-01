@@ -7,22 +7,35 @@ import { useSelector } from "react-redux";
 import { johnsonsAlgorithm } from "../utils/algorithms/johnsons";
 import popper from "cytoscape-popper";
 import cytoscape from "cytoscape";
+import { useDispatch } from "react-redux";
 import { generateMatrix } from "../utils/adjacencyMatrix";
-
+import {
+    setAdjacencyMatrix,
+    setMatrixLabels,
+    setMatrixDisplay,
+} from "../redux/actions/adjacencyMatrix";
+import { setDisplay } from "../redux/actions/modalStyle";
 import "../Styles/johnson.css";
 
 cytoscape.use(popper);
 
-const Johnson = () => {
+const Johnson = ({ deletePoppers }) => {
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
-    
+    const dispatch = useDispatch();
 
     const onClick = () => {
         // ejecutar algoritmo
         // console.log();
-        const johnsonData = johnsonsAlgorithm(generateMatrix(data.elements));
-        
+        deletePoppers();
+
+        const { adjacencyMatrix, indexes } = generateMatrix(data.elements);
+        const johnsonData = johnsonsAlgorithm({ adjacencyMatrix, indexes });
+        dispatch(setAdjacencyMatrix(adjacencyMatrix));
+        dispatch(setMatrixLabels(Array.from(indexes)));
+        dispatch(setMatrixDisplay(true));
+        dispatch(setDisplay("block"));
+
         //No se si es valido pero funca
         //generamos un cy con los valores obtenidos del estado
         const cy = cytoscape({
@@ -44,15 +57,17 @@ const Johnson = () => {
                     cy.add(element);
                 });
             }
-        };
+        }
 
         // generar poppers
-        const makePopperNode = (node, earlyStart, latestFinish , isCritical) => {
+        const makePopperNode = (node, earlyStart, latestFinish, isCritical) => {
             const popper = node.popper({
                 content: () => {
                     const div = document.createElement("div");
                     div.classList.add("popper-div");
-                    div.innerHTML = `<table class="${isCritical ? "node node--critical" : "node"}">
+                    div.innerHTML = `<table class="${
+                        isCritical ? "node node--critical" : "node"
+                    }">
                                     <tr>
                                         <td>${earlyStart}</td>
                                         <td>${latestFinish}</td>
@@ -105,7 +120,9 @@ const Johnson = () => {
         //Agregando los poppers a cada edge
         johnsonData.edges.forEach((e) => {
             //Concatenamos el valor del source y target para obtener el id
-            const edge = cy.getElementById(e.source[0]+"-"+e.destination[0]);
+            const edge = cy.getElementById(
+                e.source[0] + "-" + e.destination[0]
+            );
             //Aca igual se envia la referencia del edge y el valor de la holgura
             const popperEdge = makePopperEdge(edge, e.slag);
             let updateEdge = () => {
@@ -119,7 +136,7 @@ const Johnson = () => {
     return (
         <div className="container">
             <Modal />
-            <Header logo="/img/latam_logo.png"/>
+            <Header logo="/img/latam_logo.png" />
             <Graph />
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
