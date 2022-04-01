@@ -1,0 +1,19 @@
+.table__container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.table__col {
+    width: 3rem;
+    height: 2rem;
+}
+
+.table__input {
+    width: 3rem;
+    height: 2rem;
+}
+
+.table__col:nth-child(1){
+    border: solid black;
+    background-color: #7e499b;
+}

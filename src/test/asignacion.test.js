@@ -1,4 +1,4 @@
-import { asignacion } from "../utils/algorithms/asignacion";
+import { asignacionAlgorithm } from "../utils/algorithms/asignacion";
 
 const matrix = [
     [3, 5, 7, 9],
@@ -16,17 +16,30 @@ const maxMatrix = [
 
 describe("algoritmo de asignacion", () => {
     test("minimizar matriz", () => {
-        expect(asignacion(matrix, false)).toBeOneOf([
-            [[0, 0], [1, 1], [2, 2], [3, 3]],
-            [[0, 2], [1, 1], [2, 0], [3, 3]],
-        ])
+        expect(asignacionAlgorithm(matrix, false)).toEqual([
+            [
+                [0, 0],
+                [2, 2],
+                [3, 3],
+                [1, 1],
+            ],
+            [
+                [3, 3],
+                [0, 2],
+                [1, 1],
+                [2, 0],
+            ],
+        ]);
     });
 
     test("maximizar matriz", () => {
-        expect(asignacion(maxMatrix, true)).toBeOneOf([
-            [[0, 0], [1, 3], [2, 1], [3, 2]],
+        expect(asignacionAlgorithm(maxMatrix, true)).toEqual([
+            [
+                [0, 0],
+                [3, 2],
+                [1, 3],
+                [2, 1],
+            ],
         ]);
     });
 });
-
-

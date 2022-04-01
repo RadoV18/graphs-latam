@@ -18,3 +18,5 @@ const Counter = ({ variable, setVariable, text }) => {
         </div>
     );
 };
+
+export default Counter;
