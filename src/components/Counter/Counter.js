@@ -10,7 +10,7 @@ const Counter = ({ variable, setVariable, text }) => {
     };
 
     return (
-        <div>
+        <div className="counter">
             <span>{text}</span>
             <button onClick={decrease}>-</button>
             <span>{Number(variable) - 1}</span>
