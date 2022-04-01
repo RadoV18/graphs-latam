@@ -1,10 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import Graph from "../components/Graph/Graph";
+import { useState } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import "../Styles/asignacion.css";
-import Button from "../components/Button/Button";
 import AsignacionTable from "../components/AsignacionTable/AsignacionTable";
 import { asignacionAlgorithm } from "../utils/algorithms/asignacion";
 
@@ -23,8 +21,20 @@ const Asignacion = () => {
             return elem.slice(1);
         })
         
-        const result = asignacionAlgorithm(matrixAsignacion, selected === "min" ? false : true);
-        console.log(result);
+        const result = asignacionAlgorithm(matrixAsignacion, selected === "min" ? false : true)[0];
+        // primera fila
+        let labelsColumn = matrix.slice(0, 1)[0];
+        labelsColumn = labelsColumn.slice(1);
+        // primera columna
+        let labelsRow = matrix.map(elem => elem.filter((val, index) => index === 0));
+        labelsRow.slice(1);
+        labelsRow = labelsRow.map(elem => elem[0]).slice(1);
+
+        let resultString = "El resultado del algoritmo de asignacion es:\n";
+        for(let i = 0; i < result.length; i++) {
+            resultString += `        ${labelsRow[result[i][0]]} -> ${labelsColumn[result[i][1]]}\n`;
+        }
+        alert(resultString);
     }
 
     const radioButtonChange = (e) => {
