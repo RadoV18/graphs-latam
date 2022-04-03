@@ -38,7 +38,11 @@ const Graph = () => {
             }
         }
         setCy(newCy);
-        
+        const className = "popper-div";
+        const poppers = document.getElementsByClassName(className);
+        while (poppers.length > 0) {
+            poppers[0].parentNode.removeChild(poppers[0]);
+        }
     }, [cytoscapeData]);
 
     if (toolbar.node) {

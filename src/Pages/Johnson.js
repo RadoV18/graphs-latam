@@ -48,21 +48,6 @@ const Johnson = () => {
             }
         };
 
-        //CUADRO INDICA CAMINO CRITICO
-        const popper = cy.popper({
-            content: () => {
-                const div = document.createElement("div");
-                div.classList.add("popper-div");
-                div.innerHTML = `<div>CAMINO CRITICO  <p class="square"> ...   </p></div>`;
-                document.body.appendChild(div);
-                return div;
-            },
-            renderedPosition: () => ({ x:0, y: 0}),
-            popper: {
-                placement: "bottom",
-            }
-        });
-
         // generar poppers
         const makePopperNode = (node, earlyStart, latestFinish , isCritical) => {
             const popper = node.popper({
@@ -100,7 +85,7 @@ const Johnson = () => {
             });
             return popper;
         };
-
+        var nodeCritical = " ";
         //Agregando los popper a cada nodo
         johnsonData.nodes.forEach((e) => {
             //Obtenemos la referencia del nodo del cy declarado
@@ -112,6 +97,9 @@ const Johnson = () => {
                 e.latestFinish,
                 e.isCritical
             );
+            if(e.isCritical){
+                nodeCritical = nodeCritical + e.label+ ", ";
+            }
             let updateNode = () => {
                 popperNode.update();
             };
@@ -131,6 +119,22 @@ const Johnson = () => {
             edge.connectedNodes().on("position", updateEdge);
             cy.on("render", updateEdge);
         });
+
+        //CUADRO INDICA CAMINO CRITICO
+        const popper = cy.popper({
+            content: () => {
+                const div = document.createElement("div");
+                div.classList.add("popper-div");
+                div.innerHTML = `<div>CAMINO CRITICO  <p class="square"> ${nodeCritical} </p></div>`;
+                document.body.appendChild(div);
+                return div;
+            },
+            renderedPosition: () => ({ x:0, y: 0}),
+            popper: {
+                placement: "bottom",
+            }
+        });
+
     };
 
     return (
