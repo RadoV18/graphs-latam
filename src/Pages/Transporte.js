@@ -28,11 +28,14 @@ const Transporte = () => {
         let matrixTransporte = matrix.slice(1);
         matrixTransporte = matrixTransporte.map((elem) => {
             return elem.slice(1);
-        })
-
+        });
+        console.log(matrixTransporte);
         let demanda = demand.slice(1);
+        demanda = demanda.map((elem) => Number(elem));
         let disponibilidad = available.slice(1);
-        console.log(selected);
+        disponibilidad = disponibilidad.map((elem) => Number(elem));
+        console.log(demanda);
+        console.log(disponibilidad);
         const resultado = northWestAlgorithm(matrixTransporte, disponibilidad, demanda, selected === "min" ? false : true);
         const result = [];
         for(let i = 0; i < resultado.length; i++) {

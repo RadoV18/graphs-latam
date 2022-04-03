@@ -219,13 +219,23 @@ function sumValuesMatrix(matrix) {
     return result;
 }
 
+function matrixStringToNumber(matrix){
+    for (let f = 0; f < matrix.length; f++) {
+        for (let c = 0; c < matrix[f].length; c++) {
+            matrix[f][c] = parseInt(matrix[f][c], 10);
+        }
+    }
+}
+
 export const northWestAlgorithm = (matrix, avaliable, demand, optim) => {
     var flag = true;
+    matrixStringToNumber(matrix);
     //Se obtiene la primera solucion
     var solution = generateMatrixSolution(matrix, demand, avaliable);
     //Se ejecutara hasta que el minimo de la matriz diferencia sea 0
     while (flag) {
         const valuesInSolution = solution[0].length + solution.length - 1;
+        console.log(solution);
         if (sumValuesMatrix(solution) === valuesInSolution) {
             //Se genera la matriz con los valores de costo en la posicion de la solucion
             const valoresSolucion = generateMatrixCostosForComplement(
@@ -262,6 +272,7 @@ export const northWestAlgorithm = (matrix, avaliable, demand, optim) => {
                     posicion[0],
                     posicion[1]
                 );
+                console.log(realValue);
                 const newSolution = generateNewSolution(
                     solution,
                     demand,
@@ -276,7 +287,7 @@ export const northWestAlgorithm = (matrix, avaliable, demand, optim) => {
             flag = false;
         }
     }
-    console.log("Resultado MAXIMO");
+    console.log("Resultado OPTIMO");
     console.log(getSumaProductoMatrix(matrix, solution));
     return solution;
 };
