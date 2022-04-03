@@ -16,7 +16,9 @@ cytoscape.use(popper);
 const Johnson = () => {
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
+
     
+
 
     const onClick = () => {
         // ejecutar algoritmo
@@ -28,7 +30,7 @@ const Johnson = () => {
         const cy = cytoscape({
             container: document.getElementById("cy"),
             style: data.style,
-            zoomingEnabled: true,
+            zoomingEnabled: false,
             userZoomingEnabled: true,
             panningEnabled: true,
             userPanningEnabled: true,
@@ -45,6 +47,21 @@ const Johnson = () => {
                 });
             }
         };
+
+        //CUADRO INDICA CAMINO CRITICO
+        const popper = cy.popper({
+            content: () => {
+                const div = document.createElement("div");
+                div.classList.add("popper-div");
+                div.innerHTML = `<div>CAMINO CRITICO  <p class="square"> ...   </p></div>`;
+                document.body.appendChild(div);
+                return div;
+            },
+            renderedPosition: () => ({ x:0, y: 0}),
+            popper: {
+                placement: "bottom",
+            }
+        });
 
         // generar poppers
         const makePopperNode = (node, earlyStart, latestFinish , isCritical) => {
@@ -99,7 +116,7 @@ const Johnson = () => {
                 popperNode.update();
             };
             node.on("position", updateNode);
-            cy.on("pan zoom resize", updateNode);
+            cy.on("render", updateNode);
         });
 
         //Agregando los poppers a cada edge
@@ -112,7 +129,7 @@ const Johnson = () => {
                 popperEdge.update();
             };
             edge.connectedNodes().on("position", updateEdge);
-            cy.on("pan zoom resize", updateEdge);
+            cy.on("render", updateEdge);
         });
     };
 
@@ -120,11 +137,6 @@ const Johnson = () => {
         <div className="container">
             <Modal />
             <Header logo="/img/latam_logo.png"/>
-            {/* <div className="square-container">
-                <div className="square">
-                </div>
-                <article>Camino</article>
-            </div> */}
             <Graph />
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
