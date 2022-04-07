@@ -33,69 +33,37 @@ function calculateAllDataMatrix(costos, matrix){
 }
 
 function recursiveMainFunction(currentSolution, matrixCostos, vectorHorizontal, vectorVertical, maximaze, matrixSolutions){
-    var selectValuesFromCostosBasedOnCurrent = [];
     var secondVectorVertical = [];
     var secondVectorHorizontal = [];
 
     var newSeletedValues = [];
-
-    
-    
-
     insertIntoMatrix(currentSolution, matrixCostos, newSeletedValues);
-    console.log('current solution and new Selected values and matrixCostos');
-    console.log(currentSolution, newSeletedValues, matrixCostos);
-
     
     refillVectors(secondVectorVertical,  currentSolution.length, true, newSeletedValues);
     refillVectors(secondVectorHorizontal, currentSolution[0].length, false, newSeletedValues);
 
     asummepositionFrOriginalMatrix( currentSolution, newSeletedValues, matrixCostos, secondVectorVertical, secondVectorHorizontal);
 
-    console.log('currentSolution');
-    console.log(currentSolution);
-    console.log('new SelectedValues');
-    console.log(newSeletedValues); 
-    console.log('MatrixCostos');
-    console.log(matrixCostos);
-
-    console.log('momenot dos de la iteracion');
-    console.log(secondVectorHorizontal);
-    console.log(secondVectorVertical);
-
-    // ya se han encontrado nlos valores que son para las columnas y los verticvews 
-
     var refillValuesWithSides =[];
 
     refillMatricWithVectors(refillValuesWithSides, secondVectorVertical, secondVectorHorizontal);
 
-    console.log('fourth amtrix');
-    console.log(refillValuesWithSides);
-
     var originalMinusRefilled = [];
 
     restarMatrices(originalMinusRefilled, matrixCostos, refillValuesWithSides);
-
-    console.log('originalMinusRefilled');
-    
-    console.log(originalMinusRefilled);
 
     var posLookeFor    = [];
      
     getMaxOrMin( posLookeFor, originalMinusRefilled, maximaze);
 
     if(originalMinusRefilled[posLookeFor[0]][posLookeFor[1]] != 0){
-        console.log('posLokedFor');
-        console.log(posLookeFor);
-        console.log(originalMinusRefilled[posLookeFor[0]][posLookeFor[1]]);
+
 
         var allPositionToIterate = [];
         getAllPOsitionsForInstance(currentSolution, allPositionToIterate, posLookeFor);
 
-        console.log('positions to iterate');
-        console.log(allPositionToIterate);
+
         
-        var posiblePaths = [];
         var posibility = [];
         var positionsVisited = [];
         positionsVisited.push(transformIntoIndexOfArray(originalMinusRefilled[0].length, posLookeFor[0], posLookeFor[1]))
@@ -103,13 +71,6 @@ function recursiveMainFunction(currentSolution, matrixCostos, vectorHorizontal, 
         
         getAllPosiblePaths(positionsVisited, currentSolution, posLookeFor, allPositionToIterate, posibility, false);
 
-        console.log('posibility');
-        console.log(posibility);
-        
-        
-
-        
-        
 
         var arrayForPositionsSolution = [];
         for(let i = 0 ; i < posibility.length ; i++){
@@ -117,36 +78,17 @@ function recursiveMainFunction(currentSolution, matrixCostos, vectorHorizontal, 
             transformArrayIndexIntoMatrixPosition(posibility[i], auxl, originalMinusRefilled[0].length);       
             arrayForPositionsSolution.push(auxl);
         }
-        
-        
-
-        console.log('position solutions');
-        console.log(arrayForPositionsSolution); 
 
         var posibleRes = [];
         hasAllPairs(posibleRes , arrayForPositionsSolution);
-
-        console.log('Check for posible Res ');
-        console.log(posibleRes);
 
         var newCurrentSolutionminusX  = currentSolution.map(function(arr) {
             return arr.slice();
         });;
         for(let i = 0 ; i < posibleRes.length ; i++ ){
             if(posibleRes[i]){
-                console.log("new current solution minus x");
-                console.log(newCurrentSolutionminusX);
-
-                console.log("current solution")
-                console.log(currentSolution);
-
-                console.log('array for position solutions ');
-                console.log(arrayForPositionsSolution[i]);
-
 
                 createNewMatrixWithSelectedPath(newCurrentSolutionminusX, currentSolution,  arrayForPositionsSolution[i], maximaze);
-                console.log('New Matrix');
-                console.log(newCurrentSolutionminusX);
                 matrixSolutions.push(newCurrentSolutionminusX);
                 //recursiveMainFunction(newCurrentSolutionminusX, vectorHorizontal, vectorVertical, maximaze, matrixSolutions);
                 
@@ -190,8 +132,7 @@ function createNewMatrixWithSelectedPath(matrix, matrixOrig, arrayOfSolution, ma
         auxlia.push(matrixOrig[ arrayOfSolution[i][0] ][ arrayOfSolution[i][1] ]);
     }
     auxlia.sort();
-    console.log('auxlia');
-    console.log(auxlia);
+
  
     var num = auxlia[0];
     for(let i = 0; i < arrayOfSolution.length; i++){
@@ -253,32 +194,7 @@ function checkAllPairsForthisArray(array){
 
 }
 
-function uniqBy(a, key){
-    var seen ={};
-    return a.filter(function(item) {
-        var k = key(item);
-        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-    })
-}
-function procesoInversoArrayToMatrix(arrayResult, number, nroCols){
-    
-        arrayResult.push([  parseInt(number/nroCols )  , number%nroCols  ]  );
-    
-}
-function checkForDoubleArray(arrayResult, posibility){
-    for(let i = 0 ; i< posibility.length ; i++){
-        var current = posibility[i];
-        var contador = -1;
-        for(let a = i; a< posibility.length ; a++){
-            if(JSON.stringify(current) === JSON.stringify(posibility[a])){
-                contador++;
-            }
-        }
-        if(contador > 0){
-            arrayResult.push(posibility[i]);
-        }
-    }
-}
+
 function transformIntoIndexOfArray(nroCols, row, col){
     return row*nroCols + col;
 }
@@ -294,8 +210,7 @@ function getAllPosiblePaths(positionsVisited, matrix, posLook, positionsToIterat
                     
                         aux1.push(positionsToIterate[i]);
                 }
-                    
-                
+ 
             }else{
                 if(posLook[1] === positionsToIterate[i][1]){
                     aux1.push(positionsToIterate[i]);
@@ -309,17 +224,6 @@ function getAllPosiblePaths(positionsVisited, matrix, posLook, positionsToIterat
         posibility.push(copyPositionsVisisted);
     }
      
-    // if(copyPositionsVisisted.length%2 === 0 ){
-    //     var aray = [];
-    //     console.log('copy posiution visited');
-    //     console.log(copyPositionsVisisted);
-    //     transformArrayIndexIntoMatrixPosition(copyPositionsVisisted, aray, matrix[0].length);
-    //      console.log(aray); 
-    //     if(checkAllPairsForthisArray(aray)){
-    //         console.log('POSIBLE PUTO CANDIDATO');
-    //         console.log(aray);
-    //     }
-    // }
     for(let i = 0; i < aux1.length ; i++){
         var copyPositionsVisisted2 = copyPositionsVisisted.slice();
         var aux2 = transformIntoIndexOfArray(matrix[0].length, aux1[i][0], aux1[i][1] );
@@ -487,29 +391,14 @@ function asummepositionFrOriginalMatrix(secondMatrix,  thirdMatrix, matrixCostos
                         
                     }
                  }
-                // var auxiliar2 = [];
-                // auxiliar2.push(numInCostosMatrix);
-                // auxiliar2.push(numInVertical);
-                // auxiliar2.push(numInHorizontal);
-
-                // auxiliar2.sort();
-
-
              }else{
                  aux.push(0);
              }
         }
         
     }
-
-  
-
-
 }
 
-function getNumberToPush(row, col, vectorH, vectorV, secondMatrix){
-     
-}
  
 function refillWithZeros(matrixParaCerear , rows, cols){
     for(let i=0; i < rows;  i++){
@@ -551,10 +440,12 @@ function convertMatrix(matrix){
 }
 
 
-export const northWestAlgorithm = (matrixCostos, vectorHorizontal, vectorVertical, maximaze) =>{
+export const northWestAlgorithm = (matrixCostos,  vectorVertical, vectorHorizontal, maximaze) =>{
     matrixCostos = convertMatrix(matrixCostos).slice();
     console.log("Matrix Convertida");
     console.log(matrixCostos);
+    console.log(vectorHorizontal);
+    console.log(vectorVertical);
     var currentSolution = [];
     refillWithZeros(currentSolution, matrixCostos.length, matrixCostos[0].length);
     for(let row = 0 ; row < matrixCostos.length ; row++){
@@ -570,8 +461,6 @@ export const northWestAlgorithm = (matrixCostos, vectorHorizontal, vectorVertica
     }
     var matrixSolutions = [];
     recursiveMainFunction(currentSolution, matrixCostos,  vectorHorizontal, vectorVertical, maximaze, matrixSolutions);
-    console.log('FINAL');
-    console.log(matrixSolutions);
     var trulyTrueSolutions = [];
     if(matrixSolutions.length === 0){
         for(let i=0; i < currentSolution.length ; i++){
