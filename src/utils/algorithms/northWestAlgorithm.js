@@ -26,7 +26,10 @@ function calculateAllDataMatrix(costos, matrix){
 
     for(let i = 0; i < costos.length; i++){
         for(let j=0; j < costos[i].length; j++){
-            num = num +  ( costos[i][j] * matrix[i][j] ); 
+            if(matrix[i][j] >=0){
+                num = num +  ( costos[i][j] * matrix[i][j] );
+            }
+ 
         }
     }
     return num;
