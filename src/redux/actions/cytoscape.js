@@ -7,3 +7,12 @@ export const addState = (obj, index) => {
         }
     }
 }
+
+export const importState = (obj) => {
+    return {
+        type: "IMPORT_STATE",
+        data: {
+            obj
+        }
+    }
+}

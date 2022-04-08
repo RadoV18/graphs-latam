@@ -9,3 +9,9 @@ export const nextIndex = () => {
         type: "NEXT_INDEX"
     }
 }
+
+export const resetIndex = () => {
+    return {
+        type: "RESET_INDEX"
+    }
+}

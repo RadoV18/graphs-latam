@@ -40,6 +40,8 @@ const cytoscapeReducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD_STATE":
             return [...state.slice(0, action.data.index + 1), action.data.obj];
+        case "IMPORT_STATE":
+            return [action.data.obj];
         default:
             return state;
     }
