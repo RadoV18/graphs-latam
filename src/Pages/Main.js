@@ -33,7 +33,7 @@ const Main = () => {
             <Header title="Diseño de Grafos LATAM Airlines" logo="/img/latam_logo.png"/>
             <Graph />
             <Toolbar />
-            <Footer btnText="Generar matriz de adyacencia" onClick={onClick} />
+            <Footer btnText="Generar matriz de adyacencia" onClick={onClick} dir="/doc.pdf"/>
         </div>
     );
 };

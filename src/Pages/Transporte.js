@@ -80,7 +80,7 @@ const Transporte = () => {
                 demand={demand}
                 setDemand={setDemand}
             />
-            <Footer btnText="Ejecutar Asignacion" onClick={onClick} />
+            <Footer btnText="Ejecutar Asignacion" onClick={onClick} dir="/doc.pdf"/>
         </div>
     );
 };

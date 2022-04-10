@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from '../Button/Button';
 import './Footer.css';
 
-const Footer = ({ btnText, onClick }) => {
+const Footer = ({ btnText, onClick, dir }) => {
     const history = useHistory();
 
     const redirectToContactUs = () => {
@@ -11,7 +11,8 @@ const Footer = ({ btnText, onClick }) => {
     }
 
     const openManual = () => {
-        const newWindow = window.open(`/doc.pdf`, "_blank", "noopener,noreferrer");
+        console.log("HOLA");
+        const newWindow = window.open(`${dir}`, "_blank", "noopener,noreferrer");
         if(newWindow) {
             newWindow.opener = null;
         }

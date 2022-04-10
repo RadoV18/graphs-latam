@@ -56,7 +56,7 @@ const Asignacion = () => {
 
 
             <AsignacionTable matrix={matrix} setMatrix={setMatrix} />
-            <Footer btnText="Ejecutar Asignacion"  onClick={onClick}/>
+            <Footer btnText="Ejecutar Asignacion"  onClick={onClick} dir='/Asignacion_MU.pdf'/>
         </div>
     );
 };

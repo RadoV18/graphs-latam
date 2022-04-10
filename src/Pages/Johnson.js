@@ -159,7 +159,7 @@ const Johnson = () => {
             <Header logo="/img/latam_logo.png" />
             <Graph />
             <Toolbar />
-            <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} />
+            <Footer btnText="Ejecutar Algoritmo de Johnson" onClick={onClick} dir="/doc.pdf"/>
         </div>
     );
 };
