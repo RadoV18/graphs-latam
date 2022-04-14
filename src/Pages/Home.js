@@ -28,16 +28,38 @@ const Home = ({ deletePoppers }) => {
         history.push("/grafos/transporte");
     };
 
+    // Sort
+    const openSelectionSort = () => {
+        history.push("/sort/selection");
+    };
+
+    const openInsertionSort = () => {
+        history.push("/sort/insertion");
+    };
+
+    const openBubbleSort = () => {
+        history.push("/sort/bubble");
+    };
+
+    const openMergeSort = () => {
+        history.push("/sort/merge");
+    };
+
+    const openShellSort = () => {
+        history.push("/sort/shell");
+    };
+
+
     return (
         <div>
             <Header title={"Implementación  de  Algoritmos"} logo={""} />
             <Title text={"Grafos"} />
-            <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
+            <div className="card-wrapper" style={{ paddingBottom: "1rem" }}>
                 <Card
                     subtitle="Generación de Grafos"
                     img="/img/Card/grafos.png"
                     text="Representación de los grafos aplicados a la empresa LATAM"
-                    buttonText="Grafos"
+                    buttonText="Sort"
                     onClick={openGraphs}
                 />
                 <Card
@@ -61,6 +83,49 @@ const Home = ({ deletePoppers }) => {
                     buttonText="Transporte"
                     onClick={openTransporte}
                 />
+            </div>
+            <Title text={"Algoritmos de Ordenamiento"} />
+            <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
+                <Card
+                    subtitle="Selection Sort"
+                    img="/img/Card/selection_sort.png"
+                    text="Representación de los grafos aplicados a la empresa LATAM"
+                    buttonText="Selection Sort"
+                    onClick={openSelectionSort}
+                />
+
+                <Card
+                    subtitle="Insertion Sort"
+                    img="/img/Card/insertion_sort.png"
+                    text="Representación de los grafos aplicados a la empresa LATAM"
+                    buttonText="Insertion Sort"
+                    onClick={openInsertionSort}
+                />
+                <Card
+                    subtitle="Bubble Sort"
+                    img="/img/Card/bubble_sort.png"
+                    text="Representación de los grafos aplicados a la empresa LATAM"
+                    buttonText="Bubble Sort"
+                    onClick={openBubbleSort}
+                />
+
+                <Card
+                    subtitle="Merge Sort"
+                    img="/img/Card/merge_sort.png"
+                    text="Representación de los grafos aplicados a la empresa LATAM"
+                    buttonText="Merge Sort"
+                    onClick={openMergeSort}
+                />
+
+
+                <Card
+                    subtitle="Shell Sort"
+                    img="/img/Card/shell_sort.png"
+                    text="Representación de los grafos aplicados a la empresa LATAM"
+                    buttonText="Shell Sort"
+                    onClick={openShellSort}
+                />                
+
             </div>
         </div>
     );

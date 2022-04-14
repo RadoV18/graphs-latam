@@ -1,0 +1,29 @@
+.container-textarea {
+    display: flex;  
+ }
+
+.button-container {
+    margin-top: 3rem;
+    flex-direction: column;
+    margin-left: 2rem;
+ }
+
+textarea {
+    width: 80%;
+    height: 200px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    margin-top: 3rem;
+    margin-left: 3rem;
+    resize: none;
+}
+
+.time-container {
+    display: flex;
+    gap: 5rem;
+    margin: 0 auto;
+ }

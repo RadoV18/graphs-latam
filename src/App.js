@@ -7,6 +7,12 @@ import Main from "./Pages/Main";
 import Johnson from "./Pages/Johnson";
 import Asignacion from "./Pages/Asignacion";
 import Transporte from "./Pages/Transporte";
+import Selection from "./Pages/Selection";
+import Insertion from "./Pages/Insertion";
+import Bubble from "./Pages/Bubble";
+import Merge from "./Pages/Merge";
+import Shell from "./Pages/Shell";
+
 
 function App() {
     const deletePoppers = () => {
@@ -35,9 +41,42 @@ function App() {
                 <Route path="/grafos/transporte">
                     <Transporte />
                 </Route>
+                <Route path="/grafos/transporte">
+                    <Transporte />
+                </Route>
+                
+                {/* SORT */}
+                <Route path="/sort/selection">
+                    <Selection />
+                </Route>
+
+                <Route path="/sort/insertion">
+                    <Insertion />
+                </Route>
+
+                <Route path="/sort/bubble">
+                    <Bubble />
+                </Route>
+
+                <Route path="/sort/merge">
+                    <Merge />
+                </Route>
+
+                <Route path="/sort/shell">
+                    <Shell />
+                </Route>
+
+
+
+
+
                 <Route path="/">
                     <Home deletePoppers={deletePoppers} />
                 </Route>
+
+
+
+
             </Switch>
         </Router>
     );
