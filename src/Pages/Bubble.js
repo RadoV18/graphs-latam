@@ -4,8 +4,13 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Button from "../components/Button/Button";
 import AnimationContainer from "../components/AnimationContainer/AnimationContainer";
+import { convertirArregloNumeros, execTimeBubbleSort } from "../utils/algorithms/sortTime";
 
 const Bubble = ({ complexity }) => {
+    const [numbers, setNumbers] = useState([]);
+    const [indexes, setIndexes] = useState([]);
+    const [numbersText, setNumbersText] = useState("");
+
     const result = [
         {
             array: [5, 2, 1],
@@ -25,8 +30,17 @@ const Bubble = ({ complexity }) => {
         }
     ]
 
-    const [numbers, setNumbers] = useState([]);
-    const [indexes, setIndexes] = useState([]);
+    const setText = (e) => {
+        e.preventDefault();
+        setNumbersText(e.target.value);
+    }
+
+    const sort = () => {
+        const input = convertirArregloNumeros(numbersText);
+        const result = execTimeBubbleSort(input);
+        console.log(result);
+    }
+    
     const showAnimation = () => {
         setNumbers(result[0].array);
 
@@ -58,10 +72,10 @@ const Bubble = ({ complexity }) => {
         <div className="container">
             <Header title="Bubble Sort" logo="/img/latam_logo.png" />
             <div className="container-textarea">
-                <textarea row="200000" cols="5000" />
+                <textarea row="200000" cols="5000" value={numbersText} onChange={setText} />
                 <div className="button-container">
-                    <Button text="Generar Aleatorios" />
-                    <Button text="Ordenar" />
+                    <Button text="Generar Aleatorios"  />
+                    <Button text="Ordenar" onClick={sort} />
                     <Button text="Animación" onClick={showAnimation} />
                 </div>
             </div>
