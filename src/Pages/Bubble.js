@@ -31,16 +31,23 @@ const Bubble = ({ complexity }) => {
         setNumbers(result[0].array);
 
         const loop = (index) => {
-            if(index < result.length) {
+            if(index < result.length - 1) {
                 setTimeout(() => {
                     setNumbers(result[index].array);
-                    setIndexes(result[index].indexes);
+                }, 333);
+                setTimeout(() => {
+                    setIndexes(result[index + 1].indexes);
+                }, 666);
+                setTimeout(() => {
                     loop(index + 1);
-                }, 1500);
+                }, 1000);
             } else {
                 setTimeout(() => {
+                    setNumbers(result[result.length - 1].array);
+                }, 333);
+                setTimeout(() => {
                     setIndexes([]);
-                }, 1500);
+                }, 666);
             }
         }
 
