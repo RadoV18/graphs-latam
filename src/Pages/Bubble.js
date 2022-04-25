@@ -5,11 +5,13 @@ import Footer from "../components/Footer/Footer";
 import Button from "../components/Button/Button";
 import AnimationContainer from "../components/AnimationContainer/AnimationContainer";
 import { arregloRandomico, convertirArregloNumeros, execTimeBubbleSort } from "../utils/algorithms/sortTime";
+import { animatedBubbleSort } from "../utils/animated/bubble";
 
 const Bubble = ({ complexity }) => {
     const [numbers, setNumbers] = useState([]);
     const [indexes, setIndexes] = useState([]);
     const [result, setResult] = useState({});
+    const [input, setInput] = useState([]);
     const [numbersText, setNumbersText] = useState("");
 
     const generateRandom = () => {
@@ -27,27 +29,18 @@ const Bubble = ({ complexity }) => {
     }
 
     const sort = () => {
-        const input = convertirArregloNumeros(numbersText);
-        const resultObject = execTimeBubbleSort(input);
+        const newInput = convertirArregloNumeros(numbersText);
+        console.log(newInput);
+        setInput(newInput);
+        const resultObject = execTimeBubbleSort([...newInput]);
         setNumbersText(resultObject.result.toString());
         setResult(resultObject);
     }
     
     const showAnimation = () => {
-        var result = [
-            {
-                array: [8, 1, 5],
-                indexes: [-1, -1]
-            },
-            {
-                array: [1, 8, 5],
-                indexes: [0, 1]
-            },
-            {
-                array: [1, 5, 8],
-                indexes: [1, 2]
-            },
-        ]
+        console.log("input", input);
+        var result = animatedBubbleSort(input);
+        console.log("result", result);
         setNumbers(result[0].array);
 
         const loop = (index) => {
