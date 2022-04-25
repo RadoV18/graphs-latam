@@ -45,6 +45,17 @@ const Transporte = () => {
                 }
             }
         }
+
+        
+        var resultadoNumber =0;
+        for(let i  = 0 ; i <matrixTransporte.length; i++){
+            for(let j =0 ; j < matrixTransporte[i].length; j++){
+                resultadoNumber = resultadoNumber + (parseInt(matrixTransporte[i][j]) * resultado[i][j]);
+            }
+        }
+
+
+
         // primera fila
         let labelsColumn = matrix.slice(0, 1)[0];
         labelsColumn = labelsColumn.slice(1);
@@ -57,6 +68,7 @@ const Transporte = () => {
         for(let i = 0; i < result.length; i++) {
             resultString += `        ${labelsRow[result[i][0]]} -> ${labelsColumn[result[i][1]]} = ${result[i][2]}\n`;
         }
+        resultString += 'El total es:       ' + resultadoNumber;
         alert(resultString);
     };
 
