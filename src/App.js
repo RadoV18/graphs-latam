@@ -44,39 +44,25 @@ function App() {
                 <Route path="/grafos/transporte">
                     <Transporte />
                 </Route>
-                
                 {/* SORT */}
                 <Route path="/sort/selection">
-                    <Selection />
+                    <Selection complexity="O(n^2)" />
                 </Route>
-
                 <Route path="/sort/insertion">
-                    <Insertion />
+                    <Insertion complexity="O(n^2)"/>
                 </Route>
-
                 <Route path="/sort/bubble">
-                    <Bubble />
+                    <Bubble complexity="O(n^2)"/>
                 </Route>
-
                 <Route path="/sort/merge">
-                    <Merge />
+                    <Merge complexity="O(n*log(n))"/>
                 </Route>
-
                 <Route path="/sort/shell">
-                    <Shell />
+                    <Shell complexity="O(n*log(n))"/>
                 </Route>
-
-
-
-
-
                 <Route path="/">
                     <Home deletePoppers={deletePoppers} />
                 </Route>
-
-
-
-
             </Switch>
         </Router>
     );

@@ -4,31 +4,22 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Button from "../components/Button/Button";
 import AnimationContainer from "../components/AnimationContainer/AnimationContainer";
-import { convertirArregloNumeros, execTimeBubbleSort } from "../utils/algorithms/sortTime";
+import { arregloRandomico, convertirArregloNumeros, execTimeBubbleSort } from "../utils/algorithms/sortTime";
 
 const Bubble = ({ complexity }) => {
     const [numbers, setNumbers] = useState([]);
     const [indexes, setIndexes] = useState([]);
+    const [result, setResult] = useState({});
     const [numbersText, setNumbersText] = useState("");
 
-    const result = [
-        {
-            array: [5, 2, 1],
-            indexes: [-1, -1]
-        },
-        {
-            array: [2, 5, 1],
-            indexes: [0, 1]
-        },
-        {
-            array: [2, 1, 5],
-            indexes: [1, 2]
-        },
-        {
-            array: [1, 2, 5],
-            indexes: [0, 1]
-        }
-    ]
+    const generateRandom = () => {
+        const cant = prompt("Ingrese la cantidad de números", "1000");
+        const min = prompt("Ingrese el valor minimo", "0");
+        const max = prompt("Ingrese el valor maximo", "10000");
+        const decimales = prompt("Ingrese la cantidad de decimales", "0");
+        const input = arregloRandomico(Number(cant), Number(min), Number(max), Number(decimales));
+        setNumbersText(input.toString());
+    }
 
     const setText = (e) => {
         e.preventDefault();
@@ -37,11 +28,26 @@ const Bubble = ({ complexity }) => {
 
     const sort = () => {
         const input = convertirArregloNumeros(numbersText);
-        const result = execTimeBubbleSort(input);
-        console.log(result);
+        const resultObject = execTimeBubbleSort(input);
+        setNumbersText(resultObject.result.toString());
+        setResult(resultObject);
     }
     
     const showAnimation = () => {
+        var result = [
+            {
+                array: [8, 1, 5],
+                indexes: [-1, -1]
+            },
+            {
+                array: [1, 8, 5],
+                indexes: [0, 1]
+            },
+            {
+                array: [1, 5, 8],
+                indexes: [1, 2]
+            },
+        ]
         setNumbers(result[0].array);
 
         const loop = (index) => {
@@ -74,7 +80,7 @@ const Bubble = ({ complexity }) => {
             <div className="container-textarea">
                 <textarea row="200000" cols="5000" value={numbersText} onChange={setText} />
                 <div className="button-container">
-                    <Button text="Generar Aleatorios"  />
+                    <Button text="Generar Aleatorios" onClick={generateRandom}/>
                     <Button text="Ordenar" onClick={sort} />
                     <Button text="Animación" onClick={showAnimation} />
                 </div>
@@ -83,13 +89,13 @@ const Bubble = ({ complexity }) => {
                 <div className="theory-time">
                     <h4>Tiempo Teórico</h4>
                     <h5>
-                        {complexity} = {}
+                        {complexity} = { result.theoreticalTime ? result.theoreticalTime + " ms." : null }
                     </h5>
                 </div>
 
                 <div className="real-time">
                     <h4>Tiempo Real</h4>
-                    <h5>t = {}</h5>
+                    <h5>t = { result.realTime ? result.realTime + " ms." : null }</h5>
                 </div>
             </div>
             <AnimationContainer numbers={numbers} indexes={indexes} />

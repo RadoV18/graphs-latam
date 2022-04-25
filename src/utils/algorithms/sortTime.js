@@ -10,7 +10,6 @@ export const convertirArregloNumeros = (input) => {
     input.replace(/\s+/g, "");
     var arreglo = input.split(",");
     arreglo = arreglo.map((elem) => parseFloat(elem));
-    console.log(arreglo);
     return arreglo;
 };
 
@@ -28,50 +27,56 @@ export const arregloRandomico = (cant, min, max, decimales) => {
 
 export const execTimeSelectionSort = (input) => {
     // O(n2)
-    let inicio = new Date();
+    let inicio = performance.now();
+    console.log(inicio);
     const result = selectionSort(input);
-    let fin = new Date();
-    const realTime = (fin - inicio) / 1000;
-    const teoricTime = Math.pow(input.length, 2) / Math.pow(10, 8);
-    return { result, realTime, teoricTime };
+    let fin = performance.now() - inicio;
+    const realTime = fin;
+    const theoreticalTime = Math.pow(input.length, 2) / Math.pow(10, 5);
+    return { result, realTime, theoreticalTime };
 };
 
 export const execTimeInsertionSort = (input) => {
     // O(n)
-    let inicio = new Date();
+    let inicio = performance.now();
+    console.log(inicio);
     const result = insertionSort(input);
-    let fin = new Date();
-    const realTime = (fin - inicio) / 1000;
-    const teoricTime = input.length / Math.pow(10, 8);
-    return { result, realTime, teoricTime };
+    let fin = performance.now() - inicio;
+    const realTime = fin;
+    const theoreticalTime = input.length / Math.pow(10, 5);
+    return { result, realTime, theoreticalTime };
 };
 
 export const execTimeShellSort = (input) => {
     // O(n3/2)
-    let inicio = new Date();
+    let inicio = performance.now();
+    console.log(inicio);
     const result = shellSort(input);
-    let fin = new Date();
-    const realTime = (fin - inicio) / 1000;
-    const teoricTime = Math.pow(input.length, 3 / 2) / Math.pow(10, 8);
-    return { result, realTime, teoricTime };
+    let fin = performance.now() - inicio;
+    const realTime = fin;
+    const theoreticalTime = Math.pow(input.length, 3 / 2) / Math.pow(10, 5);
+    return { result, realTime, theoreticalTime };
 };
 
 export const execTimeMergeSort = (input) => {
     // O(nLogn)
-    let inicio = new Date();
+    let inicio = performance.now();
+    console.log(inicio);
     const result = mergeSort(input);
-    let fin = new Date();
-    const realTime = (fin - inicio) / 1000;
-    const teoricTime =
-        (input.length * Math.log(input.length)) / Math.pow(10, 8);
-    return { result, realTime, teoricTime };
+    let fin = performance.now() - inicio;
+    const realTime = fin;
+    console.log("input", input);
+    const theoreticalTime =
+        (result.length * Math.log(result.length)) / Math.pow(10, 5);
+    return { result, realTime, theoreticalTime };
 };
 
 export const execTimeBubbleSort = (input) => {
-    let inicio = new Date();
+    const inicio = performance.now();
+    console.log(inicio);
     const result = bubbleSort(input);
-    let fin = new Date();
-    const realTime = (fin - inicio) / 1000;
-    const theoreticalTime = Math.pow(input.length, 2) / Math.pow(10, 8);
+    const elapsed = performance.now() - inicio;
+    const realTime = elapsed;
+    const theoreticalTime = Math.pow(input.length, 2) / Math.pow(10, 5);
     return { result, realTime, theoreticalTime };
 };
