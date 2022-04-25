@@ -230,7 +230,9 @@ function usarPivote(matrixSelected, pathSelected, maximaze) {
     }
 
     if (results.length > 0) {
-        results.sort();
+        results.sort(function(a,b){
+            return a-b;
+        });
         var num = results[0];
         if (maximaze) {
             num = results[results.length - 1];
@@ -352,7 +354,9 @@ function getPathInArrayPosition(pathsFounded, copyMatrix) {
     }
 
     for (let i = 0; i < pathInArrayByPosition.length; i++) {
-        pathInArrayByPosition[i].sort();
+        pathInArrayByPosition[i].sort(function(a,b){
+            return a-b;
+        });
     }
 
     const deletedRepeated = uniqBy(pathInArrayByPosition, JSON.stringify);
