@@ -37,13 +37,13 @@ export const execTimeSelectionSort = (input) => {
 };
 
 export const execTimeInsertionSort = (input) => {
-    // O(n)
+    // O(n^2)
     let inicio = performance.now();
     console.log(inicio);
     const result = insertionSort(input);
     let fin = performance.now() - inicio;
     const realTime = fin;
-    const theoreticalTime = input.length / Math.pow(10, 5);
+    const theoreticalTime = Math.pow(input.length, 2) / Math.pow(10, 5);
     return { result, realTime, theoreticalTime };
 };
 
