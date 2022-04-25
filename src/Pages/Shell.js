@@ -73,7 +73,7 @@ const Shell = ({ complexity }) => {
             <Header title="Shell Sort" logo="/img/latam_logo.png" />
             <div className="container-textarea">
                 <textarea row="200000" cols="5000" value={numbersText} onChange={setText} />
-                <div className="button-container">
+                <div className="button-container--vertical">
                     <Button text="Generar Aleatorios" onClick={generateRandom} />
                     <Button text="Ordenar" onClick={sort} />
                     <Button text="Animación" onClick={showAnimation} />
