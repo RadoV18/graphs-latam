@@ -9,11 +9,10 @@ const Selection = ({complexity}) => {
         <Header title="Selection Sort" logo="/img/latam_logo.png" />
         <div className="container-textarea">
             <textarea row="200000" cols="5000"/>
-            <div className="button-container">
+            <div className="button-container--vertical">
                 <Button text="Generar Aleatorios" />
                 <Button text="Ordenar" />
                 <Button text="Animación" />
-
             </div>
         </div>
         <div className="time-container">

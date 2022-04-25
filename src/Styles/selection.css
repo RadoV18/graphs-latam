@@ -2,11 +2,13 @@
     display: flex;  
  }
 
-.button-container {
+.button-container--vertical {
+    display: flex;
     margin-top: 3rem;
     flex-direction: column;
     margin-left: 2rem;
- }
+    justify-content: space-around;
+}
 
 textarea {
     width: 80%;
