@@ -47,20 +47,20 @@ const Bubble = ({ complexity }) => {
             if(index < result.length - 1) {
                 setTimeout(() => {
                     setNumbers(result[index].array);
-                }, 333);
+                }, 125);
                 setTimeout(() => {
                     setIndexes(result[index + 1].indexes);
-                }, 666);
+                }, 300);
                 setTimeout(() => {
                     loop(index + 1);
-                }, 1000);
+                }, 450);
             } else {
                 setTimeout(() => {
                     setNumbers(result[result.length - 1].array);
-                }, 333);
+                }, 125);
                 setTimeout(() => {
                     setIndexes([]);
-                }, 666);
+                }, 300);
             }
         }
 

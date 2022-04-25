@@ -5,8 +5,6 @@ export const animatedBubbleSort = (arrayNumeros) => {
         array: [...arrayNumeros],
         indexes: [-1, -1]
     }, ];
-    let previousIndex = -1;
-    let previousIndex2 = -1;
 
     for (let i = 0; i < arrayLength; i++) {
         for (let j = 0; j < arrayLength; j++) {
@@ -26,9 +24,6 @@ export const animatedBubbleSort = (arrayNumeros) => {
                 object["array"] =  [...arrayNumeros];
                 object["indexes"] = [ j, j + 1 ];
                 result.push(object);
-
-                previousIndex = j;
-                previousIndex2 = j + 1;
             }
         }
     }
