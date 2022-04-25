@@ -94,6 +94,8 @@ const Merge = ({ complexity }) => {
                 <AnimationContainer numbers={numbers} indexes={indexes} />
             </div>
 
+            <Footer btnText="Ejecutar Transporte" dir="/Sort_MU.pdf" />
+
             {/* <Footer btnText="Ejecutar Transporte" dir="/Transporte_MU.pdf" /> */}
         </div>
     );

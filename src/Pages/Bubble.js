@@ -92,6 +92,8 @@ const Bubble = ({ complexity }) => {
                 </div>
             </div>
             <AnimationContainer numbers={numbers} indexes={indexes} />
+            <Footer btnText="" dir="/Sort_MU.pdf" />
+
             {/* <Footer btnText="Ejecutar Transporte" dir="/Transporte_MU.pdf" /> */}
         </div>
     );
