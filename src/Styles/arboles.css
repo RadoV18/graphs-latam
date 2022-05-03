@@ -1,0 +1,12 @@
+.arboles__options--row {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.arboles__options--column {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

@@ -13,6 +13,8 @@ import Bubble from "./Pages/Bubble";
 import Merge from "./Pages/Merge";
 import Shell from "./Pages/Shell";
 
+import Arboles from "./Pages/Arboles";
+
 
 function App() {
     const deletePoppers = () => {
@@ -59,6 +61,10 @@ function App() {
                 </Route>
                 <Route path="/sort/shell">
                     <Shell complexity="O(n*log(n))"/>
+                </Route>
+                {/* ARBOLES */}
+                <Route path="/arboles">
+                    <Arboles />
                 </Route>
                 <Route path="/">
                     <Home deletePoppers={deletePoppers} />

@@ -49,6 +49,10 @@ const Home = ({ deletePoppers }) => {
         history.push("/sort/shell");
     };
 
+    const openTrees = () => {
+        history.push("/arboles");
+    };
+
 
     return (
         <div>
@@ -124,9 +128,24 @@ const Home = ({ deletePoppers }) => {
                     text="Representación de los grafos aplicados a la empresa LATAM"
                     buttonText="Shell Sort"
                     onClick={openShellSort}
-                />                
+                />
 
             </div>
+            <Title text={"Árboles Binarios"} />
+
+            <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
+                <Card
+                    subtitle="Árboles Binarios"
+                    img="/img/Card/arboles.png"
+                    text="Representación de los árboles binarios"
+                    buttonText="Árboles"
+                    onClick={openTrees}
+                />
+            </div>
+
+
+
+
         </div>
     );
 };
