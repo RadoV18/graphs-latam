@@ -18,17 +18,33 @@ const Footer = ({ btnText, onClick, dir }) => {
         }
     }
 
-    return (
-        <div>
-            <div className="footer">
-                <div className="button-container">
-                    <Button text="Manual de Usuario" onClick={openManual}/>
-                    <Button text={btnText} onClick={onClick}/>
-                    <Button text="Contáctanos" onClick={redirectToContactUs}/>
+    if(btnText !== ""){
+
+        return (
+            <div>
+                <div className="footer">
+                    <div className="button-container">
+                        <Button text="Manual de Usuario" onClick={openManual}/>
+                        <Button text="Contáctanos" onClick={redirectToContactUs}/>
+                    </div>
                 </div>
             </div>
-        </div>
-        );
+            );
+    }
+    else{
+        return (
+            <div>
+                <div className="footer">
+                    <div className="button-container">
+                        <Button text="Manual de Usuario" onClick={openManual}/>
+                        <Button text="Contáctanos" onClick={redirectToContactUs}/>
+                    </div>
+                </div>
+            </div>
+            );
+    }
+
+
 };
 
 export default Footer;

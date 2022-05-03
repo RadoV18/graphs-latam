@@ -5,6 +5,8 @@
     padding: 1rem;
 }
 
+
+
 .footer button {
     border-radius: 10px;
     padding: 1rem;
@@ -19,4 +21,5 @@
     display: flex;
     justify-content: space-around;
 }
+
 
