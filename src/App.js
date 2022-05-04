@@ -48,19 +48,19 @@ function App() {
                 </Route>
                 {/* SORT */}
                 <Route path="/sort/selection">
-                    <Selection complexity="O(n^2)" />
+                    <Selection complexity="O(n^2)" animation={false}/>
                 </Route>
                 <Route path="/sort/insertion">
-                    <Insertion complexity="O(n^2)"/>
+                    <Insertion complexity="O(n^2)" animation={false}/>
                 </Route>
                 <Route path="/sort/bubble">
-                    <Bubble complexity="O(n^2)"/>
+                    <Bubble complexity="O(n^2)" animation={true}/>
                 </Route>
                 <Route path="/sort/merge">
-                    <Merge complexity="O(n*log(n))"/>
+                    <Merge complexity="O(n*log(n))" animation={false}/>
                 </Route>
                 <Route path="/sort/shell">
-                    <Shell complexity="O(n*log(n))"/>
+                    <Shell complexity="O(n*log(n))" animation={false}/>
                 </Route>
                 {/* ARBOLES */}
                 <Route path="/arboles">

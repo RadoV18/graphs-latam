@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../Styles/selection.css";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -6,7 +6,7 @@ import Button from "../components/Button/Button";
 import AnimationContainer from "../components/AnimationContainer/AnimationContainer";
 import { arregloRandomico, convertirArregloNumeros, execTimeInsertionSort } from "../utils/algorithms/sortTime";
 
-const Insertion = ({ complexity }) => {
+const Insertion = ({ complexity, animation }) => {
     const [numbers, setNumbers] = useState([]);
     const [indexes, setIndexes] = useState([]);
     const [result, setResult] = useState({});
@@ -32,8 +32,13 @@ const Insertion = ({ complexity }) => {
     };
 
     const sort = () => {
-        const input = convertirArregloNumeros(numbersText);
-        const resultObject = execTimeInsertionSort(input);
+        let newInput;
+        if(!(numbersText instanceof Array)) {
+            newInput = convertirArregloNumeros(numbersText);
+        } else {
+            newInput = numbersText;
+        }
+        const resultObject = execTimeInsertionSort(newInput);
         setNumbersText(resultObject.result.toString());
         setResult(resultObject);
     };
@@ -65,6 +70,42 @@ const Insertion = ({ complexity }) => {
         loop(0);
     };
 
+    const inputRef = useRef(null);
+
+    const fileChange = (e) => {
+        console.log(e.target.files[0]);
+        if (e.target.files) {
+            const fr = new FileReader();
+            fr.onload = () => {
+                const importedData = JSON.parse(fr.result);
+                setNumbersText(importedData);
+            };
+            fr.readAsText(e.target.files[0]);
+        }
+    };
+
+    const importFromJSON = () => {
+        inputRef.current.click();
+    };
+
+    const exportToJSON = () => {
+        const data = JSON.stringify(convertirArregloNumeros(numbersText));
+        const filename = "data.json";
+        const fileType = "text/json";
+
+        const blob = new Blob([data], { type: fileType });
+        const a = document.createElement("a");
+        a.download = filename;
+        a.href = window.URL.createObjectURL(blob);
+        const clickEvt = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        });
+        a.dispatchEvent(clickEvt);
+        a.remove();
+    };
+
     return (
         <div className="container">
             <Header title="Insertion Sort" logo="/img/latam_logo.png" />
@@ -73,7 +114,19 @@ const Insertion = ({ complexity }) => {
                 <div className="button-container--vertical">
                     <Button text="Generar Aleatorios" onClick={generateRandom} />
                     <Button text="Ordenar" onClick={sort}/>
-                    <Button text="Animación" onClick={showAnimation} />
+                    { animation ? <Button text="Animación" onClick={showAnimation} /> : null }
+                    <button title="Guardar" onClick={exportToJSON}>Guardar</button>
+                    <button title="Importar" onClick={importFromJSON}>
+                        Importar
+                        <input
+                            ref={inputRef}
+                            type="file"
+                            name="file"
+                            className="input--hidden"
+                            onChange={fileChange}
+                            accept="text/json"
+                        />
+                    </button>
                 </div>
             </div>
             <div className="time-container">

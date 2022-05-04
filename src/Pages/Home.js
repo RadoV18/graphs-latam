@@ -63,7 +63,7 @@ const Home = ({ deletePoppers }) => {
                     subtitle="Generación de Grafos"
                     img="/img/Card/grafos.png"
                     text="Representación de los grafos aplicados a la empresa LATAM"
-                    buttonText="Sort"
+                    buttonText="Grafos"
                     onClick={openGraphs}
                 />
                 <Card
