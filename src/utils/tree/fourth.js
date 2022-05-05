@@ -18,12 +18,12 @@ class NodeClase{
 
 }
 
-var inorder = [3,5,6,7,8,10,11,12,13];
+/* var inorder = [3,5,6,7,8,10,11,12,13];
 var preoder = [6,3,5,10,7,8,12,11,13];
 var postorder = [5,3,8,7,11,13,12,10,6];
 
 var nodoCurrent  = preoderAndPostorder(preoder, postorder, false    );
-console.log(nodoCurrent);
+console.log(nodoCurrent); */
 
 function preoderAndInorder(preoder, inorder){
     var slicedLeft = [];
@@ -52,7 +52,7 @@ function postorderAndInorder(postorder, inorder){
     downRecursivelyPostorderAndInorder(auxLeft, nodo, auxRight, postorder);
     return nodo;
 }
-function preoderAndPostorder(preoder1, postorder1, isSorted){
+export const preorderAndPostorder = (preoder1, postorder1, isSorted) =>{
     var preoder = preoder1.slice();
     var postorder = postorder1.slice();
     var inorder1 = [];
@@ -73,8 +73,7 @@ function preoderAndPostorder(preoder1, postorder1, isSorted){
             return nodo;
         }
     }else{
-        var slicedLeft = [];
-        var slicedRight = [];
+    
 
         var valueInNode = preoder[0];
 

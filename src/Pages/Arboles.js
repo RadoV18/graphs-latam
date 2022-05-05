@@ -9,6 +9,7 @@ import '../Styles/arboles.css';
 import cytoscape from "cytoscape";
 import dagre from 'cytoscape-dagre';
 import {binaryTree} from "../utils/tree/BinaryTree";
+import {preorderAndPostorder} from "../utils/tree/fourth";
 
 cytoscape.use( dagre );
 
@@ -45,8 +46,8 @@ function Arboles() {
 
     function compararArrays (v1, v2){
         var flag = false;
-        for(let x=0;x<v1.lenght; x++){
-            for(let i=0;i<v2.lenght;i++){
+        for(let x=0;x<v1.length; x++){
+            for(let i=0;i<v2.length;i++){
                 if(v1[x] === v2[i]){
                     flag = true;
                 }
@@ -94,6 +95,30 @@ function Arboles() {
         alert(cadena);
     };
 
+    const extra = () => {
+        var post = convertirCadena(postOrder);
+        var pre = convertirCadena(preOrder);
+        var arreglo = preorderAndPostorder(pre, post, true);
+        setListArbol(pre);
+        const [node, edge, orden] = binaryTree(pre);
+        setOrdenArbol(orden);
+        const cy = cytoscape({
+            container: document.getElementById("cy"),
+            style: data.style,
+            layout: {
+                name: "dagre",
+                rankSep: 20,
+                nodeSep: 20,
+                ranker: 'tight-tree',
+            },
+            zoomingEnabled: false,
+            userZoomingEnabled: true,
+            panningEnabled: true,
+            userPanningEnabled: true,
+            elements: {nodes: node, edges:edge}
+        }); 
+    }
+
     return (
         <div className="arboles__container">
             <Header title="Árboles Binarios" logo="/img/latam_logo.png" />
@@ -107,7 +132,7 @@ function Arboles() {
                 <div className="arboles__options--row">
                     <Input text="Ingrese el PostOrder" onChange={ event => setPostOrder(event.target.value)} />
                     <Input text="Ingrese el PreOrder" onChange={ event => setPreOrder(event.target.value)} />
-                    <Button text="Generar Árbol" onClick={()=>{}} />
+                    <Button text="Generar Árbol" onClick={extra} />
                 </div>
             </div>
 
