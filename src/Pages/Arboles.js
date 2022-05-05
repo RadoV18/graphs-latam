@@ -49,7 +49,7 @@ function Arboles() {
     };
 
   return (
-    <div>
+    <div className="arboles__container">
         <Header title="Árboles Binarios" logo="/img/latam_logo.png" />
 
         <div className="arboles__options--column">
