@@ -73,7 +73,6 @@ class Tree {
                     }
                 } else { // igual a cero
                     // Entonces el elemento ya existe.
-                    //alert("Existe un numero repetido y no se lo puede agregar");
                     break;
                 }
             }
@@ -82,13 +81,6 @@ class Tree {
 
 }
 
-function convertirCadena (input){
-    input.replace(/\s+/g, "");
-    var arreglo = input.split(",");
-    arreglo = arreglo.map((elem) => parseInt(elem));
-    console.log(arreglo);
-    return arreglo;
-}
 
 function crearTree (arreglo){
     var nodes = [];
@@ -104,8 +96,7 @@ function crearTree (arreglo){
     return [arbol, nodes, [VinOrden, VpostOrden, VpreOrder]];
 }
 
-export const binaryTree = (cadenaInput) =>{
-    let arreglo = convertirCadena(cadenaInput);
+export const binaryTree = (arreglo) =>{
     const [arbol, nodes, orden] = crearTree(arreglo);
     const edges = arbol.data;
     return [nodes, edges, orden];
