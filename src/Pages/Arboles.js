@@ -98,7 +98,7 @@ function Arboles() {
     const extra = () => {
         var post = convertirCadena(postOrder);
         var pre = convertirCadena(preOrder);
-        var arreglo = preorderAndPostorder(pre, post, true);
+        //var arreglo = preorderAndPostorder(pre, post, true);
         setListArbol(pre);
         const [node, edge, orden] = binaryTree(pre);
         setOrdenArbol(orden);

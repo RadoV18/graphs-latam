@@ -57,6 +57,8 @@ export const preorderAndPostorder = (preoder1, postorder1, isSorted) =>{
     var postorder = postorder1.slice();
     var inorder1 = [];
     var inorder2 = [];
+    var dataL = [];
+    var dataR = [];
     if(isSorted){
         inorder1 = preoder1.sort( (a,b) => a-b );
         inorder2 = postorder1.sort( (a,b) => a-b );
@@ -69,8 +71,10 @@ export const preorderAndPostorder = (preoder1, postorder1, isSorted) =>{
             var auxLeft = inorder.slice(0, positionLooked);  
             var auxRight = inorder.slice(positionLooked+1 , inorder.length);  
 
-            downRecursivelyPostorderAndInorder(auxLeft, nodo, auxRight, postorder);
-            return nodo;
+            downRecursivelyPostorderAndInorder(auxLeft, nodo, auxRight, postorder, dataL, dataR);
+            var data = dataL.concat(dataR);
+            console.log(data);
+            return data;
         }
     }else{
     
@@ -89,19 +93,23 @@ export const preorderAndPostorder = (preoder1, postorder1, isSorted) =>{
         console.log(slicedPostLeft, valueInNode, slicedPostRight);
         console.log(slicedPreLeft, valueInNode, slicedPreRight);
         var nodoMain = new NodeClase(valueInNode);
-        goDownRecursivelyPreorderAndPostorder(slicedPreLeft, slicedPostLeft, nodoMain, slicedPostRight, slicedPreRight);
-        return nodoMain;
+        
+        goDownRecursivelyPreorderAndPostorder(slicedPreLeft, slicedPostLeft, nodoMain, slicedPostRight, slicedPreRight, dataL, dataR);
+        var data2 = dataL.concat(dataR);
+        console.log(data2);
+        return data2;
     }
 }
 
-function goDownRecursivelyPreorderAndPostorder(slicedPreLeft1, slicedPostLeft1, nodo, slicedPostRight1, slicedPreRight1){
+function goDownRecursivelyPreorderAndPostorder(slicedPreLeft1, slicedPostLeft1, nodo, slicedPostRight1, slicedPreRight1, dataL, dataR){
     var slicedPreLeft = slicedPreLeft1.slice();
     var slicedPostLeft = slicedPostLeft1.slice();
     var slicedPostRight = slicedPostRight1.slice();
     var slicedPreRight = slicedPreRight1.slice();
+    var slicedDataL = dataL.slice();
+    var slicedDataR = dataR.slice();
 
-      
-
+    
     if(slicedPreLeft.length <= 2 || slicedPostLeft.length <= 2){
         if(slicedPreLeft.length === 2 && slicedPostLeft.length === 2){
             
@@ -109,15 +117,19 @@ function goDownRecursivelyPreorderAndPostorder(slicedPreLeft1, slicedPostLeft1, 
                 var currentNode = new NodeClase(slicedPreLeft[0]);
                 var secondNode = new NodeClase(slicedPreLeft[1]);
                 currentNode.setLeft(secondNode);
+                slicedDataL.push({data: { source: ''+currentNode.getValue, target: ''+ secondNode.getValue }});
                 nodo.setLeft(currentNode);
+                slicedDataL.push({data: { source: ''+nodo.getValue, target: ''+ currentNode.getValue }});
             }
         }
         
         if(slicedPreLeft.length === 1){
             nodo.setLeft(new NodeClase(slicedPreLeft[0]));
+            slicedDataL.push({data: { source: ''+nodo.getValue, target: ''+ slicedPreLeft[0] }});
         }
         if(slicedPostLeft.length === 1){
             nodo.setLeft(new NodeClase(slicedPostLeft[0]));
+            slicedDataL.push({data: { source: ''+nodo.getValue, target: ''+ slicedPostLeft[0] }});
         }
     }else{
         var valueForNode = slicedPreLeft[0];
@@ -133,8 +145,9 @@ function goDownRecursivelyPreorderAndPostorder(slicedPreLeft1, slicedPostLeft1, 
 
         var nodoCurrent = new NodeClase(slicedPreLeft[0]);
         nodo.setLeft(nodoCurrent);
+        slicedDataL.push({data: { source: ''+nodo.getValue, target: ''+ nodoCurrent.getValue }});
 
-        goDownRecursivelyPreorderAndPostorder(sPreLeft, sPostLeft, nodoCurrent, sPostRight, sPreRight);
+        goDownRecursivelyPreorderAndPostorder(sPreLeft, sPostLeft, nodoCurrent, sPostRight, sPreRight, slicedDataL, slicedDataR);
     }
 
     if(slicedPostRight.length <= 2 || slicedPreRight.length <= 2){
@@ -143,14 +156,18 @@ function goDownRecursivelyPreorderAndPostorder(slicedPreLeft1, slicedPostLeft1, 
                 var currentNode  = new NodeClase(slicedPreRight[0]);
                 var secondNode = new NodeClase(slicedPreRight[1]);
                 currentNode.setRight(secondNode);
+                slicedDataR.push({data: { source: ''+currentNode.getValue, target: ''+ secondNode.getValue }});
                 nodo.setRight(currentNode);
+                slicedDataR.push({data: { source: ''+nodo.getValue, target: ''+ currentNode.getValue }});
             }
         }
         if(slicedPostRight.length === 1){
             nodo.setRight(new NodeClase(slicedPostRight[0]));
+            slicedDataR.push({data: { source: ''+nodo.getValue, target: ''+ slicedPostRight[0]}});
         }
         if(slicedPreRight.length === 1){
             nodo.setRight(new NodeClase(slicedPreRight[0]));
+            slicedDataR.push({data: { source: ''+nodo.getValue, target: ''+ slicedPreRight[0]}});
         }
 
         
@@ -168,7 +185,8 @@ function goDownRecursivelyPreorderAndPostorder(slicedPreLeft1, slicedPostLeft1, 
 
         var nodoCurrent = new NodeClase(slicedPreRight[0]);
         nodo.setRight(nodoCurrent);
-        goDownRecursivelyPreorderAndPostorder(sPreLeft, sPostLeft, nodoCurrent, sPostRight, sPreRight);
+        slicedDataR.push({data: { source: ''+nodo.getValue, target: ''+ nodoCurrent.getValue}});
+        goDownRecursivelyPreorderAndPostorder(sPreLeft, sPostLeft, nodoCurrent, sPostRight, sPreRight, slicedDataL, slicedDataR);
 
 
     }

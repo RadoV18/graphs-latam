@@ -86,7 +86,7 @@ function crearTree (arreglo){
     var nodes = [];
     let arbol = new Tree();
     arreglo.forEach(element => {
-        nodes.push( {data: { id: ""+element } })
+        nodes.push( {data: { id: ""+element } });
         arbol.add(element);
     });
     let root = arbol.root;
