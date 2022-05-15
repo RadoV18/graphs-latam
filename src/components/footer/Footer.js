@@ -25,6 +25,7 @@ const Footer = ({ btnText, onClick, dir }) => {
                 <div className="footer">
                     <div className="button-container">
                         <Button text="Manual de Usuario" onClick={openManual}/>
+                        <Button text={btnText} onClick={onClick}/>
                         <Button text="Contáctanos" onClick={redirectToContactUs}/>
                     </div>
                 </div>

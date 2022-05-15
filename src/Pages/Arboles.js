@@ -224,7 +224,7 @@ function Arboles() {
                 </div>
             </div>
 
-            <Footer btnText="" dir="/Sort_MU.pdf" />
+            <Footer btnText="" dir="/Arboles_MU.pdf" />
         </div>
     );
 }
