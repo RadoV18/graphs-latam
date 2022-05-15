@@ -12,6 +12,8 @@ import Insertion from "./Pages/Insertion";
 import Bubble from "./Pages/Bubble";
 import Merge from "./Pages/Merge";
 import Shell from "./Pages/Shell";
+import Dijstra from "./Pages/Dijstra";
+import Kruskal from "./Pages/Kruskal";
 
 import Arboles from "./Pages/Arboles";
 
@@ -65,6 +67,12 @@ function App() {
                 {/* ARBOLES */}
                 <Route path="/arboles">
                     <Arboles />
+                </Route>
+                <Route path="/dijstra">
+                    <Dijstra />
+                </Route>
+                <Route path="/kruskal">
+                    <Kruskal />
                 </Route>
                 <Route path="/">
                     <Home deletePoppers={deletePoppers} />
