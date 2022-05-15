@@ -53,6 +53,13 @@ const Home = ({ deletePoppers }) => {
         history.push("/arboles");
     };
 
+    const openDijstra = () => {
+        history.push("/dijstra");
+    };
+
+    const openKruskal = () => {
+        history.push("/kruskal");
+    };
 
     return (
         <div>
@@ -143,6 +150,31 @@ const Home = ({ deletePoppers }) => {
                 />
             </div>
 
+            <Title text={"Dijstra"} />
+
+
+            <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
+                <Card
+                    subtitle="Dijstra"
+                    img="/img/Card/dijstra.jpg"
+                    text="Representación de algoritmo Dijstra"
+                    buttonText="Dijstra"
+                    onClick={openDijstra}
+                />
+            </div>
+
+            <Title text={"Kruskal"} />
+
+
+            <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
+                <Card
+                    subtitle="Kruskal"
+                    img="/img/Card/kruskal.png"
+                    text="Representación de algoritmo Kruskal"
+                    buttonText="Kruskal"
+                    onClick={openKruskal}
+                />
+            </div>
 
 
 
