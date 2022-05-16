@@ -15,6 +15,7 @@ cytoscape.use(dagre);
 
 function Arboles() {
     const [datoArbol, setDatoArbol] = useState("");
+    const [arbol, setArbol] = useState();
     const [listArbol, setListArbol] = useState([]);
     const [ordenArbol, setOrdenArbol] = useState([]);
     const [postOrder, setPostOrder] = useState("");
@@ -64,7 +65,8 @@ function Arboles() {
         //Recibir la lista de arboles
         var arreglo = agregarDatoList();
         setListArbol(arreglo);
-        const [node, edge, orden] = binaryTree(arreglo); //Prueba
+        const [node, edge, orden, arbol] = binaryTree(arreglo); //Prueba
+        setArbol(arbol);
         setOrdenArbol(orden);
         const cy = cytoscape({
             container: document.getElementById("cy"),
@@ -104,7 +106,7 @@ function Arboles() {
         alert(cadena);
     };
 
-    function comprobar(post, pre){
+    function comprobar(post, pre, RealpostOrder){
         var post1=post.slice();
         var pre1=pre.slice();
         post1.sort( (a,b) => a-b );
@@ -115,7 +117,14 @@ function Arboles() {
                 flag = false;
                 break;
             }
+            if(post[i]!=RealpostOrder[0][i]){
+                flag = false;
+                break;
+            }
         }
+
+
+
         return flag;
 
     }
@@ -124,9 +133,9 @@ function Arboles() {
         var post = convertirCadena(postOrder);
         var pre = convertirCadena(preOrder);
         //var arreglo = preorderAndPostorder(pre, post, true);
-        if(comprobar(post, pre)){
+        const [node, edge, orden] = binaryTree(pre);
+        if(comprobar(post, pre, orden[1] )){
             setListArbol(pre);
-            const [node, edge, orden] = binaryTree(pre);
             setOrdenArbol(orden);
             const cy = cytoscape({
                 container: document.getElementById("cy"),

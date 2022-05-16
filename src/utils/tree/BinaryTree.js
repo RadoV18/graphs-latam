@@ -100,4 +100,10 @@ export const binaryTree = (arreglo) =>{
     const [arbol, nodes, orden] = crearTree(arreglo);
     const edges = arbol.data;
     return [nodes, edges, orden];
+
+
+
+
+
+
 }
