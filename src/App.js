@@ -12,7 +12,7 @@ import Insertion from "./Pages/Insertion";
 import Bubble from "./Pages/Bubble";
 import Merge from "./Pages/Merge";
 import Shell from "./Pages/Shell";
-import Dijstra from "./Pages/Dijstra";
+import Dijkstra from "./Pages/Dijkstra";
 import Kruskal from "./Pages/Kruskal";
 
 import Arboles from "./Pages/Arboles";
@@ -69,7 +69,7 @@ function App() {
                     <Arboles />
                 </Route>
                 <Route path="/dijstra">
-                    <Dijstra />
+                    <Dijkstra />
                 </Route>
                 <Route path="/kruskal">
                     <Kruskal />

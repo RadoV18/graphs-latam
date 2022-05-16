@@ -1,7 +1,6 @@
 import UnionFind from './ufds';
 
 /**
- * 
  * @param {Array<Array<Number>>} adjacencyMatrix 
  * @returns {Array<Array<Number>>} edgeList
  */
@@ -19,7 +18,7 @@ const adjacencyMatrixToEdgeList = (adjacencyMatrix) => {
 /**
  * 
  * @param {Array<Number>} vertexList: vertex list 
- * @param {Array<Array<Number>>} adjacencyMatrix: adjacency matrix, use Infinity
+ * @param {Array<Array<Number>>} adjacencyMatrix: adjacency matrix, use 0
  * @typedef {Object} Result
  * @property {Array<Array<number>>} result: edges that are part of the MST
  * @property {Number} cost: total cost of the MST

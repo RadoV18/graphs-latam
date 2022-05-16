@@ -6,7 +6,7 @@ import Toolbar from "../components/Toolbar/Toolbar";
 import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
-import { kruskal } from "../utils/graphs/kruskal";
+import { dijkstra } from "../utils/graphs/dijkstra";
 import popper from "cytoscape-popper";
 import cytoscape from "cytoscape";
 import { generateMatrix } from "../utils/adjacencyMatrix";
@@ -22,12 +22,13 @@ import "../Styles/johnson.css";
 
 cytoscape.use(popper);
 
-const Kruskal = () => {
+const Dijkstra = () => {
     const dispatch = useDispatch();
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
 
     const onClick = () => {
+        const sourceNode = prompt("Indique el nombre del nodo de origen:");
         // ejecutar algoritmo
         // console.log();
         const { adjacencyMatrix, indexes } = generateMatrix(data.elements);
@@ -42,17 +43,11 @@ const Kruskal = () => {
         const vertexList = [];
         indexes.forEach((e) => vertexList.push(e[1]));
         const indexMap = new Map(indexes);
-        const kruskalResult = kruskal(vertexList, fixedAdjMatrix);
-        const labelMap = new Map();
-        kruskalResult.result.forEach(edge => {
-            const source = indexes[edge[0]][0];
-            const target = indexes[edge[1]][0];
-            const edgeString = `${source}-${target}`;
-            labelMap.set(edgeString, 1);
-        });
-        
+        const sourceIndex = indexMap.get(sourceNode);
+        const dijkstraResult = dijkstra(vertexList, fixedAdjMatrix, sourceIndex);
+
         //No se si es valido pero funca
-        //generamos un cy con los valores obtenidos del estado
+        // generamos un cy con los valores obtenidos del estado
         const cy = cytoscape({
             container: document.getElementById("cy"),
             style: data.style,
@@ -63,85 +58,55 @@ const Kruskal = () => {
         });
         if (data.elements) {
             if (data.elements.nodes) {
+                console.log(data.elements.nodes);
                 data.elements.nodes.forEach((element) => {
                     cy.add(element);
                 });
             }
             if (data.elements.edges) {
+                console.log(data.elements.edges);
                 data.elements.edges.forEach((element) => {
-                    if(labelMap.get(element.data.id) === 1) {
-                        element.style = {
-                            'color': 'green',
-                            'line-color': 'green',
-                            'target-arrow-color': 'green',
-                            'width': '5'
-                        }
-                    }
                     cy.add(element);
                 });
             }
         }
 
-        // // generar poppers
-        // const makePopperNode = (node, earlyStart, latestFinish, isCritical) => {
-        //     const popper = node.popper({
-        //         content: () => {
-        //             const div = document.createElement("div");
-        //             div.classList.add("popper-div");
-        //             div.innerHTML = `<table class="${
-        //                 isCritical ? "node node--critical" : "node"
-        //             }">
-        //                             <tr>
-        //                                 <td>${earlyStart}</td>
-        //                                 <td>${latestFinish}</td>
-        //                             </tr>
-        //                        </table>`;
-        //             document.body.appendChild(div);
-        //             return div;
-        //         },
-        //         popper: {
-        //             placement: "bottom",
-        //         },
-        //     });
-        //     return popper;
-        // };
+        // generar poppers
+        const makePopperNode = (node, distance) => {
+            const popper = node.popper({
+                content: () => {
+                    const div = document.createElement("div");
+                    div.classList.add("popper-div");
+                    div.innerHTML = `<table class="node">
+                                         <tr>
+                                             <td>${distance}</td>
+                                         </tr>
+                                     </table>`;
+                    document.body.appendChild(div);
+                    return div;
+                },
+                popper: {
+                    placement: "bottom",
+                },
+            });
+            return popper;
+        };
 
-        // const makePopperEdge = (edge, value) => {
-        //     const popper = edge.popper({
-        //         content: () => {
-        //             const div = document.createElement("div");
-        //             div.classList.add("popper-div");
-        //             div.innerHTML = "h = " + value;
-        //             document.body.appendChild(div);
-        //             return div;
-        //         },
-        //         popper: {
-        //             placement: "bottom",
-        //         },
-        //     });
-        //     return popper;
-        // };
-        // var nodeCritical = " ";
         // //Agregando los popper a cada nodo
-        // johnsonData.nodes.forEach((e) => {
-        //     //Obtenemos la referencia del nodo del cy declarado
-        //     const node = cy.getElementById(e.label);
-        //     //Se envia la referencia del nodo y los valores de los poppers
-        //     const popperNode = makePopperNode(
-        //         node,
-        //         e.earlyStart,
-        //         e.latestFinish,
-        //         e.isCritical
-        //     );
-        //     if (e.isCritical) {
-        //         nodeCritical = nodeCritical + e.label + ", ";
-        //     }
-        //     let updateNode = () => {
-        //         popperNode.update();
-        //     };
-        //     node.on("position", updateNode);
-        //     cy.on("render", updateNode);
-        // });
+        vertexList.forEach((e) => {
+            //Obtenemos la referencia del nodo del cy declarado
+            const node = cy.getElementById(indexMap.get(e));
+            //Se envia la referencia del nodo y los valores de los poppers
+            // const popperNode = makePopperNode(
+            //     node,
+            //     dijkstraResult.dist.get(e)
+            // );
+            // let updateNode = () => {
+            //     popperNode.update();
+            // };
+            // node.on("position", updateNode);
+            // cy.on("render", updateNode);
+        });
 
         // //Agregando los poppers a cada edge
         // johnsonData.edges.forEach((e) => {
@@ -180,9 +145,9 @@ const Kruskal = () => {
             <Header logo="/img/latam_logo.png" />
             <Graph />
             <Toolbar />
-            <Footer btnText="Ejecutar Algoritmo de Kruskal" onClick={onClick} dir="/doc.pdf"/>
+            <Footer btnText="Ejecutar Algoritmo de Dijstra" onClick={onClick} dir="/doc.pdf"/>
         </div>
     );
 };
 
-export default Kruskal;
+export default Dijkstra;
