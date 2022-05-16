@@ -13,9 +13,7 @@ import { generateMatrix } from "../utils/adjacencyMatrix";
 import {
     setAdjacencyMatrix,
     setMatrixLabels,
-    setMatrixDisplay,
 } from "../redux/actions/adjacencyMatrix";
-import { setDisplay } from "../redux/actions/modalStyle";
 
 import "../Styles/johnson.css";
 
@@ -81,97 +79,6 @@ const Kruskal = () => {
                 });
             }
         }
-
-        // // generar poppers
-        // const makePopperNode = (node, earlyStart, latestFinish, isCritical) => {
-        //     const popper = node.popper({
-        //         content: () => {
-        //             const div = document.createElement("div");
-        //             div.classList.add("popper-div");
-        //             div.innerHTML = `<table class="${
-        //                 isCritical ? "node node--critical" : "node"
-        //             }">
-        //                             <tr>
-        //                                 <td>${earlyStart}</td>
-        //                                 <td>${latestFinish}</td>
-        //                             </tr>
-        //                        </table>`;
-        //             document.body.appendChild(div);
-        //             return div;
-        //         },
-        //         popper: {
-        //             placement: "bottom",
-        //         },
-        //     });
-        //     return popper;
-        // };
-
-        // const makePopperEdge = (edge, value) => {
-        //     const popper = edge.popper({
-        //         content: () => {
-        //             const div = document.createElement("div");
-        //             div.classList.add("popper-div");
-        //             div.innerHTML = "h = " + value;
-        //             document.body.appendChild(div);
-        //             return div;
-        //         },
-        //         popper: {
-        //             placement: "bottom",
-        //         },
-        //     });
-        //     return popper;
-        // };
-        // var nodeCritical = " ";
-        // //Agregando los popper a cada nodo
-        // johnsonData.nodes.forEach((e) => {
-        //     //Obtenemos la referencia del nodo del cy declarado
-        //     const node = cy.getElementById(e.label);
-        //     //Se envia la referencia del nodo y los valores de los poppers
-        //     const popperNode = makePopperNode(
-        //         node,
-        //         e.earlyStart,
-        //         e.latestFinish,
-        //         e.isCritical
-        //     );
-        //     if (e.isCritical) {
-        //         nodeCritical = nodeCritical + e.label + ", ";
-        //     }
-        //     let updateNode = () => {
-        //         popperNode.update();
-        //     };
-        //     node.on("position", updateNode);
-        //     cy.on("render", updateNode);
-        // });
-
-        // //Agregando los poppers a cada edge
-        // johnsonData.edges.forEach((e) => {
-        //     //Concatenamos el valor del source y target para obtener el id
-        //     const edge = cy.getElementById(
-        //         e.source[0] + "-" + e.destination[0]
-        //     );
-        //     //Aca igual se envia la referencia del edge y el valor de la holgura
-        //     const popperEdge = makePopperEdge(edge, e.slag);
-        //     let updateEdge = () => {
-        //         popperEdge.update();
-        //     };
-        //     edge.connectedNodes().on("position", updateEdge);
-        //     cy.on("render", updateEdge);
-        // });
-
-        // //CUADRO INDICA CAMINO CRITICO
-        // const popper = cy.popper({
-        //     content: () => {
-        //         const div = document.createElement("div");
-        //         div.classList.add("popper-div");
-        //         div.innerHTML = `<div>CAMINO CRITICO  <p class="square"> ${nodeCritical} </p></div>`;
-        //         document.body.appendChild(div);
-        //         return div;
-        //     },
-        //     renderedPosition: () => ({ x: 0, y: 0 }),
-        //     popper: {
-        //         placement: "bottom",
-        //     },
-        // });
     };
 
     return (
