@@ -104,33 +104,54 @@ function Arboles() {
         alert(cadena);
     };
 
+    function comprobar(post, pre){
+        var post1=post.slice();
+        var pre1=pre.slice();
+        post1.sort( (a,b) => a-b );
+        pre1.sort( (a,b) => a-b );
+        var flag = true;
+        for(let i=0; i<post1.length;i++){
+            if(post1[i]!=pre1[i]){
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+
+    }
+
     const extra = () => {
         var post = convertirCadena(postOrder);
         var pre = convertirCadena(preOrder);
         //var arreglo = preorderAndPostorder(pre, post, true);
-        setListArbol(pre);
-        const [node, edge, orden] = binaryTree(pre);
-        setOrdenArbol(orden);
-        const cy = cytoscape({
-            container: document.getElementById("cy"),
-            style: data.style,
-            layout: {
-                name: "dagre",
-                rankSep: 20,
-                nodeSep: 20,
-                ranker: "tight-tree",
-            },
-            zoomingEnabled: false,
-            userZoomingEnabled: true,
-            panningEnabled: true,
-            userPanningEnabled: true,
-            elements: { nodes: node, edges: edge },
-        });
-        setExportObj({
-            nodes: node,
-            edges: edge,
-            orden: orden
-        });
+        if(comprobar(post, pre)){
+            setListArbol(pre);
+            const [node, edge, orden] = binaryTree(pre);
+            setOrdenArbol(orden);
+            const cy = cytoscape({
+                container: document.getElementById("cy"),
+                style: data.style,
+                layout: {
+                    name: "dagre",
+                    rankSep: 20,
+                    nodeSep: 20,
+                    ranker: "tight-tree",
+                },
+                zoomingEnabled: false,
+                userZoomingEnabled: true,
+                panningEnabled: true,
+                userPanningEnabled: true,
+                elements: { nodes: node, edges: edge },
+            });
+            setExportObj({
+                nodes: node,
+                edges: edge,
+                orden: orden
+            });
+        }else{
+            alert("Los datos ingresados no son correctos");
+        }
+        
     };
 
     const inputRef = useRef(null);
