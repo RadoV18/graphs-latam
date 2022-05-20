@@ -155,10 +155,10 @@ const Home = ({ deletePoppers }) => {
 
             <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
                 <Card
-                    subtitle="Dijstra"
+                    subtitle="Dijkstra"
                     img="/img/Card/dijstra.jpg"
-                    text="Representación de algoritmo Dijstra"
-                    buttonText="Dijstra"
+                    text="Representación de Dijkstra"
+                    buttonText="Dijkstra"
                     onClick={openDijstra}
                 />
             </div>

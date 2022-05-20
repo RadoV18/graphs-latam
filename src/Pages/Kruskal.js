@@ -160,7 +160,7 @@ const Kruskal = () => {
             <Header logo="/img/latam_logo.png" />
             <Graph />
             <Toolbar />
-            <Footer btnText="Ejecutar Algoritmo de Kruskal" onClick={onClick} dir="/doc.pdf"/>
+            <Footer btnText="Ejecutar Algoritmo de Kruskal" onClick={onClick} dir="/Kruskal_MU.pdf"/>
         </div>
     );
 };

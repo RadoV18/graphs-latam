@@ -160,7 +160,7 @@ const Dijstra = () => {
             <Header logo="/img/latam_logo.png" />
             <Graph />
             <Toolbar />
-            <Footer btnText="Ejecutar Algoritmo de Dijstra" onClick={onClick} dir="/doc.pdf"/>
+            <Footer btnText="Ejecutar Algoritmo de Dijksra" onClick={onClick} dir="/Dijkstra_MU.pdf"/>
         </div>
     );
 };

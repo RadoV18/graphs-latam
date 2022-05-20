@@ -68,7 +68,7 @@ function App() {
                 <Route path="/arboles">
                     <Arboles />
                 </Route>
-                <Route path="/dijstra">
+                <Route path="/dijkstra">
                     <Dijstra />
                 </Route>
                 <Route path="/kruskal">
