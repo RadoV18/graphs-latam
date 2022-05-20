@@ -150,7 +150,7 @@ const Home = ({ deletePoppers }) => {
                 />
             </div>
 
-            <Title text={"Dijstra"} />
+            <Title text={"Dijkstra"} />
 
 
             <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
