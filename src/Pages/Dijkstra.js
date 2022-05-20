@@ -46,6 +46,10 @@ const Dijkstra = () => {
         const sourceIndex = indexMap.get(sourceNode);
         const dijkstraResult = dijkstra(vertexList, fixedAdjMatrix, sourceIndex);
 
+        const keys =Array.from(indexMap.keys());
+        console.log(keys);
+        console.log("keys");
+
         //No se si es valido pero funca
         // generamos un cy con los valores obtenidos del estado
         const cy = cytoscape({
@@ -58,13 +62,11 @@ const Dijkstra = () => {
         });
         if (data.elements) {
             if (data.elements.nodes) {
-                console.log(data.elements.nodes);
                 data.elements.nodes.forEach((element) => {
                     cy.add(element);
                 });
             }
             if (data.elements.edges) {
-                console.log(data.elements.edges);
                 data.elements.edges.forEach((element) => {
                     cy.add(element);
                 });
@@ -91,52 +93,23 @@ const Dijkstra = () => {
             });
             return popper;
         };
-
+        
         // //Agregando los popper a cada nodo
         vertexList.forEach((e) => {
             //Obtenemos la referencia del nodo del cy declarado
-            const node = cy.getElementById(indexMap.get(e));
+            // console.log(listkey[e]);
+            const node = cy.getElementById(keys[e]);
             //Se envia la referencia del nodo y los valores de los poppers
-            // const popperNode = makePopperNode(
-            //     node,
-            //     dijkstraResult.dist.get(e)
-            // );
-            // let updateNode = () => {
-            //     popperNode.update();
-            // };
-            // node.on("position", updateNode);
-            // cy.on("render", updateNode);
+            const popperNode = makePopperNode(
+                 node,
+                 dijkstraResult.dist.get(e)
+            );
+            let updateNode = () => {
+                popperNode.update();
+            };
+            node.on("position", updateNode);
+            cy.on("render", updateNode);
         });
-
-        // //Agregando los poppers a cada edge
-        // johnsonData.edges.forEach((e) => {
-        //     //Concatenamos el valor del source y target para obtener el id
-        //     const edge = cy.getElementById(
-        //         e.source[0] + "-" + e.destination[0]
-        //     );
-        //     //Aca igual se envia la referencia del edge y el valor de la holgura
-        //     const popperEdge = makePopperEdge(edge, e.slag);
-        //     let updateEdge = () => {
-        //         popperEdge.update();
-        //     };
-        //     edge.connectedNodes().on("position", updateEdge);
-        //     cy.on("render", updateEdge);
-        // });
-
-        // //CUADRO INDICA CAMINO CRITICO
-        // const popper = cy.popper({
-        //     content: () => {
-        //         const div = document.createElement("div");
-        //         div.classList.add("popper-div");
-        //         div.innerHTML = `<div>CAMINO CRITICO  <p class="square"> ${nodeCritical} </p></div>`;
-        //         document.body.appendChild(div);
-        //         return div;
-        //     },
-        //     renderedPosition: () => ({ x: 0, y: 0 }),
-        //     popper: {
-        //         placement: "bottom",
-        //     },
-        // });
     };
 
     return (
