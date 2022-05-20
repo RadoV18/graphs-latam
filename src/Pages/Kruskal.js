@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Graph from "../components/Graph/Graph";
 import Header from "../components/Header/Header";
@@ -21,6 +21,7 @@ import "../Styles/johnson.css";
 cytoscape.use(popper);
 
 const Kruskal = () => {
+    const [selected, setSelected] = useState("");
     const dispatch = useDispatch();
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
@@ -39,8 +40,9 @@ const Kruskal = () => {
         })
         const vertexList = [];
         indexes.forEach((e) => vertexList.push(e[1]));
+
         const indexMap = new Map(indexes);
-        const kruskalResult = kruskal(vertexList, fixedAdjMatrix);
+        const kruskalResult = kruskal(vertexList, fixedAdjMatrix, selected === "min");
         const labelMap = new Map();
         kruskalResult.result.forEach(edge => {
             const source = indexes[edge[0]][0];
@@ -81,11 +83,23 @@ const Kruskal = () => {
         }
     };
 
+    const radioButtonChange = (e) => {
+        e.preventDefault();
+        setSelected(e.target.id);
+    }
+
     return (
         <div className="container">
             <Modal />
             <Header logo="/img/latam_logo.png" />
             <Graph />
+            <div className="radio-wrapper">
+              <input onChange={radioButtonChange} type="radio" id="max" name="radio" />
+              <label htmlFor="max">Maximizar</label>
+
+              <input onChange={radioButtonChange} type="radio" id="min" name="radio" />
+              <label htmlFor="min">Minimizar</label>
+            </div>
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Kruskal" onClick={onClick} dir="/doc.pdf"/>
         </div>
