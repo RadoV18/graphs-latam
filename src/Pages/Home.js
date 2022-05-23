@@ -151,8 +151,6 @@ const Home = ({ deletePoppers }) => {
             </div>
 
             <Title text={"Dijkstra"} />
-
-
             <div className="card-wrapper" style={{ paddingBottom: "5rem" }}>
                 <Card
                     subtitle="Dijkstra"

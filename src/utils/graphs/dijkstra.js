@@ -11,12 +11,16 @@ import PriorityQueue from './PriorityQueue';
  * @property {Map<Number, Number>} parents - parents of each node.
  * 
  */
-export const dijkstra = (vertexList, adjacencyMatrix, source) => {
+export const dijkstra = (vertexList, adjacencyMatrix, source, minimize) => {
     // init
     const dist = new Map(); // distances from source
     const parents = new Map();
     vertexList.forEach(e => {
-        dist.set(e, Infinity)
+        if(minimize) {
+            dist.set(e, Infinity)
+        } else {
+            dist.set(e, -Infinity)
+        }
         parents.set(e, "");
     });
     dist.set(source, 0);
@@ -34,11 +38,20 @@ export const dijkstra = (vertexList, adjacencyMatrix, source) => {
             for(let j = 0; j < adjacencyMatrix[u].length; j++) {
                 if(adjacencyMatrix[u][j] !== 0) {
                     let v = new Pair(vertexList[j], adjacencyMatrix[u][j]);
-                    if(dist.get(u) + v.second < dist.get(v.first)) {
-                        dist.set(v.first, dist.get(u) + v.second);
-                        parents.set(vertexList[j], u);
-                        pq.push(new Pair(dist.get(u) + v.second, v.first));
+                    if(minimize) {
+                        if(dist.get(u) + v.second < dist.get(v.first)) {
+                            dist.set(v.first, dist.get(u) + v.second);
+                            parents.set(vertexList[j], u);
+                            pq.push(new Pair(dist.get(u) + v.second, v.first));
+                        }
+                    } else {
+                        if(dist.get(u) + v.second > dist.get(v.first)) {
+                            dist.set(v.first, dist.get(u) + v.second);
+                            parents.set(vertexList[j], u);
+                            pq.push(new Pair(dist.get(u) + v.second, v.first));
+                        }
                     }
+                    
                 }
             }
         }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Graph from "../components/Graph/Graph";
 import Header from "../components/Header/Header";
@@ -23,6 +23,7 @@ import "../Styles/johnson.css";
 cytoscape.use(popper);
 
 const Dijkstra = () => {
+    const [selected, setSelected] = useState("");
     const dispatch = useDispatch();
     const currentIndex = useSelector((state) => state.currentIndex);
     const data = useSelector((state) => state.cytoscapeData[currentIndex]);
@@ -44,9 +45,9 @@ const Dijkstra = () => {
         indexes.forEach((e) => vertexList.push(e[1]));
         const indexMap = new Map(indexes);
         const sourceIndex = indexMap.get(sourceNode);
-        const dijkstraResult = dijkstra(vertexList, fixedAdjMatrix, sourceIndex);
+        const dijkstraResult = dijkstra(vertexList, fixedAdjMatrix, sourceIndex, selected === "min");
 
-        const keys =Array.from(indexMap.keys());
+        const keys = Array.from(indexMap.keys());
         console.log(keys);
         console.log("keys");
 
@@ -112,11 +113,23 @@ const Dijkstra = () => {
         });
     };
 
+    const radioButtonChange = (e) => {
+        e.preventDefault();
+        setSelected(e.target.id);
+    }
+
     return (
         <div className="container">
             <Modal />
             <Header logo="/img/latam_logo.png" />
             <Graph />
+            <div className="radio-wrapper">
+              <input onChange={radioButtonChange} type="radio" id="max" name="radio" />
+              <label htmlFor="max">Maximizar</label>
+
+              <input onChange={radioButtonChange} type="radio" id="min" name="radio" />
+              <label htmlFor="min">Minimizar</label>
+            </div>
             <Toolbar />
             <Footer btnText="Ejecutar Algoritmo de Dijkstra" onClick={onClick} dir="/Dijkstra_MU.pdf"/>
         </div>
