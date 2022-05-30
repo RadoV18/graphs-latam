@@ -80,6 +80,7 @@ const Kruskal = () => {
                     cy.add(element);
                 });
             }
+            alert(`El costo total es: ${kruskalResult.cost}`);
         }
     };
 
